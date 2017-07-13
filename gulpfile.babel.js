@@ -19,6 +19,9 @@ import {Instrumenter} from 'isparta';
 import webpack from 'webpack-stream';
 import makeWebpackConfig from './webpack.make';
 
+import pug from 'gulp-pug';
+import gettext from 'gulp-angular-gettext';
+
 var plugins = gulpLoadPlugins();
 var config;
 
@@ -592,4 +595,19 @@ gulp.task('buildcontrol:openshift', function(done) {
         {gruntfile: false}, //don't look for a Gruntfile - there is none. :-)
         function() {done();}
     );
+});
+
+/*********************
+ * translation tasks *
+ *********************/
+
+gulp.task('translate:extract', () => {
+    return gulp.src(paths.client.views)
+        .pipe(pug({
+          pretty: true
+        }))
+        .pipe(gettext.extract('template.pot', {
+            // options to pass to angular-gettext-tools...
+        }))
+        .pipe(gulp.dest('po/'));
 });
