@@ -12,6 +12,7 @@
     "angular-resource": "~1.6.0",
     "angular-cookies": "~1.6.0",
     "angular-sanitize": "~1.6.0",
+    "angular-gettext": "^2.3.10",
     "angular-ui-bootstrap": "^2.0.1",
     "font-awesome": ">=4.1.0",
     "angular-socket-io": "~0.7.0",

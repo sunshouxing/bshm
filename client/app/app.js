@@ -5,6 +5,7 @@ import angular from 'angular';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+import 'angular-gettext';
 
 import 'angular-socket-io';
 
@@ -30,7 +31,7 @@ import './app.scss';
 
 angular.module('bshmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
-  socket, util
+  socket, util, 'gettext'
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
