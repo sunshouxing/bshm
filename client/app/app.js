@@ -26,22 +26,18 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import trans from '../components/trans/trans.module';
 
 import './app.scss';
 
-const trans = require('../components/trans/zh_CN.json');
-
 angular.module('bshmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
-  socket, util, 'gettext'
+  socket, util, 'gettext', trans
 ])
   .config(routeConfig)
-  .run(function($rootScope, $location, Auth, gettextCatalog) {
+  .run(function($rootScope, $location, Auth) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
-    gettextCatalog.debug = true;
-    gettextCatalog.setCurrentLanguage('zh_CN');
-    gettextCatalog.setStrings('zh_CN', trans.zh_CN);
 
     $rootScope.$on('$stateChangeStart', function(event, next) {
       Auth.isLoggedIn(function(loggedIn) {
