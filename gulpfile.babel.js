@@ -611,3 +611,13 @@ gulp.task('translate:extract', () => {
         }))
         .pipe(gulp.dest('po/'));
 });
+
+gulp.task('translate:compile', () => {
+    return gulp.src('po/**/*.po')
+        .pipe(gettext.compile({
+            // options to pass to angular-gettext-tools...
+            format: 'json'
+        }))
+        .pipe(gulp.dest(`${clientPath}/components/trans/`));
+});
+
