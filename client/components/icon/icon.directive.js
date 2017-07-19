@@ -6,7 +6,7 @@ export default angular.module('bshmApp.icon', [])
   .directive('icon', function() {
     return {
       restrict: 'E',
-      compile: function(element, attrs) {
+      compile(element, attrs) {
         element.addClass('glyphicon');
         element.addClass(`glyphicon-${attrs.type}`);
       }

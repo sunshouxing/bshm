@@ -30,7 +30,7 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('bshmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, icon, main, 
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, icon, main,
   constants, socket, util
 ])
   .config(routeConfig)
