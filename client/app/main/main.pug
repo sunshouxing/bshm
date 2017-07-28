@@ -1,8 +1,12 @@
-header#banner.hero-unit
-  .container
-    h1 'Allo, 'Allo!
-    p.lead Kick-start your next web app with Angular Fullstack
-    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
+doctype html
+
+div#banner
+  div(uib-carousel, active='0', interval='3000')
+    div(uib-slide, ng-repeat='slide in $ctrl.slides track by slide.id', index='$index')
+      img(ng-src='{{slide.image}}')
+      .carousel-caption
+        h4 Slide {{$index}}
+        p {{slide.desc}}
 
 .container
   .row
