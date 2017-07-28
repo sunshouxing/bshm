@@ -3,6 +3,34 @@ import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
 
 export class MainController {
+  slides = [
+    {
+      id: 1,
+      image: 'assets/images/carousel/bridge-1.jpg',
+      desc: 'desc about this bridge',
+    },
+    {
+      id: 2,
+      image: 'assets/images/carousel/bridge-2.jpg',
+      desc: 'desc about this bridge',
+    },
+    {
+      id: 3,
+      image: 'assets/images/carousel/bridge-3.jpg',
+      desc: 'desc about this bridge',
+    },
+    {
+      id: 4,
+      image: 'assets/images/carousel/bridge-4.jpg',
+      desc: 'desc about this bridge',
+    },
+    {
+      id: 5,
+      image: 'assets/images/carousel/bridge-5.jpg',
+      desc: 'desc about this bridge',
+    }
+  ];
+
   awesomeThings = [];
   newThing = '';
 
