@@ -87,5 +87,4 @@ export default function($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     }
   });
-
 }

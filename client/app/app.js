@@ -16,10 +16,6 @@ import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import 'angular-validation-match';
 
-import {
-  routeConfig
-} from './app.config';
-
 import _Auth from '../components/auth/auth.module';
 import account from './account';
 import admin from './admin';
@@ -33,43 +29,13 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
-// import fuse scripts
-import './core';
-
-import './navigation/navigation.module.js';
-import './navigation/navigation.controller.js';
-
-import './toolbar/toolbar.module.js';
-import './toolbar/toolbar.controller.js';
-
-import './quick-panel/quick-panel.module.js';
-import './quick-panel/quick-panel.controller.js';
-import './quick-panel/tabs/chat/chat-tab.controller.js';
-
 import './index.module';
-
-import './main/main.controller.js';
-import './main/sample/sample.module.js';
-import './main/sample/sample.controller.js';
 
 angular.module('bshmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, icon, main,
   constants, socket, util, ngMaterial, ngMessage, ngTranslate,
   'fuse'
-])
-  .config(routeConfig)
-  .run(function($rootScope, $location, Auth) {
-    'ngInject';
-    // Redirect to login if route requires auth and you're not logged in
-
-    $rootScope.$on('$stateChangeStart', function(event, next) {
-      Auth.isLoggedIn(function(loggedIn) {
-        if(next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
-      });
-    });
-  });
+]);
 
 angular.element(document)
   .ready(() => {
