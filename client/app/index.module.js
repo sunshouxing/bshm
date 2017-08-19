@@ -1,6 +1,18 @@
 'use strict';
 
 import angular from 'angular';
+
+import ngCookies from 'angular-cookies';
+import ngResource from 'angular-resource';
+import ngSanitize from 'angular-sanitize';
+import ngMaterial from 'angular-material';
+import ngMessage from 'angular-messages';
+import ngTranslate from 'angular-translate';
+import 'angular-translate-loader-partial';
+import uiRouter from 'angular-ui-router';
+
+import util from '../components/util/util.module';
+
 // import fuse scripts
 import './core';
 
@@ -23,8 +35,18 @@ import run from './index.run';
 import api from './index.api';
 import {IndexController, MainController} from './index.controller';
 
+import './app.scss';
+
 angular
   .module('fuse', [
+    ngCookies,
+    ngResource,
+    ngSanitize,
+    ngMaterial,
+    ngMessage,
+    ngTranslate,
+    uiRouter,
+    util,
     'app.core',
     'app.navigation',
     'app.toolbar',
