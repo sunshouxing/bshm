@@ -1,19 +1,8 @@
-(function ()
-{
-    'use strict';
+'use strict';
 
-    angular
-        .module('fuse')
-        .controller('IndexController', IndexController);
+export default function IndexController(fuseTheming) {
+  'ngInject';
 
-    /** @ngInject */
-    function IndexController(fuseTheming)
-    {
-        var vm = this;
-
-        // Data
-        vm.themes = fuseTheming.themes;
-
-        //////////
-    }
-})();
+  // Data
+  this.themes = fuseTheming.themes;
+}

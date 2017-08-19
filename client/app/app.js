@@ -46,13 +46,7 @@ import './quick-panel/quick-panel.module.js';
 import './quick-panel/quick-panel.controller.js';
 import './quick-panel/tabs/chat/chat-tab.controller.js';
 
-import './index.module.js';
-import './index.constants.js';
-import './index.route.js';
-import './index.config.js';
-import './index.run.js';
-import './index.controller.js';
-import './index.api.js';
+import './index.module';
 
 import './main/main.controller.js';
 import './main/sample/sample.module.js';

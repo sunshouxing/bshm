@@ -1,37 +1,26 @@
-(function ()
-{
-    'use strict';
+'use strict';
 
-    angular
-        .module('fuse')
-        .run(runBlock);
+export default function($rootScope, $timeout, $state) {
+  'ngInject';
 
-    /** @ngInject */
-    function runBlock($rootScope, $timeout, $state)
-    {
-        // Activate loading indicator
-        var stateChangeStartEvent = $rootScope.$on('$stateChangeStart', function ()
-        {
-            $rootScope.loadingProgress = true;
-        });
+  // activate loading indicator
+  const stateChangeStartEvent = $rootScope.$on('$stateChangeStart', () => {
+    $rootScope.loadingProgress = true;
+  });
 
-        // De-activate loading indicator
-        var stateChangeSuccessEvent = $rootScope.$on('$stateChangeSuccess', function ()
-        {
-            $timeout(function ()
-            {
-                $rootScope.loadingProgress = false;
-            });
-        });
+  // de-activate loading indicator
+  const stateChangeSuccessEvent = $rootScope.$on('$stateChangeSuccess', () => {
+    $timeout(() => {
+      $rootScope.loadingProgress = false;
+    });
+  });
 
-        // Store state in the root scope for easy access
-        $rootScope.state = $state;
+  // store state in the root scope for easy access
+  $rootScope.state = $state;
 
-        // Cleanup
-        $rootScope.$on('$destroy', function ()
-        {
-            stateChangeStartEvent();
-            stateChangeSuccessEvent();
-        });
-    }
-})();
+  // cleanup
+  $rootScope.$on('$destroy', () => {
+    stateChangeStartEvent();
+    stateChangeSuccessEvent();
+  });
+}

@@ -33,8 +33,7 @@ const paths = {
             `${clientPath}/**/!(*.spec|*.mock).js`
         ],
         fuseScripts: [
-            `${clientPath}/app/{core,main,toolbar,navigation,quick-panel}/**/*.js`,
-            `${clientPath}/app/index.*.js`
+            `${clientPath}/app/{core,main,toolbar,navigation,quick-panel}/**/*.js`
         ],
         styles: [
           `${clientPath}/{app,components}/**/*.scss`,
