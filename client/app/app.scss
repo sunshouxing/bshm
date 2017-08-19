@@ -17,10 +17,9 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding: 0.2em 0;
 }
 
+// Import fuse core global.scss manually
+@import './core/scss/global';
+
 // Component styles are injected through gulp
 /* inject:scss */
-@import 'admin/admin';
-@import 'main/main';
-@import '../components/footer/footer';
-@import '../components/modal/modal';
 /* endinject */

@@ -32,7 +32,14 @@ const paths = {
         scripts: [
             `${clientPath}/**/!(*.spec|*.mock).js`
         ],
-        styles: [`${clientPath}/{app,components}/**/*.scss`],
+        fuseScripts: [
+            `${clientPath}/app/{core,main,toolbar,navigation,quick-panel}/**/*.js`
+        ],
+        styles: [
+          `${clientPath}/{app,components}/**/*.scss`,
+          // scss files in fuse core were injected manually
+          `!${clientPath}/app/core/**/*.scss`
+        ],
         mainStyle: `${clientPath}/app/app.scss`,
         views: `${clientPath}/{app,components}/**/*.pug`,
         mainView: `${clientPath}/index.html`,
@@ -259,7 +266,8 @@ gulp.task('lint:scripts', cb => runSequence(['lint:scripts:client', 'lint:script
 gulp.task('lint:scripts:client', () => {
     return gulp.src(_.union(
         paths.client.scripts,
-        _.map(paths.client.test, blob => '!' + blob)
+        _.map(paths.client.test, blob => '!' + blob),
+        _.map(paths.client.fuseScripts, blob => '!' + blob)
     ))
         .pipe(lintClientScripts());
 });
@@ -593,3 +601,5 @@ gulp.task('buildcontrol:openshift', function(done) {
         function() {done();}
     );
 });
+
+/* vim:set ts=4 sw=4 sts=4: */
