@@ -6,6 +6,9 @@ import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import ngMaterial from 'angular-material';
+import ngMessage from 'angular-messages';
+import ngTranslate from 'angular-translate';
+import 'angular-translate-loader-partial';
 
 import 'angular-socket-io';
 
@@ -35,7 +38,7 @@ import './core';
 
 angular.module('bshmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, icon, main,
-  constants, socket, util, ngMaterial
+  constants, socket, util, ngMaterial, ngMessage, ngTranslate
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
