@@ -1,9 +1,13 @@
 'use strict';
 
-export function routeConfig($urlRouterProvider, $locationProvider) {
+export default function($translateProvider) {
   'ngInject';
+  // put your common app configurations here
 
-  $urlRouterProvider.otherwise('/');
-
-  $locationProvider.html5Mode(true);
+  // angular-translate configuration
+  $translateProvider.useLoader('$translatePartialLoader', {
+    urlTemplate: '{part}/i18n/{lang}.json'
+  });
+  $translateProvider.preferredLanguage('en');
+  $translateProvider.useSanitizeValueStrategy('sanitize');
 }
