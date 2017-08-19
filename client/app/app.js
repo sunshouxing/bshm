@@ -30,6 +30,9 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
+// import fuse scripts
+import './core';
+
 angular.module('bshmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, icon, main,
   constants, socket, util, ngMaterial
