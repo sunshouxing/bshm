@@ -36,9 +36,32 @@ import './app.scss';
 // import fuse scripts
 import './core';
 
+import './navigation/navigation.module.js';
+import './navigation/navigation.controller.js';
+
+import './toolbar/toolbar.module.js';
+import './toolbar/toolbar.controller.js';
+
+import './quick-panel/quick-panel.module.js';
+import './quick-panel/quick-panel.controller.js';
+import './quick-panel/tabs/chat/chat-tab.controller.js';
+
+import './index.module.js';
+import './index.constants.js';
+import './index.route.js';
+import './index.config.js';
+import './index.run.js';
+import './index.controller.js';
+import './index.api.js';
+
+import './main/main.controller.js';
+import './main/sample/sample.module.js';
+import './main/sample/sample.controller.js';
+
 angular.module('bshmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, icon, main,
-  constants, socket, util, ngMaterial, ngMessage, ngTranslate
+  constants, socket, util, ngMaterial, ngMessage, ngTranslate,
+  'fuse'
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
