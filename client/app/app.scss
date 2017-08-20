@@ -1,5 +1,3 @@
-$icon-font-path: '/assets/fonts/bootstrap/';
-@import '~bootstrap-sass/assets/stylesheets/bootstrap';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
 @import '~angular-material/angular-material';
@@ -22,4 +20,18 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 // Component styles are injected through gulp
 /* inject:scss */
+@import 'admin/admin';
+@import 'main/main';
+@import 'navigation/layouts/horizontal-navigation/navigation';
+@import 'navigation/layouts/vertical-navigation-fullwidth-toolbar-2/navigation';
+@import 'navigation/layouts/vertical-navigation/navigation';
+@import 'quick-panel/quick-panel';
+@import 'quick-panel/tabs/activity/activity-tab';
+@import 'quick-panel/tabs/chat/chat-tab';
+@import 'quick-panel/tabs/today/today-tab';
+@import 'toolbar/layouts/content-with-toolbar/toolbar';
+@import 'toolbar/layouts/horizontal-navigation/toolbar';
+@import 'toolbar/layouts/vertical-navigation-fullwidth-toolbar-2/toolbar';
+@import 'toolbar/toolbar';
+@import '../components/footer/footer';
 /* endinject */
