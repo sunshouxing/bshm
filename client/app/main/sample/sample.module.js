@@ -1,54 +1,53 @@
-(function ()
-{
-    'use strict';
+'use strict';
 
-    angular
-        .module('app.sample', [])
-        .config(config);
+import angular from 'angular';
 
-    /** @ngInject */
-    function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider)
-    {
-        // State
-        $stateProvider
-            .state('app.sample', {
-                url    : '/sample',
-                views  : {
-                    'content@app': {
-                        templateUrl: 'app/main/sample/sample.html',
-                        controller : 'SampleController as vm'
-                    }
-                },
-                resolve: {
-                    SampleData: function (msApi)
-                    {
-                        return msApi.resolve('sample@get');
-                    }
-                }
-            });
+import SampleController from './sample.controller';
 
-        // Translation
-        $translatePartialLoaderProvider.addPart('app/main/sample');
+export default angular
+  .module('app.sample', [])
+  .config(config)
+  .controller('SampleController', SampleController)
+  .name;
 
-        // Api
-        msApiProvider.register('sample', ['app/data/sample/sample.json']);
+/** @ngInject */
+function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
+  // State
+  $stateProvider
+    .state('app.sample', {
+      url: '/sample',
+      views: {
+        'content@app': {
+          template: require('./sample.pug'),
+          controller: 'SampleController as vm'
+        }
+      },
+      resolve: {
+        SampleData: msApi => msApi.resolve('sample@get')
+      }
+    });
 
-        // Navigation
-        msNavigationServiceProvider.saveItem('fuse', {
-            title : 'SAMPLE',
-            group : true,
-            weight: 1
-        });
+  // translation
+  $translatePartialLoaderProvider.addPart('app/main/sample');
 
-        msNavigationServiceProvider.saveItem('fuse.sample', {
-            title    : 'Sample',
-            icon     : 'icon-tile-four',
-            state    : 'app.sample',
-            /*stateParams: {
-                'param1': 'page'
-             },*/
-            translate: 'SAMPLE.SAMPLE_NAV',
-            weight   : 1
-        });
-    }
-})();
+  // api
+  msApiProvider.register('sample', ['app/data/sample/sample.json']);
+
+  // navigation
+  msNavigationServiceProvider.saveItem('fuse', {
+    title: 'SAMPLE',
+    group: true,
+    weight: 1
+  });
+
+  msNavigationServiceProvider.saveItem('fuse.sample', {
+    title: 'Sample',
+    icon: 'icon-tile-four',
+    state: 'app.sample',
+    /*stateParams: {
+      'param1': 'page'
+      },*/
+    translate: 'SAMPLE.SAMPLE_NAV',
+    weight: 1
+  });
+}

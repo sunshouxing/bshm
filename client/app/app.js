@@ -16,8 +16,7 @@ import util from '../components/util/util.module';
 // import fuse scripts
 import './fuse';
 
-import './main/sample/sample.module';
-import './main/sample/sample.controller';
+import sample from './main/sample/sample.module';
 
 import routes from './app.route';
 import config from './app.config';
@@ -41,7 +40,7 @@ angular
     'app.navigation',
     'app.toolbar',
     'app.quick-panel',
-    'app.sample'
+    sample
   ])
   .config(config)
   .config(routes)

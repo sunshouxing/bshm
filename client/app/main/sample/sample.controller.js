@@ -1,21 +1,8 @@
-(function ()
-{
-    'use strict';
+'use strict';
 
-    angular
-        .module('app.sample')
-        .controller('SampleController', SampleController);
+export default function SampleController(SampleData) {
+  'ngInject';
 
-    /** @ngInject */
-    function SampleController(SampleData)
-    {
-        var vm = this;
-
-        // Data
-        vm.helloText = SampleData.data.helloText;
-
-        // Methods
-
-        //////////
-    }
-})();
+  // Data
+  this.helloText = SampleData.data.helloText;
+}
