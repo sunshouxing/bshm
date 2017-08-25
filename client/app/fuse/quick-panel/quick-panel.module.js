@@ -10,7 +10,7 @@
     function config($translatePartialLoaderProvider, msApiProvider)
     {
         // Translation
-        $translatePartialLoaderProvider.addPart('app/quick-panel');
+        $translatePartialLoaderProvider.addPart('app/fuse/quick-panel');
 
         // Api
         msApiProvider.register('quickPanel.activities', ['app/data/quick-panel/activities.json']);

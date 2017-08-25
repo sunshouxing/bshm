@@ -32,33 +32,33 @@ export default function($stateProvider, $urlRouterProvider, $locationProvider) {
 
   const layouts = {
     verticalNavigation: {
-      main: 'app/core/layouts/vertical-navigation.html',
-      toolbar: 'app/toolbar/layouts/vertical-navigation/toolbar.html',
-      navigation: 'app/navigation/layouts/vertical-navigation/navigation.html'
+      main: 'app/fuse/core/layouts/vertical-navigation.html',
+      toolbar: 'app/fuse/toolbar/layouts/vertical-navigation/toolbar.html',
+      navigation: 'app/fuse/navigation/layouts/vertical-navigation/navigation.html'
     },
     verticalNavigationFullwidthToolbar: {
-      main: 'app/core/layouts/vertical-navigation-fullwidth-toolbar.html',
-      toolbar: 'app/toolbar/layouts/vertical-navigation-fullwidth-toolbar/toolbar.html',
-      navigation: 'app/navigation/layouts/vertical-navigation/navigation.html'
+      main: 'app/fuse/core/layouts/vertical-navigation-fullwidth-toolbar.html',
+      toolbar: 'app/fuse/toolbar/layouts/vertical-navigation-fullwidth-toolbar/toolbar.html',
+      navigation: 'app/fuse/navigation/layouts/vertical-navigation/navigation.html'
     },
     verticalNavigationFullwidthToolbar2: {
-      main: 'app/core/layouts/vertical-navigation-fullwidth-toolbar-2.html',
-      toolbar: 'app/toolbar/layouts/vertical-navigation-fullwidth-toolbar-2/toolbar.html',
-      navigation: 'app/navigation/layouts/vertical-navigation-fullwidth-toolbar-2/navigation.html'
+      main: 'app/fuse/core/layouts/vertical-navigation-fullwidth-toolbar-2.html',
+      toolbar: 'app/fuse/toolbar/layouts/vertical-navigation-fullwidth-toolbar-2/toolbar.html',
+      navigation: 'app/fuse/navigation/layouts/vertical-navigation-fullwidth-toolbar-2/navigation.html'
     },
     horizontalNavigation: {
-      main: 'app/core/layouts/horizontal-navigation.html',
-      toolbar: 'app/toolbar/layouts/horizontal-navigation/toolbar.html',
-      navigation: 'app/navigation/layouts/horizontal-navigation/navigation.html'
+      main: 'app/fuse/core/layouts/horizontal-navigation.html',
+      toolbar: 'app/fuse/toolbar/layouts/horizontal-navigation/toolbar.html',
+      navigation: 'app/fuse/navigation/layouts/horizontal-navigation/navigation.html'
     },
     contentOnly: {
-      main: 'app/core/layouts/content-only.html',
+      main: 'app/fuse/core/layouts/content-only.html',
       toolbar: '',
       navigation: ''
     },
     contentWithToolbar: {
-      main: 'app/core/layouts/content-with-toolbar.html',
-      toolbar: 'app/toolbar/layouts/content-with-toolbar/toolbar.html',
+      main: 'app/fuse/core/layouts/content-with-toolbar.html',
+      toolbar: 'app/fuse/toolbar/layouts/content-with-toolbar/toolbar.html',
       navigation: ''
     }
   };
@@ -82,7 +82,7 @@ export default function($stateProvider, $urlRouterProvider, $locationProvider) {
         controller: 'NavigationController as vm'
       },
       'quickPanel@app': {
-        templateUrl: 'app/quick-panel/quick-panel.html',
+        templateUrl: 'app/fuse/quick-panel/quick-panel.html',
         controller: 'QuickPanelController as vm'
       }
     }

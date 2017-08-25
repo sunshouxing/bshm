@@ -482,7 +482,7 @@
             require         : 'msShortcuts',
             controller      : 'MsShortcutsController as MsShortcuts',
             bindToController: {},
-            templateUrl     : 'app/core/directives/ms-shortcuts/ms-shortcuts.html',
+            templateUrl     : 'app/fuse/core/directives/ms-shortcuts/ms-shortcuts.html',
             compile         : function (tElement)
             {
                 // Add class

@@ -358,7 +358,7 @@
                 onExpand     : '&?',
                 onCollapse   : '&?'
             },
-            templateUrl     : 'app/core/directives/ms-search-bar/ms-search-bar.html',
+            templateUrl     : 'app/fuse/core/directives/ms-search-bar/ms-search-bar.html',
             compile         : function (tElement)
             {
                 // Add class

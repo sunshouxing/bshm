@@ -33,12 +33,12 @@ const paths = {
             `${clientPath}/**/!(*.spec|*.mock).js`
         ],
         fuseScripts: [
-            `${clientPath}/app/{core,main,toolbar,navigation,quick-panel}/**/*.js`
+            `${clientPath}/app/fuse/**/*.js`
         ],
         styles: [
           `${clientPath}/{app,components}/**/*.scss`,
           // scss files in fuse core were injected manually
-          `!${clientPath}/app/core/**/*.scss`
+          `!${clientPath}/app/fuse/core/**/*.scss`
         ],
         mainStyle: `${clientPath}/app/app.scss`,
         views: `${clientPath}/{app,components}/**/*.pug`,

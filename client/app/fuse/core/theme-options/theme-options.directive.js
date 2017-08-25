@@ -120,7 +120,7 @@
             restrict   : 'E',
             scope      : {},
             controller : 'MsThemeOptionsController as vm',
-            templateUrl: 'app/core/theme-options/theme-options.html',
+            templateUrl: 'app/fuse/core/theme-options/theme-options.html',
             compile    : function (tElement)
             {
                 tElement.addClass('ms-theme-options');
