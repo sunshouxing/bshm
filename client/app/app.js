@@ -17,6 +17,7 @@ import util from '../components/util/util.module';
 import './fuse';
 
 import sample from './main/sample/sample.module';
+import fileManager from './main/file-manager/file-manager.component';
 
 import routes from './app.route';
 import config from './app.config';
@@ -40,7 +41,8 @@ angular
     'app.navigation',
     'app.toolbar',
     'app.quick-panel',
-    sample
+    sample,
+    fileManager
   ])
   .config(config)
   .config(routes)
