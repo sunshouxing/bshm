@@ -1,5 +1,7 @@
 'use strict';
 
+import { FILE_MANAGER_WEIGHT } from '../apps.weight';
+
 export default function($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider, msApiProvider) {
   'ngInject';
 
@@ -22,18 +24,12 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
   $translatePartialLoaderProvider.addPart('app/main/file-manager');
 
   // navigation
-  msNavigationServiceProvider.saveItem('apps', {
-    title: 'APPS',
-    group: true,
-    weight: 1
-  });
-
   msNavigationServiceProvider.saveItem('apps.file-manager', {
     title: 'File Manager',
     icon: 'icon-folder',
     state: 'app.file-manager',
     //translate: 'SAMPLE.SAMPLE_NAV',
-    weight: 1
+    weight: FILE_MANAGER_WEIGHT
   });
 
   // api
