@@ -1,6 +1,6 @@
 'use strict';
 
-export default function($stateProvider, msNavigationServiceProvider) {
+export default function($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider, msApiProvider) {
   'ngInject';
 
   // state
@@ -9,10 +9,17 @@ export default function($stateProvider, msNavigationServiceProvider) {
       url: '/file-manager',
       views: {
         'content@app': {
-          template: "<file-manager></file-manager>"
+          template: require('./file-manager.pug'),
+          controller: 'FileManagerController as vm'
         }
+      },
+      resolve: {
+        documents: msApi => msApi.resolve('fileManager.documents@get')
       }
     });
+
+  // translation
+  $translatePartialLoaderProvider.addPart('app/main/file-manager');
 
   // navigation
   msNavigationServiceProvider.saveItem('apps', {
@@ -29,4 +36,8 @@ export default function($stateProvider, msNavigationServiceProvider) {
     weight: 1
   });
 
+  // api
+  msApiProvider.register('fileManager.documents', ['app/data/file-manager/documents.json']);
 }
+
+/* vim:set sw=2 ts=2 sts=2: */

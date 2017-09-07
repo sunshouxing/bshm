@@ -17,7 +17,7 @@ import util from '../components/util/util.module';
 import './fuse';
 
 import sample from './main/sample/sample.module';
-import fileManager from './main/file-manager/file-manager.component';
+import fileManager from './main/file-manager';
 
 import routes from './app.route';
 import config from './app.config';

@@ -1,0 +1,36 @@
+// SIDENAV HEADER
+.header(layout='column', layout-align='space-between start')
+  .logo(layout='row', layout-align='start center')
+    span.logo-icon
+      md-icon.icon.s24(md-font-icon='icon-folder')
+    span.logo-text(translate='FM.FILE_MANAGER') File Manager
+  .account
+    .title John Doe
+    md-select.account-selection.simplified(ng-model='vm.selectedAccount', placeholder='Select Account')
+      md-option(ng-repeat='(provider, address) in vm.accounts', value='{{provider}}') {{address}}
+// / SIDENAV HEADER
+// SIDENAV CONTENT
+.content
+  .navigation-simple(layout='column')
+    md-button.item(aria-label='inbox')
+      .context(layout='row', layout-align='start center')
+        md-icon.s16(md-font-icon='icon-folder')
+        .title(translate='FM.MY_FILES') My Files
+    md-button.item(aria-label='starred')
+      .context(layout='row', layout-align='start center')
+        md-icon.s16(md-font-icon='icon-star')
+        .title(translate='FM.STARRED') Starred
+    md-button.item(aria-label='starred')
+      .context(layout='row', layout-align='start center')
+        md-icon.s16(md-font-icon='icon-folder-account')
+        .title(translate='FM.SHARRED_WITH_ME') Sharred with me
+    md-button.item(aria-label='starred')
+      .context(layout='row', layout-align='start center')
+        md-icon.s16(md-font-icon='icon-clock')
+        .title(translate='FM.RECENT') Recent
+    md-button.item(aria-label='starred')
+      .context(layout='row', layout-align='start center')
+        md-icon.s16(md-font-icon='icon-checkbox-marked-circle')
+        .title(translate='FM.OFFLINE') Offline
+// / SIDENAV CONTENT
+
