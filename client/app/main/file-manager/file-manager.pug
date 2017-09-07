@@ -1,0 +1,74 @@
+doctype html
+
+#file-manager.page-layout.simple.right-sidenav(layout='row')
+    // MAIN SIDENAV (EXTRA SIDENAV)
+    md-sidenav.main-sidenav(md-component-id='main-sidenav', ms-scroll, ms-sidenav-helper)
+        include ./sidenavs/main/main-sidenav.pug
+    // CENTER
+    .center(layout='column', flex)
+        // HEADER
+        .header.md-accent-bg
+            .header-content(layout='column', layout-align='space-between')
+                // TOOLBAR
+                .toolbar(layout='row', layout-align='space-between')
+                    md-button.md-icon-button.main-sidenav-toggle(
+                        ng-click="vm.toggleSidenav('main-sidenav')"
+                        aria-label='Toggle Main Sidenav'
+                        translate
+                        translate-attr-aria-label='FILE.TOOGLE_MAIN_SIDENAV'
+                    )
+                        md-icon.icon(md-font-icon='icon-menu')
+                    .right-side(layout='row')
+                        md-button.md-icon-button(aria-label='Search', translate, translate-attr-aria-label='FM.SEARCH')
+                            md-icon(md-font-icon='icon-magnify')
+                            md-tooltip
+                                span(translate='FM.SEARCH') Search
+                        md-button.md-icon-button(
+                            ng-if="vm.currentView === 'list'"
+                            ng-click='vm.toggleView()'
+                            aria-label='view type'
+                            translate
+                            translate-attr-aria-label='FM.GRID_VIEW'
+                        )
+                            md-icon(md-font-icon='icon-view-module')
+                            md-tooltip
+                                span(translate='FM.GRID_VIEW') Grid View
+                        md-button.md-icon-button(
+                            ng-if="vm.currentView === 'grid'"
+                            aria-label='view type'
+                            ng-click='vm.toggleView()'
+                            translate
+                            translate-attr-aria-label='FM.LIST_VIEW'
+                        )
+                            md-icon(md-font-icon='icon-view-headline')
+                            md-tooltip
+                                span(translate='FM.LIST_VIEW') List View
+                // BREADCRUMB
+                .breadcrumb.text-truncate(layout='row', layout-align='start center')
+                    span(data-ng-repeat='path in vm.path')
+                        | {{path}}
+                        md-icon.icon.separator(md-font-icon='icon-chevron-right')
+            // ADD FILE BUTTON
+            #file-uploader(
+                flow-init='vm.ngFlowOptions'
+                flow-name='vm.ngFlow.flow'
+                flow-files-submitted='vm.upload()'
+                flow-file-added='vm.fileAdded($file)'
+                flow-file-success='vm.fileSuccess($file, $message)'
+                flow-complete='vm.uploadComplete()'
+            )
+                md-button.add-file-button.md-fab.md-warn(flow-btn, aria-label='Add file', translate, translate-attr-aria-label='FM.ADD_FILE')
+                    md-icon(md-font-icon='icon-plus')
+        // CONTENT
+        md-content.content(flex, ms-scroll)
+            div(ng-if="vm.currentView === 'list'")
+                include ./views/list/list-view.pug
+    // SIDENAV
+    md-sidenav.sidenav.details-sidenav.md-sidenav-right(
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-component-id='details-sidenav'
+        ms-scroll
+        ms-sidenav-helper
+    )
+        include ./sidenavs/details/details-sidenav.pug
+
