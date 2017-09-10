@@ -1,1 +1,42 @@
-h2 This is bridge page.
+doctype html
+
+div#bridge.page-layout.carded.left-sidenav(layout='row')
+    // TOP BACKGROUND
+    div.top-bg.md-accent-bg
+
+    // SIDENAV
+    md-sidenav.sidenav(
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-component-id='main-sidenav'
+        ms-scroll
+        ms-sidenav-helper
+    )
+        include ./sidenavs/main/main-sidenav.pug
+
+    // CENTER
+    div.center(layout='column', flex)
+        // CONTENT HEADER
+        div.header(layout='row', layout-align='start center')
+            div.search-wrapper.md-whiteframe-4dp(layout='row', layout-align='start center', flex)
+                md-button.md-icon-button.sidenav-toggle(
+                    ng-click="vm.toggleSidenav('main-sidenav')"
+                    hide-gt-md
+                    aria-label='Toggle Sidenav'
+                    translate
+                    translate-attr-aria-label='MAIL.TOGGLE_SIDENAV'
+                )
+                    md-icon.icon(md-font-icon='icon-menu')
+                div.search(flex, layout='row', layout-align='start center')
+                    md-icon.icon.s24(md-font-icon='icon-magnify')
+                    input(
+                        flex
+                        ng-model='vm.search'
+                        type='text'
+                        placeholder='Search for an e-mail or contact'
+                        translate
+                        translate-attr-placeholder='MAIL.SEARCH_PLACEHOLDER'
+                    )
+
+        // CONTENT CARD
+        div.content-card.classic(layout='column', flex)
+            include ./views/classic/classic-view.pug

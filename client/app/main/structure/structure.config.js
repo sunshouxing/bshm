@@ -15,9 +15,13 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
       url: '/bridge',
       views: {
         'content@app': {
-          templateUrl: 'app/main/structure/bridge/bridge.pug',
+          template: require('./bridge/bridge.pug'),
           controller: 'BridgeController as vm'
         }
+      },
+      resolve: {
+        Folders: msApi => msApi.resolve('mail.folders@get'),
+        Labels: msApi => msApi.resolve('mail.labels@get')
       }
     });
 

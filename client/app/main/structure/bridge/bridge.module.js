@@ -10,5 +10,3 @@ export default angular
   .config(config)
   .controller('BridgeController', BridgeController)
   .name;
-
-/* vim:set sw=2 ts=2 sts=2: */
