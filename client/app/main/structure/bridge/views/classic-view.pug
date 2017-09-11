@@ -1,9 +1,9 @@
 doctype html
 
-// TOOLBAR
+//- TOOLBAR
 .toolbar(layout='row', layout-align='space-between center')
     div(layout='row', layout-align='start center')
-        // THREAD LIST SPECIFIC ACTIONS
+        //- THREAD LIST SPECIFIC ACTIONS
         md-checkbox.no-label(aria-label="{{vm.selectedThreads.length > 0 ? 'Deselect All' : 'Select All'}}", ng-checked='vm.selectedThreads.length > 0', ng-click='vm.toggleSelectThreads()', ng-if='!vm.currentThread')
         md-menu.select-menu(ng-if='!vm.currentThread')
             md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='Filters', translate, translate-attr-aria-label='MAIL.FILTERS')
@@ -33,10 +33,11 @@ doctype html
                 md-menu-item
                     md-button(ng-click="vm.selectThreads('starred', false)", aria-label='Unstarred', translate='MAIL.UNSTARRED', translate-attr-aria-label='MAIL.UNSTARRED')
                         | Unstarred
-        // SINGLE THREAD SPECIFIC ACTIONS
+
+        //- SINGLE THREAD SPECIFIC ACTIONS
         md-button.md-icon-button.close-thread(aria-label='Back', ng-click='vm.closeThread()', ng-if='vm.currentThread', translate, translate-attr-aria-label='MAIL.BACK')
             md-icon(md-font-icon='icon-keyboard-backspace')
-        // ACTION BUTTONS
+        //- ACTION BUTTONS
         .action-buttons(layout='row', layout-align='start center', ng-show='vm.selectedThreads.length > 0 || vm.currentThread', hide, show-gt-xs)
             .divider-vertical
             md-button.md-icon-button(aria-label='Archive', translate, translate-attr-aria-label='MAIL.ARCHIVE')
@@ -94,7 +95,7 @@ doctype html
                     md-menu-item
                         md-button(ng-click="vm.setThreadStatus('starred', false)")
                             span(translate='MAIL.REMOVE_STAR') Remove star
-        // ACTIONS MENU
+        //- ACTIONS MENU
         md-menu.actions-menu(ng-show='vm.selectedThreads.length > 0 || vm.currentThread', hide-gt-xs)
             md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='Mail Actions', translate, translate-attr-aria-label='MAIL.ACTIONS')
                 md-icon(md-font-icon='icon-dots-vertical')
@@ -131,15 +132,6 @@ doctype html
             md-tooltip
                 span(translate='MAIL.NEXT') Next
 
-// CONTENT WRAPPER
+//- CONTENT WRAPPER
 .content-wrapper(layout='column', flex)
     div.content(ui-view='bridge')
-
-    // // THREAD DETAIL
-    // .content.thread-detail(ng-if='vm.currentThread', ms-scroll, flex)
-    //     include ./detail/detail.pug
-
-    // // THREAD LIST
-    // .content.thread-list(ng-if='!vm.currentThread', ms-scroll, flex)
-    //     include ./list/list.pug
-
