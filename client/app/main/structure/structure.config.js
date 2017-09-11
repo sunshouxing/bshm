@@ -12,6 +12,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
       url: '/structure'
     })
     .state('app.structure.bridge', {
+      abstract: true,
       url: '/bridge',
       views: {
         'content@app': {
@@ -55,7 +56,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
 
   msNavigationServiceProvider.saveItem('apps.structure.bridge', {
     title: 'Bridge',
-    state: 'app.structure.bridge',
+    state: 'app.structure.bridge.list',
   });
 }
 
