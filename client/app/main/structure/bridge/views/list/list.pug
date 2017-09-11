@@ -1,0 +1,55 @@
+doctype html
+
+// BRIDGE LIST
+.thread-list(ms-scroll, flex)
+    .no-threads(ng-if='vm.threads.length === 0') There are no messages in '{{vm.currentFilter.filter}}'!
+    .loading-threads(layout='column', layout-align='center center', ng-if='!vm.threads && vm.loadingThreads')
+        md-progress-circular.md-accent(md-mode='indeterminate', md-diameter='64')
+        div Loading your mails...
+    .thread(
+        class='{{thread.status}}'
+        md-ink-ripple
+        ng-if='!vm.loadingThreads'
+        ng-repeat='thread in vm.threads | filter: vm.search | filter: global.search'
+        ng-click='vm.openThread(thread)'
+        ng-class="{'unread': !thread.read, 'current-thread': vm.currentThread === thread, 'selected': vm.isSelected(thread)}"
+    )
+        div(layout='row', layout-align='start center')
+            md-checkbox.no-label(
+                ng-checked='vm.isSelected(thread)'
+                ng-click='vm.toggleSelectThread(thread, $event)'
+                aria-label="{{vm.isSelected(thread) ? 'Deselect' : 'Select'}}"
+            )
+            .info(flex, layout='column')
+                .name(layout='row', layout-align='start center')
+                    img.avatar(ng-if='thread.from.avatar', alt='{{thread.from.name}}', ng-src='{{thread.from.avatar}}')
+                    .avatar(ng-if='!thread.from.avatar', ms-random-class='vm.colors')
+                        | {{thread.from.name[0]}}
+                    span.text-truncate {{thread.from.name}}
+                    md-icon.has-attachment.s16(md-font-icon='icon-paperclip', ng-if='thread.hasAttachments')
+                .subject.text-truncate
+                    | {{thread.subject}}
+                .message.text-truncate
+                    | {{thread.message | htmlToPlaintext | limitTo:180}}{{thread.message.length > 180 ? '...' : ''}}
+                    .labels
+                        .label(ng-repeat='labelId in thread.labels', ng-class='vm.getLabelColor(labelId)')
+                            | {{vm.getLabelTitle(labelId)}}
+            div(layout='column', layout-align='space-between end')
+                .time {{thread.time}}
+                .actions(layout='row', layout-align='start center')
+                    md-button.md-icon-button(
+                        ng-click="vm.toggleThreadStatus('starred', thread, $event)"
+                        aria-label='Toggle starred'
+                        translate
+                        translate-attr-aria-label='MAIL.TOGGLE_STARRED'
+                    )
+                        md-icon.amber-fg(ng-if='thread.starred', md-font-icon='icon-star')
+                        md-icon(ng-if='!thread.starred', md-font-icon='icon-star-outline')
+                    md-button.md-icon-button(
+                        ng-click="vm.toggleThreadStatus('important', thread, $event)" 
+                        aria-label='Toggle important'
+                        translate
+                        translate-attr-aria-label='MAIL.TOGGLE_IMPORTANT'
+                    )
+                        md-icon.amber-300-fg(ng-if='thread.important', md-font-icon='icon-label')
+                        md-icon(ng-if='!thread.important', md-font-icon='icon-label-outline')

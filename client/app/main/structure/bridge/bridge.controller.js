@@ -1,13 +1,18 @@
 'use strict';
 
+import angular from 'angular';
+
 export default class BridgeController {
   // data
   currentThread = null;
+  loadingThreads = true;
 
-  constructor($state, msApi, Folders, Labels) {
+  constructor($state, $mdDialog, $document, msApi, Folders, Labels) {
     'ngInject';
 
     this.$state = $state;
+    this.$mdDialog = $mdDialog;
+    this.$document = $document;
     this.msApi = msApi;
 
     this.folders = Folders.data;
@@ -39,6 +44,33 @@ export default class BridgeController {
     this.currentThread = thread;
 
     // update the state without reloading the controller
-    this.$state.go('app.mail.threads.thread', {threadId: thread.id}, {notify: false});
+    this.$state.go('app.structure.bridge.detail', {id: thread.id});
   }
+
+  closeThread() {
+    this.currentThread = null;
+
+    // update the state without reloading the controller
+    this.$state.go('app.structure.bridge.list');
+  }
+
+  /**
+   * Open compose dialog
+   *
+   * @param ev
+   */
+  composeDialog(ev) {
+    this.$mdDialog.show({
+      controller: 'BridgeCreateController',
+      controllerAs: 'vm',
+      locals: {
+        selectedMail: undefined
+      },
+      template: require('./dialogs/create/create-dialog.pug'),
+      parent: angular.element(this.$document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true
+    });
+  }
+
 }

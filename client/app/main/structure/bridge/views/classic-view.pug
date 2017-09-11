@@ -133,11 +133,13 @@ doctype html
 
 // CONTENT WRAPPER
 .content-wrapper(layout='column', flex)
-    // THREAD DETAIL
-    .content.thread-detail(ng-if='vm.currentThread', ms-scroll, flex)
-        include ./detail/detail.pug
+    div.content(ui-view='bridge')
 
-    // THREAD LIST
-    .content.thread-list(ng-if='!vm.currentThread', ms-scroll, flex)
-        include ./list/list.pug
+    // // THREAD DETAIL
+    // .content.thread-detail(ng-if='vm.currentThread', ms-scroll, flex)
+    //     include ./detail/detail.pug
+
+    // // THREAD LIST
+    // .content.thread-list(ng-if='!vm.currentThread', ms-scroll, flex)
+    //     include ./list/list.pug
 
