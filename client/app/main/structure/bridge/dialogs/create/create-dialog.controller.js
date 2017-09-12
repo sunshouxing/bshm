@@ -21,7 +21,7 @@ export default class BridgeCreateController {
   }
 
   $onInit() {
-    if (angular.isDefined(this.selectedMail)) {
+    if(angular.isDefined(this.selectedMail)) {
       this.form.to = this.selectedMail.from.email;
       this.form.subject = `RE: ${this.selectedMail.subject}`;
       this.form.message = `<blockquote>${this.selectedMail.message}</blockquote>`;
