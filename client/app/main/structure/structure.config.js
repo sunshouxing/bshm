@@ -21,7 +21,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
         }
       },
       resolve: {
-        Folders: msApi => msApi.resolve('mail.folders@get'),
+        folders: apiResolver => apiResolver.resolve('mail.folders@query'),
         Labels: msApi => msApi.resolve('mail.labels@get')
       }
     })

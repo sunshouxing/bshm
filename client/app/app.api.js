@@ -172,9 +172,13 @@ export default function($resource) {
   let api = {};
 
   // Base Url
-  api.baseUrl = 'app/data';
+  api.baseUrl = '/api';
 
   api.sample = $resource(`${api.baseUrl}/sample/sample.json`);
+
+  api.mail = {
+    folders: $resource(`${api.baseUrl}/mail/folders`)
+  };
 
   return api;
 }

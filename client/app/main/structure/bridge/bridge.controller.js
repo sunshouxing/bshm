@@ -4,12 +4,13 @@ import angular from 'angular';
 
 export default class BridgeController {
   // data
+  folders = [];
   bridges = [];
   selectedBridges = [];
   currentThread = null;
   loadingThreads = true;
 
-  constructor($state, $mdDialog, $document, msApi, Folders, Labels) {
+  constructor($state, $mdDialog, $document, msApi, folders, Labels) {
     'ngInject';
 
     this.$state = $state;
@@ -17,7 +18,7 @@ export default class BridgeController {
     this.$document = $document;
     this.msApi = msApi;
 
-    this.folders = Folders.data;
+    this.folders = folders;
     this.labels = Labels.data;
   }
 
@@ -134,7 +135,7 @@ export default class BridgeController {
    *
    * @param event
    */
-  deleteBridges(event) 
+  deleteBridges(event) {
     console.log('deleting bridges');
 
     this.$mdDialog.show({

@@ -7,7 +7,7 @@ export default function config($translatePartialLoaderProvider, msApiProvider) {
   $translatePartialLoaderProvider.addPart('app/main/structure/bridge');
 
   // api
-  msApiProvider.register('mail.folders', ['app/data/mail/folders.json']);
+  // msApiProvider.register('mail.folders', ['app/data/mail/folders.json']);
   msApiProvider.register('mail.labels', ['app/data/mail/labels.json']);
 
   msApiProvider.register('mail.label.notes', ['app/data/mail/labels/notes.json']);
