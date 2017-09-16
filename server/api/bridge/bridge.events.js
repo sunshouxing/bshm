@@ -18,7 +18,7 @@ var events = {
 
 // Register the event emitter to the model events
 function registerEvents(Bridge) {
-  for(var e in events) {
+  for (var e in events) {
     let event = events[e];
     Bridge.post(e, emitEvent(event));
   }
@@ -26,7 +26,7 @@ function registerEvents(Bridge) {
 
 function emitEvent(event) {
   return function(doc) {
-    BridgeEvents.emit(event + ':' + doc._id, doc);
+    BridgeEvents.emit(`${event}:${doc._id}`, doc);
     BridgeEvents.emit(event, doc);
   };
 }

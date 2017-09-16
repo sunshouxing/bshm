@@ -17,7 +17,7 @@ describe('Bridge API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          if(err) {
+          if (err) {
             return done(err);
           }
           bridges = res.body;
@@ -41,7 +41,7 @@ describe('Bridge API:', function() {
         .expect(201)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          if(err) {
+          if (err) {
             return done(err);
           }
           newBridge = res.body;
@@ -64,7 +64,7 @@ describe('Bridge API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          if(err) {
+          if (err) {
             return done(err);
           }
           bridge = res.body;
@@ -95,7 +95,7 @@ describe('Bridge API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if(err) {
+          if (err) {
             return done(err);
           }
           updatedBridge = res.body;
@@ -118,7 +118,7 @@ describe('Bridge API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
-          if(err) {
+          if (err) {
             return done(err);
           }
           let bridge = res.body;
@@ -144,7 +144,7 @@ describe('Bridge API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          if(err) {
+          if (err) {
             return done(err);
           }
           patchedBridge = res.body;
@@ -168,7 +168,7 @@ describe('Bridge API:', function() {
         .delete(`/api/bridges/${newBridge._id}`)
         .expect(204)
         .end(err => {
-          if(err) {
+          if (err) {
             return done(err);
           }
           done();
@@ -180,7 +180,7 @@ describe('Bridge API:', function() {
         .delete(`/api/bridges/${newBridge._id}`)
         .expect(404)
         .end(err => {
-          if(err) {
+          if (err) {
             return done(err);
           }
           done();

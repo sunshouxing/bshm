@@ -64,9 +64,9 @@ export default class BridgeController {
         this.loadingThreads = false;
 
         // change to bridge detail view if needed
-        if(this.$state.params.id) {
+        if (this.$state.params.id) {
           for (let i = 0; i < this.bridges.length; i++) {
-            if(this.bridges[i]._id === this.$state.params.id) {
+            if (this.bridges[i]._id === this.$state.params.id) {
               this.openThread(this.bridges[i]);
               break;
             }
@@ -92,12 +92,12 @@ export default class BridgeController {
    * @param event
    */
   toggleSelectBridge(bridge, event) {
-    if(event) {
+    if (event) {
       event.stopPropagation();
     }
 
     let index = this.selectedBridges.indexOf(bridge);
-    if(index > -1) {
+    if (index > -1) {
       this.selectedBridges.splice(index, 1);
     } else {
       this.selectedBridges.push(bridge);
@@ -115,15 +115,15 @@ export default class BridgeController {
     // before trying to select new bridges
     this.selectedBridges = [];
 
-    if(angular.isUndefined(key) && angular.isUndefined(value)) {
-      for(let i = 0; i < this.bridges.length; i++) {
+    if (angular.isUndefined(key) && angular.isUndefined(value)) {
+      for (let i = 0; i < this.bridges.length; i++) {
         this.selectedBridges.push(this.bridges[i]);
       }
     }
 
-    if(angular.isDefined(key) && angular.isDefined(value)) {
-      for(let i = 0; i < this.bridges.length; i++) {
-        if(this.bridges[i][key] === value) {
+    if (angular.isDefined(key) && angular.isDefined(value)) {
+      for (let i = 0; i < this.bridges.length; i++) {
+        if (this.bridges[i][key] === value) {
           this.selectedBridges.push(this.bridges[i]);
         }
       }

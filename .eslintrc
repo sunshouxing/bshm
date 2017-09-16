@@ -156,9 +156,6 @@
             "before": true,
             "after": true,
             "overrides": {
-                "if": {"after": false},
-                "for": {"after": false},
-                "while": {"after": false},
                 "catch": {"after": false}
             }
         }],                                                         //enforce spacing before and after keywords

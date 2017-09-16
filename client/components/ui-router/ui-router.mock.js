@@ -8,9 +8,9 @@ angular.module('stateMock')
     this.expectedTransitions = [];
 
     this.transitionTo = function(stateName) {
-      if(this.expectedTransitions.length > 0) {
+      if (this.expectedTransitions.length > 0) {
         var expectedState = this.expectedTransitions.shift();
-        if(expectedState !== stateName) {
+        if (expectedState !== stateName) {
           throw Error(`Expected transition to state: ${expectedState
             } but transitioned to ${stateName}`);
         }
@@ -31,7 +31,7 @@ angular.module('stateMock')
     };
 
     this.ensureAllTransitionsHappened = function() {
-      if(this.expectedTransitions.length > 0) {
+      if (this.expectedTransitions.length > 0) {
         throw Error('Not all transitions happened!');
       }
     };

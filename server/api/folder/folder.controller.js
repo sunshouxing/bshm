@@ -16,7 +16,7 @@ import Folder from './folder.model';
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
-    if(entity) {
+    if (entity) {
       return res.status(statusCode).json(entity);
     }
     return null;
@@ -38,7 +38,7 @@ function patchUpdates(patches) {
 
 function removeEntity(res) {
   return function(entity) {
-    if(entity) {
+    if (entity) {
       return entity.remove()
         .then(() => {
           res.status(204).end();
@@ -49,7 +49,7 @@ function removeEntity(res) {
 
 function handleEntityNotFound(res) {
   return function(entity) {
-    if(!entity) {
+    if (!entity) {
       res.status(404).end();
       return null;
     }
@@ -88,7 +88,7 @@ export function create(req, res) {
 
 // Upserts the given Folder in the DB at the specified ID
 export function upsert(req, res) {
-  if(req.body._id) {
+  if (req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
   return Folder.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
@@ -99,7 +99,7 @@ export function upsert(req, res) {
 
 // Updates an existing Folder in the DB
 export function patch(req, res) {
-  if(req.body._id) {
+  if (req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
   return Folder.findById(req.params.id).exec()

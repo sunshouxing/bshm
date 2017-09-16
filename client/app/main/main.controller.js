@@ -5,7 +5,7 @@ export default function($scope, $rootScope) {
 
   // remove the splash screen
   $scope.$on('$viewContentAnimationEnded', event => {
-    if(event.targetScope.$id === $scope.$id) {
+    if (event.targetScope.$id === $scope.$id) {
       $rootScope.$broadcast('msSplashScreen::remove');
     }
   });
