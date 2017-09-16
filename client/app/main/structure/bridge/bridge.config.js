@@ -7,7 +7,6 @@ export default function config($translatePartialLoaderProvider, msApiProvider) {
   $translatePartialLoaderProvider.addPart('app/main/structure/bridge');
 
   // api
-  // msApiProvider.register('mail.folders', ['app/data/mail/folders.json']);
   msApiProvider.register('mail.labels', ['app/data/mail/labels.json']);
 
   msApiProvider.register('mail.label.notes', ['app/data/mail/labels/notes.json']);
@@ -15,7 +14,6 @@ export default function config($translatePartialLoaderProvider, msApiProvider) {
   msApiProvider.register('mail.label.invoices', ['app/data/mail/labels/invoices.json']);
   msApiProvider.register('mail.label.amazon', ['app/data/mail/labels/amazon.json']);
 
-  msApiProvider.register('mail.folder.inbox', ['app/data/mail/folders/inbox.json']);
   msApiProvider.register('mail.folder.sent', ['app/data/mail/folders/sent.json']);
   msApiProvider.register('mail.folder.drafts', ['app/data/mail/folders/drafts.json']);
   msApiProvider.register('mail.folder.spam', ['app/data/mail/folders/spam.json']);

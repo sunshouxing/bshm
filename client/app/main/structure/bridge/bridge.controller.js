@@ -9,27 +9,69 @@ export default class BridgeController {
   selectedBridges = [];
   currentThread = null;
   loadingThreads = true;
+  colors = ['blue-bg', 'blue-grey-bg', 'orange-bg', 'pink-bg', 'purple-bg'];
 
-  constructor($state, $mdDialog, $document, msApi, folders, Labels) {
+  constructor($state, $mdDialog, $document, api, folders, Labels) {
     'ngInject';
 
     this.$state = $state;
     this.$mdDialog = $mdDialog;
     this.$document = $document;
-    this.msApi = msApi;
+    this.api = api;
 
     this.folders = folders;
     this.labels = Labels.data;
   }
+// function init()
+//         {
+//             // Figure out the api name
+//             var apiName = 'mail.' + ($state.params.type || 'folder') + '.' + $state.params.filter + '@get';
 
+//             // Request the mails
+//             msApi.request(apiName).then(
+//                 // Success
+//                 function (response)
+//                 {
+//                     // Load new threads
+//                     vm.threads = response.data;
+
+//                     // Hide the loading screen
+//                     vm.loadingThreads = false;
+
+//                     // Open the thread if needed
+//                     if ( $state.params.threadId )
+//                     {
+//                         for ( var i = 0; i < vm.threads.length; i++ )
+//                         {
+//                             if ( vm.threads[i].id === $state.params.threadId )
+//                             {
+//                                 vm.openThread(vm.threads[i]);
+//                                 break;
+//                             }
+//                         }
+//                     }
+//                 }
+//             );
+//         }
   $onInit() {
-    let apiName = 'mail.folder.inbox@get';
-
-    this.msApi.request(apiName).then(
+    this.api.bridges.query(
       // success callback
-      response => {
-        this.bridges = response.data;
+      bridges => {
+        // set bridge list data
+        this.bridges = bridges;
+
+        // hide the loading screen
         this.loadingThreads = false;
+
+        // change to bridge detail view if needed
+        if(this.$state.params.id) {
+          for (let i = 0; i < this.bridges.length; i++) {
+            if(this.bridges[i]._id === this.$state.params.id) {
+              this.openThread(this.bridges[i]);
+              break;
+            }
+          }
+        }
       }
     );
   }
@@ -101,14 +143,14 @@ export default class BridgeController {
     this.currentThread = thread;
 
     // update the state without reloading the controller
-    this.$state.go('app.structure.bridge.detail', {id: thread.id});
+    this.$state.go('app.structure.bridge.detail', {id: thread._id});
   }
 
   closeThread() {
     this.currentThread = null;
 
     // update the state without reloading the controller
-    this.$state.go('app.structure.bridge.list');
+    this.$state.go('app.structure.bridge');
   }
 
   /**

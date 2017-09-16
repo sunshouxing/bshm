@@ -142,4 +142,10 @@ doctype html
 
 //- CONTENT WRAPPER
 .content-wrapper(layout='column', flex)
-    div.content(ui-view='bridge')
+    //- THREAD DETAIL VIEW
+    .content.thread-detail(ng-if='vm.currentThread', ms-scroll, flex)
+        include ./detail/detail.pug
+
+    //- THREAD LIST VIEW
+    .content.thread-list(ng-if='!vm.currentThread', ms-scroll, flex)
+        include ./list/list.pug

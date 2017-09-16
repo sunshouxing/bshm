@@ -180,5 +180,7 @@ export default function($resource) {
     folders: $resource(`${api.baseUrl}/mail/folders`)
   };
 
+  api.bridges = $resource(`${api.baseUrl}/bridges`);
+
   return api;
 }

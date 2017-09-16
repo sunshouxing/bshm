@@ -37,8 +37,10 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 @import 'main/file-manager/sidenavs/main/main-sidenav';
 @import 'main/file-manager/views/list/list-view';
 @import 'main/structure/bridge/bridge';
+@import 'main/structure/bridge/dialogs/create/create-dialog';
+@import 'main/structure/bridge/dialogs/delete/delete-dialog';
 @import 'main/structure/bridge/sidenavs/main/main-sidenav';
-@import 'main/structure/bridge/views/classic/detail/detail';
-@import 'main/structure/bridge/views/classic/list/list';
+@import 'main/structure/bridge/views/detail/detail';
+@import 'main/structure/bridge/views/list/list';
 @import '../components/footer/footer';
 /* endinject */

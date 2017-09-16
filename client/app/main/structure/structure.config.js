@@ -12,8 +12,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
       url: '/structure'
     })
     .state('app.structure.bridge', {
-      abstract: true,
-      url: '/bridge',
+      url: '/bridges',
       views: {
         'content@app': {
           template: require('./bridge/bridge.pug'),
@@ -25,25 +24,8 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
         Labels: msApi => msApi.resolve('mail.labels@get')
       }
     })
-    .state('app.structure.bridge.list', {
-      url: '/list',
-      views: {
-        'bridge@app.structure.bridge': {
-          template: require('./bridge/views/list/list.pug')
-        }
-      }
-    })
     .state('app.structure.bridge.detail', {
-      url: '/{id:[0-9a-f]{19}}',
-      views: {
-        'bridge@app.structure.bridge': {
-          template: require('./bridge/views/detail/detail.pug'),
-          controller: 'BridgeDetailController as vm'
-        }
-      },
-      resolve: {
-        bridge: msApi => msApi.resolve('mail.folder.inbox@get')
-      }
+      url: '/{id:[0-9a-f]{24}}',
     });
 
 
@@ -56,7 +38,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
 
   msNavigationServiceProvider.saveItem('apps.structure.bridge', {
     title: 'Bridge',
-    state: 'app.structure.bridge.list',
+    state: 'app.structure.bridge',
   });
 }
 
