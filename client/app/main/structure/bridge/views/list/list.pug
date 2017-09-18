@@ -10,7 +10,7 @@ doctype html
         class='{{bridge.status}}'
         md-ink-ripple
         ng-if='!vm.loadingBridges'
-        ng-repeat='bridge in vm.bridges | filter: vm.search | filter: global.search'
+        ng-repeat='bridge in vm.bridges | filter: vm.search | filter: global.search | limitTo: vm.pageSize:(vm.currentPage-1)*vm.pageSize'
         ng-click='vm.inspectDetail(bridge)'
         ng-class="{'unread': !bridge.read, 'current-bridge': vm.currentBridge === bridge, 'selected': vm.isSelected(bridge)}"
     )

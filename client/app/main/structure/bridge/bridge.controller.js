@@ -11,6 +11,10 @@ export default class BridgeController {
   loadingBridges = true;
   colors = ['blue-bg', 'blue-grey-bg', 'orange-bg', 'pink-bg', 'purple-bg'];
 
+  // pagination: default value of current page and page size
+  currentPage = 1;
+  pageSize = 10;
+
   constructor($state, $mdDialog, $document, api, folders, Labels) {
     'ngInject';
 
@@ -181,4 +185,6 @@ export default class BridgeController {
     });
   }
 
+  onPaginate(page, limit) {
+  }
 }

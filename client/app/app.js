@@ -9,6 +9,7 @@ import ngMaterial from 'angular-material';
 import ngMessage from 'angular-messages';
 import ngTranslate from 'angular-translate';
 import 'angular-translate-loader-partial';
+import 'angular-material-data-table';
 import uiRouter from 'angular-ui-router';
 
 import util from '../components/util/util.module';
@@ -39,6 +40,7 @@ angular
     ngTranslate,
     uiRouter,
     util,
+    'md.data.table',
     'app.core',
     'app.navigation',
     'app.toolbar',

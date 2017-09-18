@@ -128,17 +128,16 @@ doctype html
                     md-button(aria-label='Labels', translate-attr-aria-label='BRIDGE.LABELS')
                         md-icon(md-font-icon='icon-label')
                         span(translate='BRIDGE.LABELS') Labels
-    div(layout='row', layout-align='start center')
-        //- PAGE INFO
-        span.page-info(hide-sm) 1 - 100 of 980
-        md-button.md-icon-button.arrow(aria-label='Previous', translate, translate-attr-aria-label='BRIDGE.PREVIOUS')
-            md-icon(md-font-icon='icon-chevron-left')
-            md-tooltip
-                span(translate='BRIDGE.PREVIOUS') Previous
-        md-button.md-icon-button.arrow(aria-label='Next', translate, translate-attr-aria-label='BRIDGE.NEXT')
-            md-icon(md-font-icon='icon-chevron-right')
-            md-tooltip
-                span(translate='BRIDGE.NEXT') Next
+    //- PAGE INFO
+    div(layout='row', layout-align='start center', ng-if='!vm.currentBridge')
+        data-md-table-pagination(
+            md-limit='vm.pageSize'
+            md-limit-options='[5, 10, 20]'
+            md-page='vm.currentPage'
+            md-page-select
+            md-total='{{vm.bridges.length}}'
+            md-on-paginate='vm.onPaginate'
+        )
 
 //- CONTENT WRAPPER
 .content-wrapper(layout='column', flex)
