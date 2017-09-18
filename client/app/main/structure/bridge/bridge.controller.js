@@ -7,7 +7,7 @@ export default class BridgeController {
   folders = [];
   bridges = [];
   selectedBridges = [];
-  currentThread = null;
+  currentBridge = null;
   loadingThreads = true;
   colors = ['blue-bg', 'blue-grey-bg', 'orange-bg', 'pink-bg', 'purple-bg'];
 
@@ -140,14 +140,14 @@ export default class BridgeController {
     thread.read = true;
 
     // assign thread as the current thread
-    this.currentThread = thread;
+    this.currentBridge = thread;
 
     // update the state without reloading the controller
     this.$state.go('app.structure.bridge.detail', {id: thread._id});
   }
 
   closeThread() {
-    this.currentThread = null;
+    this.currentBridge = null;
 
     // update the state without reloading the controller
     this.$state.go('app.structure.bridge');

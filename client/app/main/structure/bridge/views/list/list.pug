@@ -12,7 +12,7 @@ doctype html
         ng-if='!vm.loadingThreads'
         ng-repeat='bridge in vm.bridges | filter: vm.search | filter: global.search'
         ng-click='vm.openThread(bridge)'
-        ng-class="{'unread': !bridge.read, 'current-thread': vm.currentThread === bridge, 'selected': vm.isSelected(bridge)}"
+        ng-class="{'unread': !bridge.read, 'current-thread': vm.currentBridge === bridge, 'selected': vm.isSelected(bridge)}"
     )
         div(layout='row', layout-align='start center')
             md-checkbox.no-label(
