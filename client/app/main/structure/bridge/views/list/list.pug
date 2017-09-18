@@ -41,7 +41,7 @@ doctype html
                         ng-click="vm.toggleThreadStatus('starred', bridge, $event)"
                         aria-label='Toggle starred'
                         translate
-                        translate-attr-aria-label='MAIL.TOGGLE_STARRED'
+                        translate-attr-aria-label='BRIDGE.TOGGLE_STARRED'
                     )
                         md-icon.amber-fg(ng-if='bridge.starred', md-font-icon='icon-star')
                         md-icon(ng-if='!bridge.starred', md-font-icon='icon-star-outline')
@@ -49,7 +49,7 @@ doctype html
                         ng-click="vm.toggleThreadStatus('important', bridge, $event)" 
                         aria-label='Toggle important'
                         translate
-                        translate-attr-aria-label='MAIL.TOGGLE_IMPORTANT'
+                        translate-attr-aria-label='BRIDGE.TOGGLE_IMPORTANT'
                     )
                         md-icon.amber-300-fg(ng-if='bridge.important', md-font-icon='icon-label')
                         md-icon(ng-if='!bridge.important', md-font-icon='icon-label-outline')

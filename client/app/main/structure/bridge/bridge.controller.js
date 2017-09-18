@@ -101,7 +101,25 @@ export default class BridgeController {
   }
 
   /**
-   * Open bridge
+   * deselect bridges
+   */
+  deselectBridges() {
+    this.selectedBridges = [];
+  }
+
+  /**
+   * toggle select bridges
+   */
+  toggleSelectBridges() {
+    if (this.selectedBridges.length > 0) {
+      this.deselectBridges();
+    } else {
+      this.selectBridges();
+    }
+  }
+
+  /**
+   * open bridge detail view
    *
    * @param bridge
    */
@@ -116,6 +134,9 @@ export default class BridgeController {
     this.$state.go('app.structure.bridge.detail', {id: bridge._id});
   }
 
+  /**
+   * open bridge list view
+   */
   surveyBridges() {
     this.currentBridge = null;
 

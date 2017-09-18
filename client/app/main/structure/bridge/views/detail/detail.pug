@@ -13,7 +13,7 @@ doctype html
                 ng-click="vm.toggleThreadStatus('starred')"
                 aria-label='Toggle starred'
                 translate
-                translate-attr-toogle-starred='MAIL.TOGGLE_STARRED'
+                translate-attr-toogle-starred='BRIDGE.TOGGLE_STARRED'
             )
                 md-icon.amber-fg(ng-if='vm.currentBridge.starred', md-font-icon='icon-star')
                 md-icon(ng-if='!vm.currentBridge.starred', md-font-icon='icon-star-outline')
@@ -21,7 +21,7 @@ doctype html
                 ng-click="vm.toggleThreadStatus('important')"
                 aria-label='Toggle important'
                 translate
-                translate-attr-toogle-starred='MAIL.TOGGLE_IMPORTANT'
+                translate-attr-toogle-starred='BRIDGE.TOGGLE_IMPORTANT'
             )
                 md-icon.amber-300-fg(ng-if='vm.currentBridge.important', md-font-icon='icon-label')
                 md-icon(ng-if='!vm.currentBridge.important', md-font-icon='icon-label-outline')
@@ -37,51 +37,51 @@ doctype html
                         .name
                             | {{vm.currentBridge.from.name}}
                         .to(layout='row', layout-align='start center')
-                            .to-text(translate='MAIL.INFO.TO') to
+                            .to-text(translate='BRIDGE.INFO.TO') to
                             div {{vm.currentBridge.to[0].name}}
                 a.toggle-details.md-accent-color(
                     ng-hide='vm.selectedMailShowDetails'
                     ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails'
-                    translate='MAIL.SHOW_DETAILS'
+                    translate='BRIDGE.SHOW_DETAILS'
                 )
                     | Show Details
-                a.toggle-details.md-accent-color(ng-show='vm.selectedMailShowDetails', ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails', translate='MAIL.HIDE_DETAILS')
+                a.toggle-details.md-accent-color(ng-show='vm.selectedMailShowDetails', ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails', translate='BRIDGE.HIDE_DETAILS')
                     | Hide Details
                 .details(ng-show='vm.selectedMailShowDetails', layout='row', layout-align='start start')
                     div(layout='column')
-                        span.title(translate='MAIL.DETAILS.FROM') From:
-                        span.title(translate='MAIL.DETAILS.TO') To:
-                        span.title(translate='MAIL.DETAILS.DATE') Date:
+                        span.title(translate='BRIDGE.DETAILS.FROM') From:
+                        span.title(translate='BRIDGE.DETAILS.TO') To:
+                        span.title(translate='BRIDGE.DETAILS.DATE') Date:
                     div(layout='column')
                         span.detail {{vm.currentBridge.from.email}}
                         span.detail {{vm.currentBridge.to[0].email}}
                         span.detail {{vm.currentBridge.time}}
             md-menu
-                md-button.md-icon-button(aria-label='More', ng-click='$mdOpenMenu($event)', translate, translate-aria-label='MAIL.MORE')
+                md-button.md-icon-button(aria-label='More', ng-click='$mdOpenMenu($event)', translate, translate-aria-label='BRIDGE.MORE')
                     md-icon(md-font-icon='icon-dots-vertical')
                 md-menu-content(width='3')
                     md-menu-item
-                        md-button(aria-label='Reply', translate-aria-label='MAIL.REPLY', ng-click='vm.replyDialog($event)')
+                        md-button(aria-label='Reply', translate-aria-label='BRIDGE.REPLY', ng-click='vm.replyDialog($event)')
                             md-icon(md-font-icon='icon-reply')
-                            span(translate='MAIL.REPLY') Reply
+                            span(translate='BRIDGE.REPLY') Reply
                     md-menu-item
-                        md-button(aria-label='Forward', translate-aria-label='MAIL.FORWARD')
+                        md-button(aria-label='Forward', translate-aria-label='BRIDGE.FORWARD')
                             md-icon(md-font-icon='icon-forward')
-                            span(translate='MAIL.FORWARD') Forward
+                            span(translate='BRIDGE.FORWARD') Forward
                     md-menu-item
-                        md-button(aria-label='Print', translate-aria-label='MAIL.PRINT')
+                        md-button(aria-label='Print', translate-aria-label='BRIDGE.PRINT')
                             md-icon(md-font-icon='icon-printer')
-                            span(translate='MAIL.PRINT') Print
+                            span(translate='BRIDGE.PRINT') Print
         div(ng-bind-html='vm.currentBridge.message')
     .bridge-attachments(ng-if='vm.currentBridge.attachments')
         .title
-            span(translte='MAIL.ATTACHMENTS') Attachments
+            span(translte='BRIDGE.ATTACHMENTS') Attachments
             |  ({{vm.currentBridge.attachments.length}})
         .attachment-list(layout-wrap, layout='row')
             .attachment(layout='column', ng-repeat='attachment in vm.currentBridge.attachments')
                 img.preview(ng-src='{{attachment.preview}}')
                 div(layout='column')
-                    a.md-accent-color.link(href='#', translate='MAIL.VIEW') View
-                    a.md-accent-color.link(href='#', translate='MAIL.DOWNLOAD') Download
+                    a.md-accent-color.link(href='#', translate='BRIDGE.VIEW') View
+                    a.md-accent-color.link(href='#', translate='BRIDGE.DOWNLOAD') Download
                     .size ({{attachment.size}})
     
