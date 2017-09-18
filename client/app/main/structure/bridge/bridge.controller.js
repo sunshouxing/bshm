@@ -186,5 +186,6 @@ export default class BridgeController {
   }
 
   onPaginate(page, limit) {
+    console.log(`Current page: ${page}, page size: ${limit}`);
   }
 }

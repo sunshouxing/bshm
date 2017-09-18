@@ -1,9 +1,9 @@
 <md-menu md-position-mode="target-right target">
 
-    <div ng-click="$mdOpenMenu($event)">
+    <div ng-click="$mdMenu.open($event)">
         <ms-color-picker-button>
             <md-button aria-label="Row Color" md-menu-origin
-                       ng-click="$mdOpenMenu($event)" ng-class="vm.selectedColor.class">
+                       ng-click="$mdMenu.open($event)" ng-class="vm.selectedColor.class">
 
                 <span ng-show="vm.selectedColor.palette">
                     {{vm.selectedColor.palette}} {{vm.selectedColor.hue}}
