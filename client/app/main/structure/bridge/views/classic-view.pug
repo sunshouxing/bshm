@@ -36,9 +36,9 @@ doctype html
                         | Unstarred
 
         //- SINGLE THREAD SPECIFIC ACTIONS (back to bridges list page)
-        md-button.md-icon-button.close-thread(
+        md-button.md-icon-button.close-bridge(
             ng-if='vm.currentBridge'
-            ng-click='vm.closeThread()'
+            ng-click='vm.surveyBridges()'
             aria-label='Back'
             translate
             translate-attr-aria-label='MAIL.BACK'
@@ -70,7 +70,7 @@ doctype html
                     md-icon(md-font-icon='icon-label')
                     md-tooltip
                         span(translate='MAIL.LABELS') Labels
-                md-menu-content.thread-labels-toggle-list(width='3')
+                md-menu-content.bridge-labels-toggle-list(width='3')
                     md-list
                         md-subheader.md-no-sticky
                             span(translate='MAIL.LABELS') Labels
@@ -143,9 +143,9 @@ doctype html
 //- CONTENT WRAPPER
 .content-wrapper(layout='column', flex)
     //- THREAD DETAIL VIEW
-    .content.thread-detail(ng-if='vm.currentBridge', ms-scroll, flex)
+    .content.bridge-detail(ng-if='vm.currentBridge', ms-scroll, flex)
         include ./detail/detail.pug
 
     //- THREAD LIST VIEW
-    .content.thread-list(ng-if='!vm.currentBridge', ms-scroll, flex)
+    .content.bridge-list(ng-if='!vm.currentBridge', ms-scroll, flex)
         include ./list/list.pug

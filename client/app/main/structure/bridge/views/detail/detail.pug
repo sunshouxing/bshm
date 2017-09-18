@@ -1,8 +1,8 @@
 doctype html
 
 // BRIDGE DETAIL
-.thread-detail(ms-scroll, flex)
-    .thread-header(layout='row', layout-align='space-between center')
+.bridge-detail(ms-scroll, flex)
+    .bridge-header(layout='row', layout-align='space-between center')
         div
             .subject(flex) {{vm.currentBridge.subject}}
             .labels
@@ -25,7 +25,7 @@ doctype html
             )
                 md-icon.amber-300-fg(ng-if='vm.currentBridge.important', md-font-icon='icon-label')
                 md-icon(ng-if='!vm.currentBridge.important', md-font-icon='icon-label-outline')
-    .thread-content
+    .bridge-content
         .info(layout='row', layout-align='space-between start')
             div(layout='column', layout-align='start start')
                 div(layout='row', layout-align='start start')
@@ -73,7 +73,7 @@ doctype html
                             md-icon(md-font-icon='icon-printer')
                             span(translate='MAIL.PRINT') Print
         div(ng-bind-html='vm.currentBridge.message')
-    .thread-attachments(ng-if='vm.currentBridge.attachments')
+    .bridge-attachments(ng-if='vm.currentBridge.attachments')
         .title
             span(translte='MAIL.ATTACHMENTS') Attachments
             |  ({{vm.currentBridge.attachments.length}})

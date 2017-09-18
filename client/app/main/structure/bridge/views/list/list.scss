@@ -9,11 +9,11 @@
                 .content-wrapper {
                     background: #FAFAFA;
 
-                    .thread-list {
+                    .bridge-list {
                         position: relative;
                         padding: 0;
 
-                        .no-threads {
+                        .no-bridges {
                             background: #FAFAFA;
                             width: 100%;
                             text-align: center;
@@ -21,7 +21,7 @@
                             font-size: 20px;
                         }
 
-                        .loading-threads {
+                        .loading-bridges {
                             background: #FAFAFA;
                             width: 100%;
                             text-align: center;
@@ -29,7 +29,7 @@
                             font-size: 20px;
                         }
 
-                        .thread {
+                        .bridge {
                             background: #FAFAFA;
                             position: relative;
                             padding: 16px 24px;
@@ -69,7 +69,7 @@
                                 }
                             }
 
-                            &.current-thread {
+                            &.current-bridge {
                                 background: #E3F2FD;
 
                                 .info {

@@ -1,18 +1,18 @@
 doctype html
 
 // BRIDGE LIST
-.thread-list(ms-scroll, flex)
-    .no-threads(ng-if='vm.bridges.length === 0') There are no messages in '{{vm.currentFilter.filter}}'!
-    .loading-threads(layout='column', layout-align='center center', ng-if='!vm.bridges && vm.loadingThreads')
+.bridge-list(ms-scroll, flex)
+    .no-bridges(ng-if='vm.bridges.length === 0') There are no messages in '{{vm.currentFilter.filter}}'!
+    .loading-bridges(layout='column', layout-align='center center', ng-if='!vm.bridges && vm.loadingBridges')
         md-progress-circular.md-accent(md-mode='indeterminate', md-diameter='64')
         div Loading your mails...
-    .thread(
+    .bridge(
         class='{{bridge.status}}'
         md-ink-ripple
-        ng-if='!vm.loadingThreads'
+        ng-if='!vm.loadingBridges'
         ng-repeat='bridge in vm.bridges | filter: vm.search | filter: global.search'
-        ng-click='vm.openThread(bridge)'
-        ng-class="{'unread': !bridge.read, 'current-thread': vm.currentBridge === bridge, 'selected': vm.isSelected(bridge)}"
+        ng-click='vm.inspectDetail(bridge)'
+        ng-class="{'unread': !bridge.read, 'current-bridge': vm.currentBridge === bridge, 'selected': vm.isSelected(bridge)}"
     )
         div(layout='row', layout-align='start center')
             md-checkbox.no-label(

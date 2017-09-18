@@ -8,7 +8,7 @@ export default class BridgeController {
   bridges = [];
   selectedBridges = [];
   currentBridge = null;
-  loadingThreads = true;
+  loadingBridges = true;
   colors = ['blue-bg', 'blue-grey-bg', 'orange-bg', 'pink-bg', 'purple-bg'];
 
   constructor($state, $mdDialog, $document, api, folders, Labels) {
@@ -22,37 +22,7 @@ export default class BridgeController {
     this.folders = folders;
     this.labels = Labels.data;
   }
-// function init()
-//         {
-//             // Figure out the api name
-//             var apiName = 'mail.' + ($state.params.type || 'folder') + '.' + $state.params.filter + '@get';
 
-//             // Request the mails
-//             msApi.request(apiName).then(
-//                 // Success
-//                 function (response)
-//                 {
-//                     // Load new threads
-//                     vm.threads = response.data;
-
-//                     // Hide the loading screen
-//                     vm.loadingThreads = false;
-
-//                     // Open the thread if needed
-//                     if ( $state.params.threadId )
-//                     {
-//                         for ( var i = 0; i < vm.threads.length; i++ )
-//                         {
-//                             if ( vm.threads[i].id === $state.params.threadId )
-//                             {
-//                                 vm.openThread(vm.threads[i]);
-//                                 break;
-//                             }
-//                         }
-//                     }
-//                 }
-//             );
-//         }
   $onInit() {
     this.api.bridges.query(
       // success callback
@@ -61,13 +31,13 @@ export default class BridgeController {
         this.bridges = bridges;
 
         // hide the loading screen
-        this.loadingThreads = false;
+        this.loadingBridges = false;
 
         // change to bridge detail view if needed
         if (this.$state.params.id) {
           for (let i = 0; i < this.bridges.length; i++) {
             if (this.bridges[i]._id === this.$state.params.id) {
-              this.openThread(this.bridges[i]);
+              this.inspectDetail(this.bridges[i]);
               break;
             }
           }
@@ -131,22 +101,22 @@ export default class BridgeController {
   }
 
   /**
-   * Open thread
+   * Open bridge
    *
-   * @param thread
+   * @param bridge
    */
-  openThread(thread) {
-    // set the read status on the thread
-    thread.read = true;
+  inspectDetail(bridge) {
+    // set the read status on the bridge
+    bridge.read = true;
 
-    // assign thread as the current thread
-    this.currentBridge = thread;
+    // assign bridge as the current bridge
+    this.currentBridge = bridge;
 
     // update the state without reloading the controller
-    this.$state.go('app.structure.bridge.detail', {id: thread._id});
+    this.$state.go('app.structure.bridge.detail', {id: bridge._id});
   }
 
-  closeThread() {
+  surveyBridges() {
     this.currentBridge = null;
 
     // update the state without reloading the controller
@@ -154,7 +124,7 @@ export default class BridgeController {
   }
 
   /**
-   * Open compose dialog
+   * open compose dialog
    *
    * @param ev
    */
