@@ -1,6 +1,7 @@
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
 @import '~angular-material/angular-material';
+@import '~angular-material-data-table/dist/md-data-table';
 
 // @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,900|Roboto:300,500,700,900);
 
@@ -20,4 +21,27 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 // Component styles are injected through gulp
 /* inject:scss */
+@import 'admin/admin';
+@import 'fuse/navigation/layouts/horizontal-navigation/navigation';
+@import 'fuse/navigation/layouts/vertical-navigation-fullwidth-toolbar-2/navigation';
+@import 'fuse/navigation/layouts/vertical-navigation/navigation';
+@import 'fuse/quick-panel/quick-panel';
+@import 'fuse/quick-panel/tabs/activity/activity-tab';
+@import 'fuse/quick-panel/tabs/chat/chat-tab';
+@import 'fuse/quick-panel/tabs/today/today-tab';
+@import 'fuse/toolbar/layouts/content-with-toolbar/toolbar';
+@import 'fuse/toolbar/layouts/horizontal-navigation/toolbar';
+@import 'fuse/toolbar/layouts/vertical-navigation-fullwidth-toolbar-2/toolbar';
+@import 'fuse/toolbar/toolbar';
+@import 'main/file-manager/file-manager';
+@import 'main/file-manager/sidenavs/details/details-sidenav';
+@import 'main/file-manager/sidenavs/main/main-sidenav';
+@import 'main/file-manager/views/list/list-view';
+@import 'main/structure/bridge/bridge';
+@import 'main/structure/bridge/dialogs/create/create-dialog';
+@import 'main/structure/bridge/dialogs/delete/delete-dialog';
+@import 'main/structure/bridge/sidenavs/main/main-sidenav';
+@import 'main/structure/bridge/views/detail/detail';
+@import 'main/structure/bridge/views/list/list';
+@import '../components/footer/footer';
 /* endinject */

@@ -1,0 +1,56 @@
+doctype html
+
+md-dialog.delete-dialog(aria-label='New Message')
+    form.md-inline-form
+        md-toolbar.md-accent.md-hue-2
+            .md-toolbar-tools(layout='row', layout-align='space-between center')
+                span.title(translate='BRIDGE.NEW_MESSAGE') New Message
+                md-button.md-icon-button(ng-click='vm.closeDialog()', aria-label='Close dialog', tranlate, translate-aria-label='BRIDGE.CLOSE_DIALOG')
+                    md-icon(md-font-icon='icon-close')
+        md-dialog-content(ms-scroll)
+            md-input-container.md-block
+                label(translate='BRIDGE.FROM') From
+                input(ng-model='vm.form.from', type='email', disabled)
+            md-input-container.md-block.to(ng-class="{'hidden-cc': vm.hiddenCC, 'hidden-bcc': vm.hiddenBCC}")
+                label(translate='BRIDGE.TO') To
+                input(ng-model='vm.form.to', type='email', md-autofocus)
+                .cc-bcc(layout='row', layout-align='start center')
+                    .show-cc(ng-show='vm.hiddenCC', ng-click='vm.hiddenCC = false') CC
+                    .show-bcc(ng-show='vm.hiddenBCC', ng-click='vm.hiddenBCC = false') BCC
+            md-input-container.md-block(ng-hide='vm.hiddenCC')
+                label(translate='BRIDGE.CC') Cc
+                input(ng-model='vm.form.cc', type='email')
+            md-input-container.md-block(ng-hide='vm.hiddenBCC')
+                label(translate='BRIDGE.BCC') Bcc
+                input(ng-model='vm.form.bcc', type='t')
+            md-input-container.md-block
+                label(translate='BRIDGE.SUBJECT') Subject
+                input(ng-model='vm.form.subject', type='text')
+            text-angular(ng-model='vm.form.message')
+            .attachment-list
+                .attachment(layout='row', layout-align='space-between center')
+                    div
+                        span.filename attachment-2.doc
+                        span.size (12 Kb)
+                    md-button.md-icon-button(aria-label='Delete attachment', translate, translate-attr-aria-label='BRIDGE.DELETE_ATTACHMENT')
+                        md-icon.s16(md-font-icon='icon-close')
+                .attachment(layout='row', layout-align='space-between center')
+                    div
+                        span.filename attachment-1.jpg
+                        span.size (350 Kb)
+                    md-button.md-icon-button(aria-label='Delete attachment', translate, translate-attr-aria-label='BRIDGE.DELETE_ATTACHMENT')
+                        md-icon.s16(md-font-icon='icon-close')
+        md-dialog-actions(layout='row', layout-align='space-between center')
+            div(layout='row', layout-align='start center')
+                md-button.send-button.md-accent.md-raised(ng-click='vm.closeDialog()', aria-label='Send', translate='BRIDGE.SEND', translate-attr-aria-label='BRIDGE.SEND')
+                    | SEND
+                md-button.md-icon-button(aria-label='Attach file', translate-attr-aria-label='BRIDGE.ATTACH_FILE')
+                    md-icon(md-font-icon='icon-paperclip')
+                    md-tooltip
+                        span(translate='BRIDGE.ATTACH_FILE')
+            div(layout='row')
+                md-button.md-icon-button(aria-label='Delete', translate-attr-aria-label='BRIDGE.DELETE')
+                    md-icon(md-font-icon='icon-delete')
+                    md-tooltip
+                        span(translate='BRIDGE.DELETE')
+

@@ -16,6 +16,8 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/bridge/bridge.socket').register(socket);
+  require('../api/folder/folder.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 }
 

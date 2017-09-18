@@ -9,6 +9,7 @@ import ngMaterial from 'angular-material';
 import ngMessage from 'angular-messages';
 import ngTranslate from 'angular-translate';
 import 'angular-translate-loader-partial';
+import 'angular-material-data-table';
 import uiRouter from 'angular-ui-router';
 
 import util from '../components/util/util.module';
@@ -16,14 +17,16 @@ import util from '../components/util/util.module';
 // import fuse scripts
 import './fuse';
 
+import main from './main/main.module';
 import sample from './main/sample/sample.module';
 import fileManager from './main/file-manager';
+import structure from './main/structure';
 
 import routes from './app.route';
 import config from './app.config';
 import run from './app.run';
 import api from './app.api';
-import {IndexController, MainController} from './app.controller';
+import IndexController from './app.controller';
 
 import './app.scss';
 
@@ -37,19 +40,22 @@ angular
     ngTranslate,
     uiRouter,
     util,
+    'md.data.table',
     'app.core',
     'app.navigation',
     'app.toolbar',
     'app.quick-panel',
+    // add your apps here
+    structure,
+    fileManager,
     sample,
-    fileManager
+    main
   ])
   .config(config)
   .config(routes)
   .run(run)
   .factory('api', api)
-  .controller('IndexController', IndexController)
-  .controller('MainController', MainController);
+  .controller('IndexController', IndexController);
 
 angular
   .element(document)
