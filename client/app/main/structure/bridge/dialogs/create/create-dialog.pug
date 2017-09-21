@@ -1,13 +1,29 @@
 doctype html
 
-md-dialog.compose-dialog(aria-label='New Message')
+md-dialog.compose-dialog(aria-label='New Bridge')
     form.md-inline-form
         md-toolbar.md-accent.md-hue-2
             .md-toolbar-tools(layout='row', layout-align='space-between center')
-                span.title(translate='BRIDGE.NEW_MESSAGE') New Message
+                span.title(translate='BRIDGE.NEW_BRIDGE') New Bridge
                 md-button.md-icon-button(ng-click='vm.closeDialog()', aria-label='Close dialog', tranlate, translate-aria-label='BRIDGE.CLOSE_DIALOG')
                     md-icon(md-font-icon='icon-close')
         md-dialog-content(ms-scroll)
+            md-input-container.md-block
+                label(translate='BRIDGE.NAME') Name
+                md-icon(md-font-icon='icon-label')
+                input(type='text', ng-model='vm.form.name')
+            md-input-container.md-block
+                label(translate='BRIDGE.DESC') Description
+                md-icon(md-font-icon='icon-document')
+                textarea(ng-model='vm.form.desc', placeholder='100 characters at least', required)
+            md-input-container.md-block
+                label(translate='BRIDGE.PROVINCE') Province
+                md-icon(md-font-icon='icon-map-marker')
+                input(type='text', ng-model='vm.form.province' required)
+            md-input-container.md-block
+                label(translate='BRIDGE.CITY') City
+                md-icon(md-font-icon='icon-city')
+                input(type='text', ng-model='vm.form.city' required)
             md-input-container.md-block
                 label(translate='BRIDGE.FROM') From
                 input(ng-model='vm.form.from', type='email', disabled)
