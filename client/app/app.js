@@ -7,8 +7,11 @@ import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import ngMaterial from 'angular-material';
 import ngMessage from 'angular-messages';
+
 import ngTranslate from 'angular-translate';
 import 'angular-translate-loader-partial';
+import 'angular-translate-storage-cookie';
+
 import 'angular-material-data-table';
 import uiRouter from 'angular-ui-router';
 
