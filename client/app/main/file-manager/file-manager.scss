@@ -8,6 +8,44 @@
             .header-content {
                 height: 100%;
 
+                .toolbar {
+                    .search-input-wrapper {
+                        position: relative;
+
+                        label {
+                            padding-right: 4px;
+                            cursor: pointer;
+
+                            md-icon {
+                                color: rgba(255, 255, 255, 0.8);
+                            }
+
+                        }
+
+                        md-input-container {
+
+                            .md-errors-spacer {
+                                display: none;
+                            }
+
+                            input {
+                                border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+                                color: rgba(255, 255, 255, 0.8);
+                                width: 240px;
+
+                                &::placeholder {
+                                    color: rgba(255, 255, 255, 0.8);
+                                }
+
+                                &:focus {
+                                    border-bottom: 1px solid white;
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 .breadcrumb {
                     font-size: 24px;
                     padding-left: 90px;
