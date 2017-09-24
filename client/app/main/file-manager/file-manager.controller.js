@@ -1,7 +1,7 @@
 'use strict';
 
 export default class FileManagerController {
-  currentView = 'list';
+  // data
 
   /**@ngInject*/
   constructor($mdSidenav, documents) {
