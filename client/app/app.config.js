@@ -13,5 +13,5 @@ export default function($translateProvider) {
   // tell the module to store the language in the cookies
   $translateProvider.useCookieStorage();
 
-  $translateProvider.useSanitizeValueStrategy('sanitize');
+  $translateProvider.useSanitizeValueStrategy('sce');
 }
