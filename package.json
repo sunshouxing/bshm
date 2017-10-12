@@ -38,6 +38,7 @@
     "babel-runtime": "^6.6.1",
     "babel-polyfill": "^6.7.2",
     "pug": "2.0.0-beta4",
+    "moment": "^2.18.1",
     "mongoose": "^4.1.2",
     "bluebird": "^3.3.3",
     "connect-mongo": "^1.2.1",
