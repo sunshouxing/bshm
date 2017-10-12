@@ -14,7 +14,7 @@ export default class FileManagerController {
 
   // you can configure the ngflow from here
   ngFlowOptions = {
-    // target: 'api/files/upload',
+    target: 'api/files/upload',
     // chunkSize                : 15 * 1024 * 1024,
     // maxChunkRetries          : 1,
     // simultaneousUploads      : 1,

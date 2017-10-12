@@ -2,6 +2,8 @@
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/files              ->  index
  * POST    /api/files              ->  create
+ * GET     /api/files/upload       ->  check
+ * POST    /api/files/upload       ->  upload
  * GET     /api/files/:id          ->  show
  * PUT     /api/files/:id          ->  upsert
  * PATCH   /api/files/:id          ->  patch
@@ -115,4 +117,16 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+// Checks if the File has already existed
+export function check(req, res) {
+  console.log('checking if the uploading file has already exist');
+  res.status(204).send();
+}
+
+// Uploads the File
+export function upload(req, res) {
+  console.log('uploading the file');
+  res.status(200).send();
 }
