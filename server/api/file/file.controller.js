@@ -14,6 +14,9 @@
 
 import jsonpatch from 'fast-json-patch';
 import File from './file.model';
+import * as flow from './flow';
+
+const ACCESS_CONTROLL_ALLOW_ORIGIN = false;
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -121,12 +124,28 @@ export function destroy(req, res) {
 
 // Checks if the File has already existed
 export function check(req, res) {
-  console.log('checking if the uploading file has already exist');
-  res.status(204).send();
+  flow.get(req, function(status, filename, originalFileName, identifier) {
+    if (ACCESS_CONTROLL_ALLOW_ORIGIN) {
+      res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    status = (status == 'found' ? 200 : 204);
+    res.status(status).send();
+  });
 }
 
 // Uploads the File
 export function upload(req, res) {
-  console.log('uploading the file');
-  res.status(200).send();
+  flow.post(req, function(status, filename, originalFileName, identifier) {
+    if (ACCESS_CONTROLL_ALLOW_ORIGIN) {
+      res.header('Access-Control-Allow-Origin', '*');
+    }
+
+    res.status(/^(partly_done|done)$/.test(status) ? 200 : 500).send();
+  });
+}
+
+// Downloads the File
+export function download(req, res) {
+  flow.write(req.params.identifier, res);
 }
