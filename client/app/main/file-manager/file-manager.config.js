@@ -2,7 +2,7 @@
 
 import { FILE_MANAGER_WEIGHT } from '../apps.weight';
 
-export default function($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider, msApiProvider) {
+export default function($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
   'ngInject';
 
   // state
@@ -16,7 +16,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
         }
       },
       resolve: {
-        documents: msApi => msApi.resolve('fileManager.documents@get')
+        documents: apiResolver => apiResolver.resolve('files@query')
       }
     });
 
@@ -31,9 +31,6 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
     //translate: 'SAMPLE.SAMPLE_NAV',
     weight: FILE_MANAGER_WEIGHT
   });
-
-  // api
-  msApiProvider.register('fileManager.documents', ['app/data/file-manager/documents.json']);
 }
 
 /* vim:set sw=2 ts=2 sts=2: */

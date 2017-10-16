@@ -4,6 +4,7 @@
  * POST    /api/files              ->  create
  * GET     /api/files/upload       ->  check
  * POST    /api/files/upload       ->  upload
+ * GET     /api/files/download/:id ->  download
  * GET     /api/files/:id          ->  show
  * PUT     /api/files/:id          ->  upsert
  * PATCH   /api/files/:id          ->  patch
@@ -141,7 +142,8 @@ export function upload(req, res) {
       res.header('Access-Control-Allow-Origin', '*');
     }
 
-    res.status(/^(partly_done|done)$/.test(status) ? 200 : 500).send();
+    status = (/^(partly_done|done)$/.test(status) ? 200 : 500);
+    res.status(status).send(`manage to upload ${filename}`);
   });
 }
 

@@ -6,6 +6,10 @@ import moment from 'moment';
 export default class FileManagerController {
   // data
   files = [];
+  folders = [];
+
+  // info about the uploading file
+  uploadingFile = {};
 
   // ngflow will be injected into here through its directive
   ngFlow = {
@@ -15,7 +19,7 @@ export default class FileManagerController {
   // you can configure the ngflow from here
   ngFlowOptions = {
     target: 'api/files/upload',
-    chunkSize: 10 * 1024 * 1024,
+    chunkSize: 10 * 1024 * 1024
     // maxChunkRetries          : 1,
     // simultaneousUploads      : 1,
     // testChunks               : false,
@@ -23,17 +27,30 @@ export default class FileManagerController {
   };
 
   /**@ngInject*/
-  constructor($mdSidenav, documents) {
+  constructor($scope, $mdSidenav, socket, api, documents) {
     this.$mdSidenav = $mdSidenav;
+    this.socket = socket;
+    this.Files = api.files;
     this.documents = documents;
+
+    $scope.$on('$destroy', () => {
+      this.socket.unsyncUpdates('file');
+    });
   }
 
   $onInit() {
-    this.path = this.documents.data.path;
-    this.folders = this.documents.data.folders;
-    this.files = this.documents.data.files;
+    this.path = ['My files', 'Documents'];
+
+    angular.forEach(this.documents, item => {
+      if (item.type === 'folder') {
+        this.folders.push(item);
+      } else {
+        this.files.push(item);
+      }
+    });
 
     this.selected = this.files[0];
+    this.socket.syncUpdates('file', this.files);
   }
 
   toggleSidenav(sidenavId) {
@@ -52,10 +69,10 @@ export default class FileManagerController {
    */
   fileAdded(file) {
     // prepare the temp file data for file list
-    let uploadingFile = {
+    this.uploadingFile = {
       id: file.uniqueIdentifier,
       file,
-      type: '',
+      type: 'document',
       owner: 'Emily Bennett',
       size: '',
       modified: moment().format('MMMM D, YYYY'),
@@ -66,9 +83,6 @@ export default class FileManagerController {
       offline: false,
       preview: 'assets/images/etc/sample-file-preview.jpg'
     };
-
-    // append it to the file list
-    this.files.push(uploadingFile);
   }
 
   /**
@@ -76,9 +90,6 @@ export default class FileManagerController {
    * automatically triggers when files added to the uploader
    */
   upload() {
-    // debug
-    console.log('uploading files added to uploader.');
-
     // set headers
     this.ngFlow.flow.opts.headers = {
       'X-Requested-With': 'XMLHttpRequest',
@@ -96,25 +107,36 @@ export default class FileManagerController {
    * @param message
    */
   fileSuccess(file, message) {
-    // debug
-    console.log(`${file.name} is uploaded successfully.`);
+    console.log(message);
 
-    // iterate through the file list, find the one we
-    // are added as a temp and replace its data
+    let fileInfo = {
+      // id: file.uniqueIdentifier,
+      name: file.name,
+      size: file.size,
+      type: 'document',
+      owner: 'Emily Bennett',
+      opened: '',
+      modified: this.uploadingFile.modified,
+      created: this.uploadingFile.created,
+      extention: '',
+      location: 'My Files > Documents',
+      offline: false,
+      preview: 'assets/images/etc/sample-file-preview.jpg'
+    }
+    // update the file's info, then append it to the file list
+    this.uploadingFile = {};
 
-    // normally you would parse the message and extract
-    // the uploaded file data from it
-    angular.forEach(this.files, item => {
-      if (item.id && item.id === file.uniqueIdentifier) {
-        // normally you would update the file from
-        // database but we are cheating here!
-
-        // update the file info
-        item.name = file.name;
-        item.size = file.size;
-        item.type = 'document';
+    this.Files.save(
+      fileInfo,
+      (...res) => { // res incluces [value, responseHeaders(function), status, message]
+        // *should done by socket.io later*
+        console.log(`manage to save file info to db with response status ${res[2]}`);
+        // this.files.push(fileInfo);
+      },
+      err => {
+        console.log(`failed to save file info to db, error info: ${err}`);
       }
-    });
+    );
   }
 }
 

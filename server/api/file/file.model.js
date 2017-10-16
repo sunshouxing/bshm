@@ -5,8 +5,16 @@ import {registerEvents} from './file.events';
 
 var FileSchema = new mongoose.Schema({
   name: String,
-  info: String,
-  active: Boolean
+  type: String,
+  owner: String,
+  size: Number,
+  modified: Date,
+  opened: Date,
+  created: Date,
+  extention: String,
+  location: String,
+  offline: Boolean,
+  preview: String
 });
 
 registerEvents(FileSchema);
