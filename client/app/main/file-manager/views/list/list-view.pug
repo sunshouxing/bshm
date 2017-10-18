@@ -22,8 +22,8 @@ table.simple.list-view
             td.name {{folder.name}}
             td.type(hide, show-gt-sm) {{folder.type}}
             td.owner(hide-xs) {{folder.owner}}
-            td.size(hide-xs) {{folder.size === '' ? '-': folder.size}}
-            td.last-modified(hide, show-gt-md) {{folder.modified}}
+            td.size(hide-xs) {{folder.size === '' ? '-': folder.size | fsize}}
+            td.last-modified(hide, show-gt-md) {{folder.modified | date:'mediumDate'}}
             td.show-details(hide-gt-md)
                 md-button.md-icon-button.sidenav-toggle(ng-click='vm.toggleDetails(folder)', aria-label='Toggle details sidenav')
                     md-icon(md-font-icon='icon-information-outline')
@@ -37,8 +37,8 @@ table.simple.list-view
             td.name {{file.name}}
             td.type(hide, show-gt-sm) {{file.type}}
             td.owner(hide-xs) {{file.owner}}
-            td.size(hide-xs) {{file.size === '' ? '-': file.size}}
-            td.last-modified(hide, show-gt-md) {{file.modified}}
+            td.size(hide-xs) {{file.size === '' ? '-': file.size | fsize}}
+            td.last-modified(hide, show-gt-md) {{file.modified | date:'mediumDate'}}
             td.show-details(hide-gt-md)
                 md-button.md-icon-button.sidenav-toggle(ng-click='vm.toggleDetails(file)', aria-label='Details', translate, translate-attr-aria-label='FM.DETAILS')
                     md-icon(md-font-icon='icon-information-outline')

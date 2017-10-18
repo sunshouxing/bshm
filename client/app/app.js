@@ -12,10 +12,13 @@ import ngTranslate from 'angular-translate';
 import 'angular-translate-loader-partial';
 import 'angular-translate-storage-cookie';
 
-import 'angular-material-data-table';
 import uiRouter from 'angular-ui-router';
+import 'angular-material-data-table';
+import 'angular-socket-io';
 
 import util from '../components/util/util.module';
+import socket from '../components/socket/socket.service';
+import fsize from '../components/fsize/fsize.filter';
 
 // import fuse scripts
 import './fuse';
@@ -43,7 +46,10 @@ angular
     ngTranslate,
     uiRouter,
     util,
+    socket,
+    fsize,
     'md.data.table',
+    'btford.socket-io',
     'app.core',
     'app.navigation',
     'app.toolbar',
