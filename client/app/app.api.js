@@ -183,7 +183,7 @@ export default function($resource) {
   api.bridges = $resource(`${api.baseUrl}/bridges`);
 
   // rest api for file manager
-  api.files = $resource(`${api.baseUrl}/files`);
+  api.files = $resource(`${api.baseUrl}/files/:id`);
 
   return api;
 }

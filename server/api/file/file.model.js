@@ -8,6 +8,7 @@ var FileSchema = new mongoose.Schema({
   type: String,
   owner: String,
   size: Number,
+  flowId: String,
   modified: Date,
   opened: Date,
   created: Date,

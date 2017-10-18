@@ -53,6 +53,20 @@ function removeEntity(res) {
   };
 }
 
+function deleteChunks(res) {
+  return function(entity) {
+    if (entity.flowId) {
+      flow.clean(entity.flowId, {
+        onDone() {
+          console.log(`deleted all chunks of ${entity.name}`);
+          return;
+        }
+      });
+    }
+    return entity;
+  }
+}
+
 function handleEntityNotFound(res) {
   return function(entity) {
     if (!entity) {
@@ -119,6 +133,7 @@ export function patch(req, res) {
 export function destroy(req, res) {
   return File.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
+    .then(deleteChunks(res))
     .then(removeEntity(res))
     .catch(handleError(res));
 }
@@ -149,5 +164,11 @@ export function upload(req, res) {
 
 // Downloads the File
 export function download(req, res) {
-  flow.write(req.params.identifier, res);
+  return File.findById(req.params.id).exec()
+    .then(handleEntityNotFound(res))
+    .then(entity => {
+      res.attachment(entity.name);
+      flow.write(entity.flowId, res);
+    })
+    .catch(handleError(res));
 }

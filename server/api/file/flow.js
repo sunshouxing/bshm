@@ -1,5 +1,7 @@
-var fs = require('fs');
-var path = require('path');
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
 
 const FILE_PARAM_NAME = 'file';
 const TMP_DIR = 'tmp';

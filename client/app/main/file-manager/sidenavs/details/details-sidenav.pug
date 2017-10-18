@@ -3,15 +3,29 @@ doctype html
 // SIDENAV HEADER
 .header.md-accent-bg(layout='column', layout-align='space-between')
     .toolbar(layout='row', layout-align='end center')
-        md-button.md-icon-button(ng-click='vm.delete()', aria-label='Delete', translate, translate-attr-aria-label='FM.DELETE')
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id'
+            ng-click='vm.delete()'
+            aria-label='Delete'
+            translate, translate-attr-aria-label='FM.DELETE'
+        )
             md-icon(md-font-icon='icon-delete')
             md-tooltip
                 span(translate='FM.DELETE') Delete
-        md-button.md-icon-button(aria-label='Download', translate, translate-attr-aria-label='FM.DOWNLOAD')
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id'
+            ng-href='http://localhost:9000/api/files/download/{{vm.selected._id}}'
+            aria-label='Download'
+            translate, translate-attr-aria-label='FM.DOWNLOAD'
+        )
             md-icon(md-font-icon='icon-download')
             md-tooltip
                 span(translate='FM.DOWNLOAD') Download
-        md-button.md-icon-button(aria-label='More', translate, translate-attr-aria-label='FM.MORE')
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id'
+            aria-label='More'
+            translate, translate-attr-aria-label='FM.MORE'
+        )
             md-icon(md-font-icon='icon-dots-vertical')
             md-tooltip
                 span(translate='FM.MORE') More
@@ -52,3 +66,5 @@ md-content.content(flex, ms-scroll)
             tr.created
                 th(translate='FM.CREATED') Created
                 td {{vm.selected.created | date:'mediumDate'}}
+
+//- vim:set sw=4 ts=4 sts=4:

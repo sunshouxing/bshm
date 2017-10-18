@@ -57,8 +57,31 @@ export default class FileManagerController {
     this.$mdSidenav(sidenavId).toggle();
   }
 
+  /**
+   * select the item as current file
+   */
   select(item) {
     this.selected = item;
+  }
+
+  /**
+   * delete selected file
+   */
+  delete() {
+    this.Files.delete(
+      {id: this.selected._id},
+      (...res) => {
+        console.log(`managed to delete ${selected.name}.`);
+        if (this.files.length > 0) {
+          this.selected = this.files[0];
+        } else {
+          this.selected = {};
+        }
+      },
+      err => {
+        console.log('failed to delete ${selected.name}.');
+      }
+    );
   }
 
   /**
@@ -113,6 +136,7 @@ export default class FileManagerController {
       // id: file.uniqueIdentifier,
       name: file.name,
       size: file.size,
+      flowId: file.uniqueIdentifier,
       type: 'document',
       owner: 'Emily Bennett',
       opened: '',
@@ -129,9 +153,7 @@ export default class FileManagerController {
     this.Files.save(
       fileInfo,
       (...res) => { // res incluces [value, responseHeaders(function), status, message]
-        // *should done by socket.io later*
         console.log(`manage to save file info to db with response status ${res[2]}`);
-        // this.files.push(fileInfo);
       },
       err => {
         console.log(`failed to save file info to db, error info: ${err}`);
