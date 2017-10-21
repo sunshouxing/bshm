@@ -57,9 +57,14 @@ function validateRequest(chunkNumber, chunkSize, totalSize, identifier, filename
   return 'valid';
 }
 
-//'found', filename, originalFilename, identifier
-//'not_found', null, null, null
-export function get(req, callback) {
+/**
+ * Checks if the file chunk already existed, then invoke {hanle} callback
+ * with the check result(found, not_found).
+ *
+ * @param {Object} req
+ * @param {Function} handle
+ */
+export function get(req, handle) {
   var chunkNumber = req.query.flowChunkNumber;
   var chunkSize = req.query.flowChunkSize;
   var totalSize = req.query.flowTotalSize;
@@ -70,21 +75,24 @@ export function get(req, callback) {
     var chunkFilename = getChunkFileName(chunkNumber, identifier);
     fs.exists(chunkFilename, function(exists) {
       if (exists) {
-        callback('found', chunkFilename, filename, identifier);
+        handle('found');
       } else {
-        callback('not_found', null, null, null);
+        handle('not_found');
       }
     });
   } else {
-    callback('not_found', null, null, null);
+    handle('not_found');
   }
 }
 
-//'partly_done', filename, originalFilename, identifier
-//'done', filename, originalFilename, identifier
-//'invalid_flow_request', null, null, null
-//'non_flow_request', null, null, null
-export function post(req, callback) {
+/**
+ * Uploads the file chunk, then invoke {handle} callback with
+ * the upload results(done, partly_done, invalid_flow_request, non_flow_request).
+ *
+ * @param {Object} req
+ * @param {Function} handle
+ */
+export function post(req, handle) {
   var fields = req.body;
   var files = req.files;
 
@@ -95,12 +103,13 @@ export function post(req, callback) {
   var filename = fields.flowFilename;
 
   if (!files[FILE_PARAM_NAME] || !files[FILE_PARAM_NAME].size) {
-    callback('invalid_flow_request', null, null, null);
+    handle('invalid_flow_request');
     return;
   }
 
-  var originalFilename = files[FILE_PARAM_NAME].originalFilename;
-  var validation = validateRequest(chunkNumber, chunkSize, totalSize, identifier, filename, files[FILE_PARAM_NAME].size);
+  // var originalFilename = files[FILE_PARAM_NAME].originalFilename;
+  var fileSize = files[FILE_PARAM_NAME].size;
+  var validation = validateRequest(chunkNumber, chunkSize, totalSize, identifier, filename, fileSize);
   if (validation == 'valid') {
     var chunkFilename = getChunkFileName(chunkNumber, identifier);
 
@@ -114,20 +123,20 @@ export function post(req, callback) {
           if (exists) {
             currentTestChunk++;
             if (currentTestChunk > numberOfChunks) {
-              callback('done', filename, originalFilename, identifier);
+              handle('done');
             } else {
               // Recursion
               testChunkExists();
             }
           } else {
-            callback('partly_done', filename, originalFilename, identifier);
+            handle('partly_done');
           }
         });
       };
       testChunkExists();
     });
   } else {
-    callback(validation, filename, originalFilename, identifier);
+    handle(validation);
   }
 }
 
@@ -141,7 +150,7 @@ export function post(req, callback) {
 //   stream.on('finish', function(){...});
 export function write(identifier, writableStream, options) {
   options = options || {};
-  options.end = (typeof options.end == 'undefined' ? true : options.end);
+  options.end = typeof options.end == 'undefined' ? true : options.end;
 
   // Iterate over each chunk
   var pipeChunk = function(number) {

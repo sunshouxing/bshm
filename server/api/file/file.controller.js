@@ -53,7 +53,7 @@ function removeEntity(res) {
   };
 }
 
-function deleteChunks(res) {
+function deleteChunks() {
   return function(entity) {
     if (entity.flowId) {
       flow.clean(entity.flowId, {
@@ -64,7 +64,7 @@ function deleteChunks(res) {
       });
     }
     return entity;
-  }
+  };
 }
 
 function handleEntityNotFound(res) {
@@ -133,31 +133,32 @@ export function patch(req, res) {
 export function destroy(req, res) {
   return File.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
-    .then(deleteChunks(res))
+    .then(deleteChunks())
     .then(removeEntity(res))
     .catch(handleError(res));
 }
 
 // Checks if the File has already existed
 export function check(req, res) {
-  flow.get(req, function(status, filename, originalFileName, identifier) {
+  flow.get(req, function(status) {
     if (ACCESS_CONTROLL_ALLOW_ORIGIN) {
       res.header('Access-Control-Allow-Origin', '*');
     }
 
-    status = (status == 'found' ? 200 : 204);
+    status = status == 'found' ? 200 : 204;
     res.status(status).send();
   });
 }
 
 // Uploads the File
 export function upload(req, res) {
-  flow.post(req, function(status, filename, originalFileName, identifier) {
+  flow.post(req, function(result) {
     if (ACCESS_CONTROLL_ALLOW_ORIGIN) {
       res.header('Access-Control-Allow-Origin', '*');
     }
 
-    status = (/^(partly_done|done)$/.test(status) ? 200 : 500);
+    let status = /^(partly_done|done)$/.test(result) ? 200 : 500;
+    let filename = req.body.flowFilename;
     res.status(status).send(`manage to upload ${filename}`);
   });
 }

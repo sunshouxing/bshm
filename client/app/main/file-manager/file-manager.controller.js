@@ -27,8 +27,9 @@ export default class FileManagerController {
   };
 
   /**@ngInject*/
-  constructor($scope, $mdSidenav, socket, api, documents) {
+  constructor($scope, $mdSidenav, $mdToast, socket, api, documents) {
     this.$mdSidenav = $mdSidenav;
+    this.$mdToast = $mdToast;
     this.socket = socket;
     this.Files = api.files;
     this.documents = documents;
@@ -71,15 +72,21 @@ export default class FileManagerController {
     this.Files.delete(
       {id: this.selected._id},
       (...res) => {
-        console.log(`managed to delete ${selected.name}.`);
+        console.log(`managed to delete ${this.selected.name} with response code ${res[2]}.`);
+        this.selected = {};
         if (this.files.length > 0) {
           this.selected = this.files[0];
-        } else {
-          this.selected = {};
         }
       },
       err => {
-        console.log('failed to delete ${selected.name}.');
+        if (err.status == -1) {
+          this.$mdToast.show(
+            this.$mdToast.simple()
+              .textContent(`Failed to delete ${this.selected.name}`)
+              .position('bottom right')
+              .hideDelay(3000)
+          );
+        }
       }
     );
   }
@@ -146,7 +153,7 @@ export default class FileManagerController {
       location: 'My Files > Documents',
       offline: false,
       preview: 'assets/images/etc/sample-file-preview.jpg'
-    }
+    };
     // update the file's info, then append it to the file list
     this.uploadingFile = {};
 

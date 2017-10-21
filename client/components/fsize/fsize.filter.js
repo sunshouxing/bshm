@@ -5,11 +5,13 @@ import angular from 'angular';
 /*@ngInject*/
 export function fsizeFilter() {
   return function(bytes) {
-    if (!bytes) { return ''; }
+    if (!bytes) {
+      return '';
+    }
 
-    let s = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'];
+    let s = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
     let e = Math.floor(Math.log(bytes) / Math.log(1024));
-    return (bytes / Math.pow(1024, e)).toFixed(2) + " " + s[e];
+    return `${(bytes / Math.pow(1024, e)).toFixed(2)} ${s[e]}`;
   };
 }
 
