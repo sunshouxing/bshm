@@ -27,12 +27,16 @@ export default class FileManagerController {
   };
 
   /**@ngInject*/
-  constructor($scope, $mdSidenav, $mdToast, socket, api, documents) {
+  constructor($scope, $mdSidenav, $mdToast, appConfig, socket, api, documents) {
     this.$mdSidenav = $mdSidenav;
     this.$mdToast = $mdToast;
-    this.socket = socket;
     this.Files = api.files;
+    this.socket = socket;
     this.documents = documents;
+
+    let backendHost = appConfig.server.host || 'localhost';
+    let backendPort = appConfig.server.port || 9000;
+    this.backend = `http://${backendHost}:${backendPort}/api`;
 
     $scope.$on('$destroy', () => {
       this.socket.unsyncUpdates('file');

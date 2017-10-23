@@ -14,7 +14,7 @@ doctype html
                 span(translate='FM.DELETE') Delete
         md-button.md-icon-button(
             ng-disabled='!vm.selected._id'
-            ng-href='http://localhost:9000/api/files/download/{{vm.selected._id}}'
+            ng-href='{{vm.backend}}/files/download/{{vm.selected._id}}'
             aria-label='Download'
             translate, translate-attr-aria-label='FM.DOWNLOAD'
         )
