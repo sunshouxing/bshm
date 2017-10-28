@@ -2,32 +2,14 @@
 
 import { STRUCTURE_WEIGHT } from '../apps.weight';
 
-export default function($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
+export default function($stateProvider, msNavigationServiceProvider) {
   'ngInject';
 
   // state
-  $stateProvider
-    .state('app.structure', {
-      abstract: true,
-      url: '/structure'
-    })
-    .state('app.structure.bridge', {
-      url: '/bridges',
-      views: {
-        'content@app': {
-          template: require('./bridge/bridge.pug'),
-          controller: 'BridgeController as vm'
-        }
-      },
-      resolve: {
-        folders: apiResolver => apiResolver.resolve('mail.folders@query'),
-        Labels: msApi => msApi.resolve('mail.labels@get')
-      }
-    })
-    .state('app.structure.bridge.detail', {
-      url: '/{id:[0-9a-f]{24}}',
-    });
-
+  $stateProvider.state('app.structure', {
+    abstract: true,
+    url: '/structure'
+  });
 
   // navigations
   msNavigationServiceProvider.saveItem('apps.structure', {
@@ -39,6 +21,16 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
   msNavigationServiceProvider.saveItem('apps.structure.bridge', {
     title: 'Bridge',
     state: 'app.structure.bridge',
+  });
+
+  msNavigationServiceProvider.saveItem('apps.structure.section', {
+    title: 'Section',
+    state: 'app.structure.section',
+  });
+
+  msNavigationServiceProvider.saveItem('apps.structure.sensor', {
+    title: 'Sensor',
+    state: 'app.structure.sensor',
   });
 }
 

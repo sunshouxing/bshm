@@ -180,7 +180,13 @@ export default function($resource) {
     folders: $resource(`${api.baseUrl}/mail/folders`)
   };
 
-  api.bridges = $resource(`${api.baseUrl}/bridges`);
+  api.bridges = $resource(
+    `${api.baseUrl}/bridges/:id`,
+    {},
+    {
+      update: {method: 'PUT'}
+    }
+  );
 
   // rest api for file manager
   api.files = $resource(`${api.baseUrl}/files/:id`);

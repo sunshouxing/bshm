@@ -15,24 +15,31 @@ export default class BridgeController {
   currentPage = 1;
   pageSize = 10;
 
-  constructor($state, $mdDialog, $document, api, folders, Labels) {
+  constructor($scope, $state, $mdDialog, $document, api, socket, folders, Labels) {
     'ngInject';
 
     this.$state = $state;
     this.$mdDialog = $mdDialog;
     this.$document = $document;
-    this.api = api;
+
+    this.Bridges = api.bridges;
+    this.socket = socket;
 
     this.folders = folders;
     this.labels = Labels.data;
+
+    $scope.$on('$destroy', () => {
+      this.socket.unsyncUpdates('bridge');
+    });
   }
 
   $onInit() {
-    this.api.bridges.query(
+    this.Bridges.query(
       // success callback
       bridges => {
         // set bridge list data
         this.bridges = bridges;
+        this.socket.syncUpdates('bridge', this.bridges);
 
         // hide the loading screen
         this.loadingBridges = false;
@@ -149,40 +156,115 @@ export default class BridgeController {
   }
 
   /**
-   * open compose dialog
+   * Create a new bridge.
    *
-   * @param ev
+   * @param {Event} event
    */
-  composeDialog(ev) {
+  createBridge(event) {
     this.$mdDialog.show({
+      template: require('./dialogs/create/create-dialog.pug'),
       controller: 'BridgeCreateController',
       controllerAs: 'vm',
       locals: {
-        selectedMail: undefined
+        mode: 'create',
+        bridge: {}
       },
-      template: require('./dialogs/create/create-dialog.pug'),
       parent: angular.element(this.$document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true
-    });
+      targetEvent: event,
+    }).then(
+      bridge => {
+        this.Bridges.save(
+          bridge,
+          (...res) => { // res incluces [value, responseHeaders(function), status, message]
+            console.log(`manage to save bridge info to db with response status ${res[2]}`);
+          },
+          err => {
+            console.log(`failed to save bridge info to db, error info: ${err}`);
+          }
+        );
+      },
+      () => {
+        // dialog cancel callback
+      }
+    );
   }
 
   /**
-   * delete selected bridges or current bridge
+   * Update an existed bridge.
    *
-   * @param event
+   * @param {Event} event
+   */
+  updateBridge(event) {
+    this.$mdDialog.show({
+      template: require('./dialogs/create/create-dialog.pug'),
+      controller: 'BridgeCreateController',
+      controllerAs: 'vm',
+      locals: {
+        mode: 'update',
+        bridge: this.currentBridge
+      },
+      parent: angular.element(this.$document.body),
+      targetEvent: event
+    }).then(
+      bridge => {
+        this.Bridges.upsert(
+          {id: bridge._id},
+          bridge,
+          (...res) => { // res: [value, headers(function), status, message]
+            console.log(`manage to save bridge info to db with response status ${res[2]}`);
+          },
+          err => {
+            console.log(`failed to save bridge info to db, error info: ${err}`);
+          }
+        );
+      },
+      () => {
+        // dialog cancel callback
+      }
+    );
+  }
+
+  /**
+   * Delete selected bridges or current bridge
+   *
+   * @param {Event} event
    */
   deleteBridges(event) {
-    console.log('deleting bridges');
+    let bridges = [];
+    if (this.$state.current.name == 'app.structure.bridge') {
+      angular.copy(this.selectedBridges, bridges);
+    } else {
+      bridges.push(angular.copy(this.currentBridge));
+    }
 
     this.$mdDialog.show({
       controller: 'BridgeDeleteController',
       controllerAs: 'vm',
+      locals: {
+        bridges
+      },
       template: require('./dialogs/delete/delete-dialog.pug'),
       parent: angular.element(this.$document.body),
       targetEvent: event,
-      clickOutsideToClose: true
-    });
+      clickOutsideToClose: false
+    }).then(
+      confirmed => {
+        angular.forEach(confirmed, bridge => {
+          if (bridge.delete) {
+            this.Bridges.delete(
+              {id: bridge._id},
+              () => { // success callback
+                if (this.$state.current.name == 'app.structure.bridge.detail') {
+                  this.currentBridge = null;
+                  this.$state.go('app.structure.bridge');
+                }
+              }
+            );
+          }
+        });
+      },
+      () => {}
+    );
   }
 
   onPaginate(page, limit) {
