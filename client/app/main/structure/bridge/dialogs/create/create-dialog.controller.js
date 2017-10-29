@@ -25,8 +25,6 @@ export default class BridgeCreateController {
     // progressCallbacksInterval: 1000
   };
 
-  selectedMail = null;
-
   /**@ngInject*/
   constructor($mdDialog, mode, bridge) {
     this.$mdDialog = $mdDialog;
@@ -35,11 +33,6 @@ export default class BridgeCreateController {
   }
 
   $onInit() {
-    if (angular.isDefined(this.selectedMail)) {
-      this.form.to = this.selectedMail.from.email;
-      this.form.subject = `RE: ${this.selectedMail.subject}`;
-      this.form.message = `<blockquote>${this.selectedMail.message}</blockquote>`;
-    }
   }
 
   /**
