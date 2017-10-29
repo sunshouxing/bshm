@@ -4,9 +4,11 @@ import angular from 'angular';
 
 import config from './structure.config';
 import bridge from './bridge/bridge.module';
+import section from './section/section.module';
+import sensor from './sensor/sensor.module';
 
 export default angular
-  .module('app.structure', [bridge])
+  .module('app.structure', [bridge, section, sensor])
   .config(config)
   .name;
 
