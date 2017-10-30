@@ -11,7 +11,11 @@ import config from './config/environment';
 import http from 'http';
 import seedDatabaseIfNeeded from './config/seed';
 
-// Connect to MongoDB
+import timeline from './plugins/timeline';
+
+// register timeline plugin to mongoose
+mongoose.plugin(timeline);
+
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {
   console.error(`MongoDB connection error: ${err}`);

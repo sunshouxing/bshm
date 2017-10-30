@@ -172,7 +172,7 @@ export default class BridgeController {
       parent: angular.element(this.$document.body),
       targetEvent: event,
     }).then(
-      bridge => {
+      bridge => { // dialog confirm callback
         this.Bridges.save(
           bridge,
           (...res) => { // res incluces [value, responseHeaders(function), status, message]
@@ -183,8 +183,7 @@ export default class BridgeController {
           }
         );
       },
-      () => {
-        // dialog cancel callback
+      () => { // dialog cancel callback
       }
     );
   }
@@ -206,20 +205,10 @@ export default class BridgeController {
       parent: angular.element(this.$document.body),
       targetEvent: event
     }).then(
-      bridge => {
-        this.Bridges.upsert(
-          {id: bridge._id},
-          bridge,
-          (...res) => { // res: [value, headers(function), status, message]
-            console.log(`manage to save bridge info to db with response status ${res[2]}`);
-          },
-          err => {
-            console.log(`failed to save bridge info to db, error info: ${err}`);
-          }
-        );
+      bridge => { // dialog confirm callback
+        bridge.$update({id: bridge._id});
       },
-      () => {
-        // dialog cancel callback
+      () => { // dialog cancel callback
       }
     );
   }
@@ -251,7 +240,7 @@ export default class BridgeController {
       confirmed => {
         angular.forEach(confirmed, bridge => {
           if (bridge.delete) {
-            this.Bridges.delete(
+            bridge.$delete(
               {id: bridge._id},
               () => { // success callback
                 if (this.$state.current.name == 'app.structure.bridge.detail') {
