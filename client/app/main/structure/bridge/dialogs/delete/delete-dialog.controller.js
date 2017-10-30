@@ -31,7 +31,6 @@ export default class BridgeDeleteController {
    * Confirm the operation of deleting bridges.
    */
   confirm() {
-    console.log(this.bridges);
     this.$mdDialog.hide(this.bridges);
   }
 }
