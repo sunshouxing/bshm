@@ -2,13 +2,13 @@
 
 import angular from 'angular';
 
-export default class BridgeCreateController {
+export default class EditDialogController {
   // data
-  bridge = {
+  section = {
     from: 'johndoe@creapond.com'
   };
 
-  attachments = [];
+  bridges = [];
 
   // ngflow will be injected into here through its directive
   ngFlow = {
@@ -25,36 +25,32 @@ export default class BridgeCreateController {
     // progressCallbacksInterval: 1000
   };
 
-  /**@ngInject*/
-  constructor($mdDialog, mode, bridge) {
+  constructor($mdDialog, api, mode, section) {
+    'ngInject';
+
     this.$mdDialog = $mdDialog;
+    this.Sections = api.sections;
     this.mode = mode;
-    this.bridge = bridge;
+    this.section = section;
   }
 
-  $onInit() {
-  }
-
-  /**
-   * Remove the {index}th attachment from attachments list
-   *
-   * @param {Number} index
-   */
-  removeAttachment(index) {
-    this.attachments.splice(index, 1);
-  }
+  $onInit() { }
 
   /**
    * ngflow's file added callback
-   * triggers when bridge image added to the uploader
+   * triggers when section image added to the uploader
    *
    * @param file
    */
   imageAdded(file) {
+    this.section.image = {
+      name: file.name,
+      path: file.uniqueIdentifier
+    };
   }
 
   /**
-   * Upload the bridge image
+   * Upload the section image
    * automatically triggers when files added to the uploader
    */
   upload() {
@@ -74,20 +70,31 @@ export default class BridgeCreateController {
    * @param file
    * @param message
    */
-  uploadSuccess(file, message) {
-    this.bridge.image = file.name;
-    this.bridge.imageId = file.uniqueIdentifier;
+  uploadSuccess(file, message) { }
+
+  /**
+   * Search for associated bridges
+   *
+   * @param {String} text
+   */
+  search(text) {
+    if (!text) {
+      return this.bridges;
+    }
+
+    text = angular.lowercase(text);
+    return this.bridges.filter(bridge => (bridge.name.indexOf(text) != -1));
   }
 
   /**
-   * Confirm the operation of creating bridge.
+   * Confirm the operation of editing section.
    */
   confirm() {
-    this.$mdDialog.hide(this.bridge);
+    this.$mdDialog.hide(this.section);
   }
 
   /**
-   * Cancel the operation of creating bridge.
+   * Cancel the operation of editing section.
    */
   cancel() {
     this.$mdDialog.cancel();

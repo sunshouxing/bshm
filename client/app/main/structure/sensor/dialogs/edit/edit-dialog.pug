@@ -1,58 +1,58 @@
 doctype html
 
-md-dialog.compose-dialog(aria-label='New Bridge')
-    form.md-inline-form(name='bridgeForm')
+md-dialog.compose-dialog(aria-label='New Sensor')
+    form.md-inline-form(name='sensorForm')
         md-toolbar.md-accent.md-hue-2
             .md-toolbar-tools(layout='row', layout-align='space-between center')
                 span.title(
                     ng-if='vm.mode == "create"'
-                    translate='BRIDGE.NEW_BRIDGE'
-                ) New Bridge
+                    translate='SENSOR.NEW_SENSOR'
+                ) New Sensor
                 span.title(
                     ng-if='vm.mode == "update"'
-                    translate='BRIDGE.UPDATE_BRIDGE'
-                ) Update Bridge
+                    translate='SENSOR.UPDATE_SENSOR'
+                ) Update Sensor
                 md-button.md-icon-button(
                     ng-click='vm.cancel()'
                     aria-label='Close dialog'
-                    tranlate, translate-aria-label='BRIDGE.CLOSE_DIALOG'
+                    tranlate, translate-aria-label='SENSOR.CLOSE_DIALOG'
                 )
                     md-icon(md-font-icon='icon-close')
         md-dialog-content(ms-scroll)
             md-input-container.md-block
-                label(translate='BRIDGE.NAME') Name
+                label(translate='SENSOR.NAME') Name
                 md-icon(md-font-icon='icon-label')
-                input(type='text', ng-model='vm.bridge.name', required)
+                input(type='text', ng-model='vm.sensor.name', required)
             md-input-container.md-block
-                label(translate='BRIDGE.DESC') Description
+                label(translate='SENSOR.DESC') Description
                 md-icon(md-font-icon='icon-document')
                 textarea(
-                    ng-model='vm.bridge.desc'
+                    ng-model='vm.sensor.desc'
                     ng-minlength=100
                     ng-maxlength=500
                     md-maxlength='500'
                     placeholder='100 characters at least'
-                    translate-attr='{placeholder: "BRIDGE.DESC_MIN_LEN"}'
+                    translate-attr='{placeholder: "SENSOR.DESC_MIN_LEN"}'
                     required
                 )
             div(layout-gt-sm='row')
                 md-input-container.md-block(flex-gt-sm)
-                    label(translate='BRIDGE.PROVINCE') Province
+                    label(translate='SENSOR.PROVINCE') Province
                     md-icon(md-font-icon='icon-google-maps')
-                    input(type='text', ng-model='vm.bridge.province' required)
+                    input(type='text', ng-model='vm.sensor.province' required)
                 div(flex='5', hide-xs, hide-sm)
                 md-input-container.md-block(flex-gt-sm)
-                    label(translate='BRIDGE.CITY') City
-                    input(type='text', ng-model='vm.bridge.city' required)
+                    label(translate='SENSOR.CITY') City
+                    input(type='text', ng-model='vm.sensor.city' required)
             div(layout-gt-sm='row')
                 md-input-container.md-block(flex-gt-sm)
-                    label(translate='BRIDGE.LONGITUDE') Longitude
+                    label(translate='SENSOR.LONGITUDE') Longitude
                     md-icon(md-font-icon='icon-web')
-                    input(type='number', ng-model='vm.bridge.longitude' required)
+                    input(type='number', ng-model='vm.sensor.longitude' required)
                 div(flex='5', hide-xs, hide-sm)
                 md-input-container.md-block(flex-gt-sm)
-                    label(translate='BRIDGE.LATITUDE') Latitude
-                    input(type='number', ng-model='vm.bridge.latitude' required)
+                    label(translate='SENSOR.LATITUDE') Latitude
+                    input(type='number', ng-model='vm.sensor.latitude' required)
             div(
                 layout-gt-sm='row'
                 flow-init='vm.ngFlowOptions'
@@ -62,25 +62,25 @@ md-dialog.compose-dialog(aria-label='New Bridge')
                 flow-file-success='vm.uploadSuccess($file, $message)'
             )
                 md-input-container.md-block(flex-gt-sm)
-                    label(translate='BRIDGE.IMAGE') Image
+                    label(translate='SENSOR.IMAGE') Image
                     md-icon(md-font-icon='icon-picture')
-                    input(type='text', ng-model='vm.bridge.image', disabled, required)
+                    input(type='text', ng-model='vm.sensor.image', disabled, required)
                 md-button.md-fab.md-mini(
                     flow-btn
                     aria-label='Upload image'
-                    translate-attr-aria-label='BRIDGE.UPLOAD_IMAGE'
+                    translate-attr-aria-label='SENSOR.UPLOAD_IMAGE'
                 )
                     md-icon(md-font-icon='icon-plus')
                     md-tooltip
-                        span(translate='BRIDGE.UPLOAD_IMAGE')
-            input.ng-hide(type='text', ng-model='vm.bridge.imageId', required)
+                        span(translate='SENSOR.UPLOAD_IMAGE')
+            input.ng-hide(type='text', ng-model='vm.sensor.imageId', required)
         md-dialog-actions(layout='row', layout-align='space-between center')
             div(layout='row', layout-align='start center')
                 md-button.send-button.md-primary.md-raised(
                     ng-click='vm.cancel()'
                     aria-label='Cancel'
-                    translate='BRIDGE.CANCEL'
-                    translate-attr-aria-label='BRIDGE.CANCEL'
+                    translate='SENSOR.CANCEL'
+                    translate-attr-aria-label='SENSOR.CANCEL'
                 )
                     | Cancel
             div(layout='row', layout-align='start center')
@@ -88,20 +88,20 @@ md-dialog.compose-dialog(aria-label='New Bridge')
                 md-button.send-button.md-accent.md-raised(
                     ng-if='vm.mode == "create"'
                     ng-click='vm.confirm()'
-                    ng-disabled='!bridgeForm.$valid'
+                    ng-disabled='!sensorForm.$valid'
                     aria-label='Create'
-                    translate='BRIDGE.CREATE'
-                    translate-attr-aria-label='BRIDGE.CREATE'
+                    translate='SENSOR.CREATE'
+                    translate-attr-aria-label='SENSOR.CREATE'
                 )
                     | Create
 
                 md-button.send-button.md-accent.md-raised(
                     ng-if='vm.mode == "update"'
                     ng-click='vm.confirm()'
-                    ng-disabled='!bridgeForm.$valid'
+                    ng-disabled='sensorForm.$invalid || sensorForm.$pristine'
                     aria-label='Update'
-                    translate='BRIDGE.UPDATE'
-                    translate-attr-aria-label='BRIDGE.UPDATE'
+                    translate='SENSOR.UPDATE'
+                    translate-attr-aria-label='SENSOR.UPDATE'
                 )
                     | Update
 

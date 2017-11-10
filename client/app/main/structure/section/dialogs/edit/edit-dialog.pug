@@ -1,0 +1,123 @@
+doctype html
+
+md-dialog.compose-dialog(aria-label='New Section')
+    form.md-inline-form(name='sectionForm')
+        md-toolbar.md-accent.md-hue-2
+            .md-toolbar-tools(layout='row', layout-align='space-between center')
+                span.title(
+                    ng-if='vm.mode == "create"'
+                    translate='SECTION.NEW_SECTION'
+                ) New Section
+                span.title(
+                    ng-if='vm.mode == "update"'
+                    translate='SECTION.UPDATE_SECTION'
+                ) Update Section
+                md-button.md-icon-button(
+                    ng-click='vm.cancel()'
+                    aria-label='Close dialog'
+                    tranlate, translate-aria-label='SECTION.CLOSE_DIALOG'
+                )
+                    md-icon(md-font-icon='icon-close')
+        md-dialog-content(ms-scroll)
+            md-input-container.md-block
+                label(translate='SECTION.NAME') Name
+                md-icon(md-font-icon='icon-label')
+                input(type='text', ng-model='vm.section.name', required)
+
+            //- ASSOCIATED BRIDGE INFO
+            md-autocomplete(
+                required
+                md-autocomplete-icon='icon-link-variant'
+                md-input-name='associatedBridge'
+                md-min-length=0
+                md-selected-item='vm.associatedBridge'
+                md-selected-item-change='vm.section.bid = vm.associatedBridge._id'
+                md-search-text='vm.searchText'
+                md-items='bridge in vm.search(vm.searchText)'
+                md-item-text='bridge.name'
+                md-require-match
+                md-floating-label='{{"SECTION.ASSOCIATED_BRIDGE.LABEL" | translate}}'
+            )
+                md-item-template
+                    span(md-highlight-text='vm.searchText') {{bridge.name}}
+                div(
+                    ng-messages='sectionForm.associatedBridge.$error'
+                    ng-if='sectionForm.associatedBridge.$touched'
+                )
+                    div(ng-message='required') {{'SECTION.ASSOCIATED_BRIDGE.REQUIRED' | translate}}
+                    div(ng-message='md-require-match') {{'SECTION.ASSOCIATED_BRIDGE.REQUIRED_MATCH' | translate}}
+
+            md-input-container.md-block
+                label(translate='SECTION.DESC') Description
+                md-icon(md-font-icon='icon-document')
+                textarea(
+                    ng-model='vm.section.desc'
+                    ng-maxlength=200
+                    md-maxlength='200'
+                    required
+                )
+
+            div(layout-gt-sm='row')
+                md-input-container.md-block(flex-gt-sm)
+                    label(translate='SECTION.ABSCISSA') Abscissa
+                    md-icon(md-font-icon='icon-map-marker')
+                    input(type='number', ng-model='vm.section.axis.x' required)
+                div(flex='5', hide-xs, hide-sm)
+                md-input-container.md-block(flex-gt-sm)
+                    label(translate='SECTION.ORDINATE') Ordinate
+                    input(type='number', ng-model='vm.section.axis.y' required)
+
+            div(
+                layout-gt-sm='row'
+                flow-init='vm.ngFlowOptions'
+                flow-name='vm.ngFlow.flow'
+                flow-files-submitted='vm.upload()'
+                flow-file-added='vm.imageAdded($file)'
+                flow-file-success='vm.uploadSuccess($file, $message)'
+            )
+                md-input-container.md-block(flex-gt-sm)
+                    label(translate='SECTION.IMAGE') Image
+                    md-icon(md-font-icon='icon-picture')
+                    input(type='text', ng-model='vm.section.image.name', disabled, required)
+                md-button.md-fab.md-mini(
+                    flow-btn
+                    aria-label='Upload image'
+                    translate-attr-aria-label='SECTION.UPLOAD_IMAGE'
+                )
+                    md-icon(md-font-icon='icon-plus')
+                    md-tooltip
+                        span(translate='SECTION.UPLOAD_IMAGE')
+            input.ng-hide(type='text', ng-model='vm.section.image.path', required)
+
+        md-dialog-actions(layout='row', layout-align='space-between center')
+            div(layout='row', layout-align='start center')
+                md-button.send-button.md-primary.md-raised(
+                    ng-click='vm.cancel()'
+                    aria-label='Cancel'
+                    translate='SECTION.CANCEL'
+                    translate-attr-aria-label='SECTION.CANCEL'
+                )
+                    | Cancel
+
+            div(layout='row', layout-align='start center')
+
+                md-button.send-button.md-accent.md-raised(
+                    ng-if='vm.mode == "create"'
+                    ng-click='vm.confirm()'
+                    ng-disabled='sectionForm.$invalid'
+                    aria-label='Create'
+                    translate='SECTION.CREATE'
+                    translate-attr-aria-label='SECTION.CREATE'
+                )
+                    | Create
+
+                md-button.send-button.md-accent.md-raised(
+                    ng-if='vm.mode == "update"'
+                    ng-click='vm.confirm()'
+                    ng-disabled='sectionForm.$invalid || sectionForm.$pristine'
+                    aria-label='Update'
+                    translate='SECTION.UPDATE'
+                    translate-attr-aria-label='SECTION.UPDATE'
+                )
+                    | Update
+

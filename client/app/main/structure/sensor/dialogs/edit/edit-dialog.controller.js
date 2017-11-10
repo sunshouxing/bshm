@@ -2,9 +2,9 @@
 
 import angular from 'angular';
 
-export default class BridgeCreateController {
+export default class EditDialogController {
   // data
-  bridge = {
+  sensor = {
     from: 'johndoe@creapond.com'
   };
 
@@ -25,21 +25,14 @@ export default class BridgeCreateController {
     // progressCallbacksInterval: 1000
   };
 
-  selectedMail = null;
-
   /**@ngInject*/
-  constructor($mdDialog, mode, bridge) {
+  constructor($mdDialog, mode, sensor) {
     this.$mdDialog = $mdDialog;
     this.mode = mode;
-    this.bridge = bridge;
+    this.sensor = sensor;
   }
 
   $onInit() {
-    if (angular.isDefined(this.selectedMail)) {
-      this.form.to = this.selectedMail.from.email;
-      this.form.subject = `RE: ${this.selectedMail.subject}`;
-      this.form.message = `<blockquote>${this.selectedMail.message}</blockquote>`;
-    }
   }
 
   /**
@@ -53,7 +46,7 @@ export default class BridgeCreateController {
 
   /**
    * ngflow's file added callback
-   * triggers when bridge image added to the uploader
+   * triggers when sensor image added to the uploader
    *
    * @param file
    */
@@ -61,7 +54,7 @@ export default class BridgeCreateController {
   }
 
   /**
-   * Upload the bridge image
+   * Upload the sensor image
    * automatically triggers when files added to the uploader
    */
   upload() {
@@ -82,19 +75,19 @@ export default class BridgeCreateController {
    * @param message
    */
   uploadSuccess(file, message) {
-    this.bridge.image = file.name;
-    this.bridge.imageId = file.uniqueIdentifier;
+    this.sensor.image = file.name;
+    this.sensor.imageId = file.uniqueIdentifier;
   }
 
   /**
-   * Confirm the operation of creating bridge.
+   * Confirm the operation of creating sensor.
    */
   confirm() {
-    this.$mdDialog.hide(this.bridge);
+    this.$mdDialog.hide(this.sensor);
   }
 
   /**
-   * Cancel the operation of creating bridge.
+   * Cancel the operation of creating sensor.
    */
   cancel() {
     this.$mdDialog.cancel();
