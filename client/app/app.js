@@ -13,12 +13,13 @@ import 'angular-translate-loader-partial';
 import 'angular-translate-storage-cookie';
 
 import uiRouter from 'angular-ui-router';
-import 'angular-material-data-table';
 import 'angular-socket-io';
 
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import fsize from '../components/fsize/fsize.filter';
+import mdAutocompleteIcon from '../components/directives/md-autocomplete-icon';
+import mdPagination from '../components/directives/md-pagination';
 
 // import fuse scripts
 import './fuse';
@@ -48,7 +49,8 @@ angular
     util,
     socket,
     fsize,
-    'md.data.table',
+    mdAutocompleteIcon,
+    mdPagination,
     'btford.socket-io',
     'app.core',
     'app.navigation',
