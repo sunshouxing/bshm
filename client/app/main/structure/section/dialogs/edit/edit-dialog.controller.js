@@ -4,9 +4,7 @@ import angular from 'angular';
 
 export default class EditDialogController {
   // data
-  section = {
-    from: 'johndoe@creapond.com'
-  };
+  section = {};
 
   bridges = [];
 
@@ -32,9 +30,26 @@ export default class EditDialogController {
     this.Sections = api.sections;
     this.mode = mode;
     this.section = section;
+
+    // init work
+    api.bridges.query(
+      bridges => {
+        this.bridges = bridges;
+
+        if (mode === 'update') {
+          angular.forEach(this.bridges, bridge => {
+            if (bridge._id == this.section.bid) {
+              this.associatedBridge = bridge;
+            }
+          });
+        }
+      }
+    );
   }
 
-  $onInit() { }
+  $onInit() {
+    // TODO: {Arthur} the $onInit can't be invoked
+  }
 
   /**
    * ngflow's file added callback

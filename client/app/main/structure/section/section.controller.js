@@ -211,7 +211,7 @@ export default class SectionController {
   updateSection(event) {
     this.$mdDialog.show({
       template: require('./dialogs/edit/edit-dialog.pug'),
-      controller: 'EditDialogController',
+      controller: 'SectionEditController',
       controllerAs: 'vm',
       locals: {
         mode: 'update',
