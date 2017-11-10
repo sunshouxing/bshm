@@ -10,7 +10,7 @@
         "IMPORTANT": "Important",
         "SENT": "Sent",
         "DRAFTS": "Drafts",
-        "DESC_MIN_LEN": "请输入至少100字的桥梁描述信息",
+        "DESC_MIN_LEN": "请输入至少100字的传感器描述信息",
         "ALL_MAIL": "All Mail",
         "SPAM": "Spam",
         "TRASH": "Trash",
@@ -20,7 +20,7 @@
         "OUTLOOK_VIEW": "Outlook View",
         "SPLIT_VIEW": "Split View",
         "TOGGLE_SIDENAV": "Toggle Sidenav",
-        "SEARCH_PLACEHOLDER": "搜索桥梁",
+        "SEARCH_PLACEHOLDER": "搜索传感器",
         "FILTERS": "Filters",
         "ACTIONS": "Mail Actions",
         "MORE": "More",
@@ -40,8 +40,8 @@
         "SPAM": "Spam",
         "DELETE": "删除",
         "UPDATE": "更新",
-        "DELETE_BRIDGES": "删除桥梁",
-        "DELETE_WARN_MSG": "请在以下列表中确认您要删除的桥梁",
+        "DELETE_SENSORS": "删除传感器",
+        "DELETE_WARN_MSG": "请在以下列表中确认您要删除的传感器",
         "MOVE_TO": "Move to",
         "FILTERS": "Filters",
         "LABELS": "Labels",
@@ -67,8 +67,8 @@
         "INSERT_PICTURE": "Insert picture",
         "INSERT_EMOTICON": "Insert emoticon",
         "DELETE": "删除",
-        "NEW_BRIDGE": "新建桥梁",
-        "UPDATE_BRIDGE": "更新桥梁",
+        "NEW_SENSOR": "新建传感器",
+        "UPDATE_SENSOR": "更新传感器",
         "NAME": "名称",
         "DESC": "描述",
         "PROVINCE": "省",
@@ -84,7 +84,7 @@
         "SELECT_MESSAGE_TO_READ": "Select a message to read",
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
-        "IMAGE": "Bridge image",
+        "IMAGE": "传感器图片",
         "INFO": {
             "TO": "to"
         },
@@ -92,6 +92,11 @@
             "TO": "To:",
             "FROM": "From:",
             "DATE": "Date:"
+        },
+        "PAGINATION": {
+            "PAGE": "页码:",
+            "ROWS_PER_PAGE": "每页行数:",
+            "OF": "共计"
         }
     }
 }

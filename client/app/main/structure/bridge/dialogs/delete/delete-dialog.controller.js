@@ -2,7 +2,7 @@
 
 import angular from 'angular';
 
-export default class BridgeDeleteController {
+export default class DeleteDialogController {
   // data
   bridges = [];
 

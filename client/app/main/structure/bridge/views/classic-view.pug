@@ -141,16 +141,6 @@ doctype html
                     md-button(aria-label='Labels', translate-attr-aria-label='BRIDGE.LABELS')
                         md-icon(md-font-icon='icon-label')
                         span(translate='BRIDGE.LABELS') Labels
-    //- PAGE INFO
-    div(layout='row', layout-align='start center', ng-if='!vm.currentBridge')
-        data-md-table-pagination(
-            md-limit='vm.pageSize'
-            md-limit-options='[5, 10, 20]'
-            md-page='vm.currentPage'
-            md-page-select
-            md-total='{{vm.bridges.length}}'
-            md-on-paginate='vm.onPaginate'
-        )
 
 //- CONTENT WRAPPER
 .content-wrapper(layout='column', flex)

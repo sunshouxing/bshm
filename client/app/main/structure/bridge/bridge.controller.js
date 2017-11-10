@@ -3,7 +3,9 @@
 import angular from 'angular';
 
 export default class BridgeController {
-  // data
+  /*********************
+   *       Data        *
+   *********************/
   folders = [];
   bridges = [];
   selectedBridges = [];
@@ -11,26 +13,25 @@ export default class BridgeController {
   loadingBridges = true;
   colors = ['blue-bg', 'blue-grey-bg', 'orange-bg', 'pink-bg', 'purple-bg'];
 
-  // pagination: default value of current page and page size
-  currentPage = 1;
-  pageSize = 10;
+  pagination = {size: 10, page: 1};
 
-  constructor($scope, $state, $mdDialog, $document, api, socket, folders, Labels) {
+  /*********************
+   *     Methods       *
+   *********************/
+  constructor($scope, $state, $document, $translate, $mdDialog, $mdSidenav, socket, api, folders, Labels) {
     'ngInject';
 
+    this.$scope = $scope;
     this.$state = $state;
-    this.$mdDialog = $mdDialog;
     this.$document = $document;
+    this.$translate = $translate;
+    this.$mdDialog = $mdDialog;
+    this.$mdSidenav = $mdSidenav;
 
-    this.Bridges = api.bridges;
     this.socket = socket;
-
+    this.Bridges = api.bridges;
     this.folders = folders;
     this.labels = Labels.data;
-
-    $scope.$on('$destroy', () => {
-      this.socket.unsyncUpdates('bridge');
-    });
   }
 
   $onInit() {
@@ -55,6 +56,19 @@ export default class BridgeController {
         }
       }
     );
+
+    this.$scope.$on('$destroy', () => {
+      this.socket.unsyncUpdates('bridge');
+    });
+  }
+
+  /**
+   * Toggle main sidenav.
+   *
+   * @param {String} sidenavId
+   */
+  toggleSidenav(sidenavId) {
+    this.$mdSidenav(sidenavId).toggle();
   }
 
   /**
@@ -67,10 +81,10 @@ export default class BridgeController {
   }
 
   /**
-   * toggle selected status of the bridge
+   * Toggle selected status of the bridge
    *
-   * @param bridge
-   * @param event
+   * @param {Object} bridge
+   * @param {Event} event
    */
   toggleSelectBridge(bridge, event) {
     if (event) {
@@ -86,10 +100,10 @@ export default class BridgeController {
   }
 
   /**
-   * select bridges. if key/value pair given, bridges will be tested against them.
+   * Select bridges. if key/value pair given, bridges will be tested against them.
    *
-   * @param [key]
-   * @param [value]
+   * @param {String} [key]
+   * @param {String} [value]
    */
   selectBridges(key, value) {
     // make sure the current selection is cleared
@@ -130,9 +144,9 @@ export default class BridgeController {
   }
 
   /**
-   * open bridge detail view
+   * Open bridge detail view
    *
-   * @param bridge
+   * @param {Object} bridge
    */
   inspectDetail(bridge) {
     // set the read status on the bridge
@@ -146,7 +160,7 @@ export default class BridgeController {
   }
 
   /**
-   * open bridge list view
+   * Open bridge list view
    */
   surveyBridges() {
     this.currentBridge = null;
@@ -162,8 +176,8 @@ export default class BridgeController {
    */
   createBridge(event) {
     this.$mdDialog.show({
-      template: require('./dialogs/create/create-dialog.pug'),
-      controller: 'BridgeCreateController',
+      template: require('./dialogs/edit/edit-dialog.pug'),
+      controller: 'EditDialogController',
       controllerAs: 'vm',
       locals: {
         mode: 'create',
@@ -183,8 +197,7 @@ export default class BridgeController {
           }
         );
       },
-      () => { // dialog cancel callback
-      }
+      () => { /* dialog cancel callback */ }
     );
   }
 
@@ -195,18 +208,23 @@ export default class BridgeController {
    */
   updateBridge(event) {
     this.$mdDialog.show({
-      template: require('./dialogs/create/create-dialog.pug'),
-      controller: 'BridgeCreateController',
+      template: require('./dialogs/edit/edit-dialog.pug'),
+      controller: 'EditDialogController',
       controllerAs: 'vm',
       locals: {
         mode: 'update',
-        bridge: this.currentBridge
+        bridge: angular.copy(this.currentBridge)
       },
       parent: angular.element(this.$document.body),
       targetEvent: event
     }).then(
       bridge => { // dialog confirm callback
-        bridge.$update({id: bridge._id});
+        this.Bridges.update(
+          {id: bridge._id}, bridge,
+          (...res) => {
+            this.currentBridge = res[0];
+          }
+        );
       },
       () => { // dialog cancel callback
       }

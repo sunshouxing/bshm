@@ -180,8 +180,27 @@ export default function($resource) {
     folders: $resource(`${api.baseUrl}/mail/folders`)
   };
 
+  // rest api for structure bridge
   api.bridges = $resource(
     `${api.baseUrl}/bridges/:id`,
+    {},
+    {
+      update: {method: 'PUT'}
+    }
+  );
+
+  // rest api for structure section
+  api.sections = $resource(
+    `${api.baseUrl}/sections/:id`,
+    {},
+    {
+      update: {method: 'PUT'}
+    }
+  );
+
+  // rest api for structure sensor
+  api.sensors = $resource(
+    `${api.baseUrl}/sensors/:id`,
     {},
     {
       update: {method: 'PUT'}

@@ -1,7 +1,5 @@
 'use strict';
 
-import angular from 'angular';
-
 export default class EditDialogController {
   // data
   bridge = {
