@@ -14,7 +14,6 @@ export default function(app) {
   app.use('/api/files', require('./api/file'));
   app.use('/api/bridges', require('./api/bridge'));
   app.use('/api/mail/folders', require('./api/folder'));
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth').default);
