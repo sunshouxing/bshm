@@ -31,7 +31,7 @@ md-dialog.compose-dialog(aria-label='New Section')
                 md-input-name='associatedBridge'
                 md-min-length=0
                 md-selected-item='vm.associatedBridge'
-                md-selected-item-change='vm.section.bid = vm.associatedBridge._id'
+                md-selected-item-change='vm.section.pid = vm.associatedBridge._id'
                 md-search-text='vm.searchText'
                 md-items='bridge in vm.search(vm.searchText)'
                 md-item-text='bridge.name'

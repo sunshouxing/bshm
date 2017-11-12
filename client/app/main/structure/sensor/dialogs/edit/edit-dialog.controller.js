@@ -2,9 +2,7 @@
 
 export default class EditDialogController {
   // data
-  sensor = {
-    from: 'johndoe@creapond.com'
-  };
+  sensor = {};
 
   attachments = [];
 
@@ -30,17 +28,7 @@ export default class EditDialogController {
     this.sensor = sensor;
   }
 
-  $onInit() {
-  }
-
-  /**
-   * Remove the {index}th attachment from attachments list
-   *
-   * @param {Number} index
-   */
-  removeAttachment(index) {
-    this.attachments.splice(index, 1);
-  }
+  $onInit() {}
 
   /**
    * ngflow's file added callback
@@ -48,8 +36,7 @@ export default class EditDialogController {
    *
    * @param file
    */
-  imageAdded(file) {
-  }
+  imageAdded(file) {}
 
   /**
    * Upload the sensor image
@@ -91,3 +78,5 @@ export default class EditDialogController {
     this.$mdDialog.cancel();
   }
 }
+
+/* vim:set sw=2 ts=2 sts=2: */

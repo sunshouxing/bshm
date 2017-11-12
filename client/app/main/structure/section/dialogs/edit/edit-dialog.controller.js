@@ -115,3 +115,5 @@ export default class EditDialogController {
     this.$mdDialog.cancel();
   }
 }
+
+/* vim:set sw=2 ts=2 sts=2: */

@@ -85,6 +85,10 @@
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
         "IMAGE": "传感器图片",
+        "EDIT": {
+            "BASIC_INFO": "基础信息",
+            "CHANNELS": "通道"
+        },
         "INFO": {
             "TO": "to"
         },

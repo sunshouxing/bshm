@@ -2,11 +2,7 @@
 
 export default class EditDialogController {
   // data
-  bridge = {
-    from: 'johndoe@creapond.com'
-  };
-
-  attachments = [];
+  bridge = {};
 
   // ngflow will be injected into here through its directive
   ngFlow = {
@@ -30,17 +26,7 @@ export default class EditDialogController {
     this.bridge = bridge;
   }
 
-  $onInit() {
-  }
-
-  /**
-   * Remove the {index}th attachment from attachments list
-   *
-   * @param {Number} index
-   */
-  removeAttachment(index) {
-    this.attachments.splice(index, 1);
-  }
+  $onInit() {}
 
   /**
    * ngflow's file added callback
@@ -48,8 +34,7 @@ export default class EditDialogController {
    *
    * @param file
    */
-  imageAdded(file) {
-  }
+  imageAdded(file) {}
 
   /**
    * Upload the bridge image
@@ -73,8 +58,10 @@ export default class EditDialogController {
    * @param message
    */
   uploadSuccess(file, message) {
-    this.bridge.image = file.name;
-    this.bridge.imageId = file.uniqueIdentifier;
+    this.bridge.image = {
+      name: file.name,
+      path: file.uniqueIdentifier
+    };
   }
 
   /**
@@ -91,3 +78,5 @@ export default class EditDialogController {
     this.$mdDialog.cancel();
   }
 }
+
+/* vim:set sw=2 ts=2 sts=2: */

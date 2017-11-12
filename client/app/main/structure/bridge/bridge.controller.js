@@ -226,8 +226,7 @@ export default class BridgeController {
           }
         );
       },
-      () => { // dialog cancel callback
-      }
+      () => { /* dialog cancel callback */ }
     );
   }
 

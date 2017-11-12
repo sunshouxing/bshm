@@ -85,6 +85,10 @@
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
         "IMAGE": "Sensor image",
+        "EDIT": {
+            "BASIC_INFO": "Basic Information",
+            "CHANNELS": "Channels"
+        },
         "INFO": {
             "TO": "to"
         },
