@@ -221,8 +221,7 @@ export default class SectionController {
       targetEvent: event
     }).then(
       section => { // dialog confirm callback
-        this.Sections.update(
-          {id: section._id}, section,
+        section.$update(
           (...res) => {
             this.currentSection = res[0];
           }
@@ -261,7 +260,6 @@ export default class SectionController {
         angular.forEach(confirmed, section => {
           if (section.delete) {
             section.$delete(
-              {id: section._id},
               () => { // success callback
                 if (this.$state.current.name == 'app.structure.section.detail') {
                   this.currentSection = null;

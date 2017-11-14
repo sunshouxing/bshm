@@ -219,8 +219,7 @@ export default class SensorController {
       targetEvent: event
     }).then(
       sensor => { // dialog confirm callback
-        this.Sensors.update(
-          {id: sensor._id}, sensor,
+        sensor.$update(
           (...res) => {
             this.currentSensor = res[0];
           }
@@ -258,7 +257,6 @@ export default class SensorController {
         angular.forEach(confirmed, sensor => {
           if (sensor.delete) {
             sensor.$delete(
-              {id: sensor._id},
               () => { // success callback
                 if (this.$state.current.name == 'app.structure.sensor.detail') {
                   this.currentSensor = null;

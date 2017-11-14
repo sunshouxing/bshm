@@ -183,7 +183,7 @@ export default function($resource) {
   // rest api for structure bridge
   api.bridges = $resource(
     `${api.baseUrl}/bridges/:id`,
-    {},
+    {id: '@_id'},
     {
       update: {method: 'PUT'}
     }
@@ -192,7 +192,7 @@ export default function($resource) {
   // rest api for structure section
   api.sections = $resource(
     `${api.baseUrl}/sections/:id`,
-    {},
+    {id: '@_id'},
     {
       update: {method: 'PUT'}
     }
@@ -201,7 +201,7 @@ export default function($resource) {
   // rest api for structure sensor
   api.sensors = $resource(
     `${api.baseUrl}/sensors/:id`,
-    {},
+    {id: '@_id'},
     {
       update: {method: 'PUT'}
     }

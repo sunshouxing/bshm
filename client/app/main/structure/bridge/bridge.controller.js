@@ -209,7 +209,7 @@ export default class BridgeController {
   updateBridge(event) {
     this.$mdDialog.show({
       template: require('./dialogs/edit/edit-dialog.pug'),
-      controller: 'EditDialogController',
+      controller: 'BridgeEditController',
       controllerAs: 'vm',
       locals: {
         mode: 'update',
@@ -219,8 +219,7 @@ export default class BridgeController {
       targetEvent: event
     }).then(
       bridge => { // dialog confirm callback
-        this.Bridges.update(
-          {id: bridge._id}, bridge,
+        bridge.$update(
           (...res) => {
             this.currentBridge = res[0];
           }
@@ -258,7 +257,6 @@ export default class BridgeController {
         angular.forEach(confirmed, bridge => {
           if (bridge.delete) {
             bridge.$delete(
-              {id: bridge._id},
               () => { // success callback
                 if (this.$state.current.name == 'app.structure.bridge.detail') {
                   this.currentBridge = null;
