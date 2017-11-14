@@ -2,6 +2,7 @@
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/sensors              ->  index
  * POST    /api/sensors              ->  create
+ * GET     /api/sensors/types        ->  types
  * GET     /api/sensors/:id          ->  show
  * PUT     /api/sensors/:id          ->  upsert
  * PATCH   /api/sensors/:id          ->  patch
@@ -66,6 +67,8 @@ function handleError(res, statusCode) {
 
 // Gets a list of Sensors
 export function index(req, res) {
+  console.log(req);
+
   return Sensor.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -83,6 +86,13 @@ export function show(req, res) {
 export function create(req, res) {
   return Sensor.create(req.body)
     .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+}
+
+// Gets a list of sensor types
+export function types(req, res) {
+  return Sensor.distinct('type').exec()
+    .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
