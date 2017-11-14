@@ -22,22 +22,31 @@ doctype html
 
         md-dialog-content(ms-scroll)
             form(
-                ms-vertical-stepper
                 name='sensorForm'
                 ng-submit='vm.submitVerticalStepper()'
                 ng-model='vm.verticalStepper'
+                ms-vertical-stepper
                 novalidate
             )
                 ms-vertical-stepper-step(
-                    ng-form='verticalStep1'
+                    ng-form='basicInfo'
                     step='1'
                     step-title="'Basic Information'"
                     step-title-translate="'SENSOR.EDIT.BASIC_INFO'"
                 )
                     include ./forms/basic-info.pug
+
                 ms-vertical-stepper-step(
-                    ng-form='verticalStep2'
+                    ng-form='associatedInfo'
                     step='2'
+                    step-title="'Associated Information'"
+                    step-title-translate="'SENSOR.EDIT.ASSOCIATED_INFO'"
+                )
+                    include ./forms/associated-info.pug
+
+                ms-vertical-stepper-step(
+                    ng-form='channels'
+                    step='3'
                     step-title="'Channels'"
                     step-title-translate="'SENSOR.EDIT.CHANNELS'"
                 )

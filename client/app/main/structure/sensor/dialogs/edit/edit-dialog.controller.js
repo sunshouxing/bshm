@@ -1,15 +1,18 @@
 'use strict';
 
+import angular from 'angular';
+
 export default class EditDialogController {
   // data
   sensor = {};
 
-  attachments = [];
+  bridges = [];
+  sections = [];
+  channels = [];
+  types = [];
 
   // ngflow will be injected into here through its directive
-  ngFlow = {
-    flow: {}
-  };
+  ngFlow = {flow: {}};
 
   // you can configure the ngflow from here
   ngFlowOptions = {
@@ -22,13 +25,67 @@ export default class EditDialogController {
   };
 
   /**@ngInject*/
-  constructor($mdDialog, mode, sensor) {
+  constructor($http, $mdDialog, api, mode, sensor) {
+    this.$http = $http;
     this.$mdDialog = $mdDialog;
+    this.api = api;
     this.mode = mode;
     this.sensor = sensor;
   }
 
-  $onInit() {}
+  $onInit() {
+    this.$http.get('/api/sensors/types').then(
+      response => { this.types = response.data; }
+    );
+
+    this.api.bridges.query(
+      bridges => { this.bridges = bridges; }
+    );
+
+    this.api.sections.query(
+      sections => { this.sections = sections; }
+    );
+  }
+
+  /**
+   * Search for sensor types
+   *
+   * @param {String} text
+   */
+  searchTypes(text) {
+    if (!text) { return this.types; } 
+
+    text = angular.lowercase(text);
+    return this.types.filter(type => (type.indexOf(text) != -1));
+  }
+
+  /**
+   * Search for associated bridges
+   *
+   * @param {String} text
+   */
+  searchBridges(text) {
+    if (!text) { return this.bridges; }
+
+    text = angular.lowercase(text);
+    return this.bridges.filter(bridge => (bridge.name.indexOf(text) != -1));
+  }
+
+  /**
+   * Search for associated sections
+   *
+   * @param {String} text
+   */
+  searchSections(text) {
+    if (!text) {
+      return this.sections.filter(section => (section.pid == this.associatedBridge._id));
+    }
+
+    text = angular.lowercase(text);
+    return this.sections.filter(section => (
+      (section.name.indexOf(text) != -1) && (section.pid == this.associatedBridge._id)
+    ));
+  }
 
   /**
    * ngflow's file added callback
@@ -36,7 +93,12 @@ export default class EditDialogController {
    *
    * @param file
    */
-  imageAdded(file) {}
+  imageAdded(file) {
+    this.sensor.image = {
+      name: file.name,
+      path: file.uniqueIdentifier
+    };
+  }
 
   /**
    * Upload the sensor image
@@ -59,9 +121,10 @@ export default class EditDialogController {
    * @param file
    * @param message
    */
-  uploadSuccess(file, message) {
-    this.sensor.image = file.name;
-    this.sensor.imageId = file.uniqueIdentifier;
+  uploadSuccess(file, message) {}
+
+  setCoordinate() {
+    this.sensor.axis = '123, 456';
   }
 
   /**

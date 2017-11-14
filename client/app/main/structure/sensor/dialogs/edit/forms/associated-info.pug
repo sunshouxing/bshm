@@ -1,0 +1,72 @@
+doctype html
+
+.md-inline-form(name='associatedInfo')
+
+    div(layout-gt-sm='row')
+
+        //- ASSOCIATED BRIDGE INFO
+        md-autocomplete(
+            required
+            flex-gt-sm
+            md-require-match
+            md-min-length=0
+            md-no-cache='true'
+            md-autocomplete-icon='icon-link-variant'
+            md-input-name='associatedBridge'
+            md-selected-item='vm.associatedBridge'
+            md-selected-item-change='vm.section.bid = vm.associatedBridge._id'
+            md-search-text='vm.bridgeKeyword'
+            md-items='bridge in vm.searchBridges(vm.bridgeKeyword)'
+            md-item-text='bridge.name'
+            md-floating-label='{{"SENSOR.ASSOCIATED_BRIDGE.LABEL" | translate}}'
+        )
+            md-item-template
+                span(md-highlight-text='vm.bridgeKeyword') {{bridge.name}}
+            div(
+                ng-messages='associatedInfo.associatedBridge.$error'
+                ng-if='associatedInfo.associatedBridge.$touched'
+            )
+                div(ng-message='required') {{'SENSOR.ASSOCIATED_BRIDGE.REQUIRED' | translate}}
+                div(ng-message='md-require-match') {{'SENSOR.ASSOCIATED_BRIDGE.REQUIRED_MATCH' | translate}}
+
+        div(flex='5', hide-xs, hide-sm)
+
+        //- ASSOCIATED SECTION INFO
+        md-autocomplete(
+            required
+            flex-gt-sm
+            md-require-match
+            md-min-length=0
+            md-no-cache='true'
+            md-input-name='associatedSection'
+            md-selected-item='vm.associatedSection'
+            md-selected-item-change='vm.sensor.pid = vm.associatedSection._id'
+            md-search-text='vm.sectionKeyword'
+            md-items='section in vm.searchSections(vm.sectionKeyword)'
+            md-item-text='section.name'
+            md-floating-label='{{"SENSOR.ASSOCIATED_SECTION.LABEL" | translate}}'
+        )
+            md-item-template
+                span(md-highlight-text='vm.sectionKeyword') {{section.name}}
+            div(
+                ng-messages='associatedInfo.associatedBridge.$error'
+                ng-if='associatedInfo.associatedBridge.$touched'
+            )
+                div(ng-message='required') {{'SENSOR.ASSOCIATED_SECTION.REQUIRED' | translate}}
+                div(ng-message='md-require-match') {{'SENSOR.ASSOCIATED_SECTION.REQUIRED_MATCH' | translate}}
+
+    // SENSOR COORDINATE ON SECTION IMAGE
+    div(layout-gt-sm='row')
+
+        md-input-container.md-block(flex-gt-sm)
+            label(translate='SENSOR.COORDINATE') coordinate
+            md-icon(md-font-icon='icon-map-marker-radius')
+            input(
+                type='text'
+                ng-model='vm.sensor.axis'
+                ng-disabled='true'
+            )
+
+        md-button.md-fab.md-mini(ng-click='vm.setCoordinate()')
+            md-icon(md-font-icon='icon-crosshairs-gps')
+

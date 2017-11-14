@@ -71,6 +71,7 @@
         "UPDATE_SENSOR": "Update Sensor",
         "NAME": "Name",
         "DESC": "Description",
+        "TYPE": "Type",
         "PROVINCE": "Province",
         "CITY": "City",
         "LATITUDE": "Latitude",
@@ -84,18 +85,22 @@
         "SELECT_MESSAGE_TO_READ": "Select a message to read",
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
+        "COORDINATE": "Coordinate",
         "IMAGE": "Sensor image",
         "EDIT": {
             "BASIC_INFO": "Basic Information",
+            "ASSOCIATED_INFO": "Associated Information",
             "CHANNELS": "Channels"
         },
-        "INFO": {
-            "TO": "to"
+        "ASSOCIATED_BRIDGE": {
+          "LABEL":  "Associated bridge",
+          "REQUIRED": "You must specify associated bridge for the sensor",
+          "REQUIRED_MATCH": "Please select an existing bridge"
         },
-        "DETAILS": {
-            "TO": "To:",
-            "FROM": "From:",
-            "DATE": "Date:"
+        "ASSOCIATED_SECTION": {
+          "LABEL":  "Associated section",
+          "REQUIRED": "You must specify associated section for the sensor",
+          "REQUIRED_MATCH": "Please select an existing section"
         }
     }
 }

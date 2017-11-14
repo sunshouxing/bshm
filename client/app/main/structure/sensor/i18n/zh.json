@@ -71,6 +71,7 @@
         "UPDATE_SENSOR": "更新传感器",
         "NAME": "名称",
         "DESC": "描述",
+        "TYPE": "类型",
         "PROVINCE": "省",
         "CITY": "市",
         "LONGITUDE": "经度",
@@ -84,23 +85,22 @@
         "SELECT_MESSAGE_TO_READ": "Select a message to read",
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
+        "COORDINATE": "坐标",
         "IMAGE": "传感器图片",
         "EDIT": {
             "BASIC_INFO": "基础信息",
+            "ASSOCIATED_INFO": "关联信息",
             "CHANNELS": "通道"
         },
-        "INFO": {
-            "TO": "to"
+        "ASSOCIATED_BRIDGE": {
+          "LABEL": "关联桥梁",
+          "REQUIRED": "您必须为传感器指定关联桥梁信息",
+          "REQUIRED_MATCH": "请选择已存在的桥梁"
         },
-        "DETAILS": {
-            "TO": "To:",
-            "FROM": "From:",
-            "DATE": "Date:"
-        },
-        "PAGINATION": {
-            "PAGE": "页码:",
-            "ROWS_PER_PAGE": "每页行数:",
-            "OF": "共计"
+        "ASSOCIATED_SECTION": {
+          "LABEL": "关联截面",
+          "REQUIRED": "您必须为传感器指定关联截面信息",
+          "REQUIRED_MATCH": "请选择已存在的截面"
         }
     }
 }
