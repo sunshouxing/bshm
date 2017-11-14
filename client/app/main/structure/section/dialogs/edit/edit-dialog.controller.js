@@ -27,16 +27,17 @@ export default class EditDialogController {
     'ngInject';
 
     this.$mdDialog = $mdDialog;
-    this.Sections = api.sections;
+    this.api = api;
     this.mode = mode;
     this.section = section;
+  }
 
-    // init work
-    api.bridges.query(
+  $onInit() {
+    this.api.bridges.query(
       bridges => {
         this.bridges = bridges;
 
-        if (mode === 'update') {
+        if (this.mode === 'update') {
           angular.forEach(this.bridges, bridge => {
             if (bridge._id == this.section.bid) {
               this.associatedBridge = bridge;
@@ -45,10 +46,6 @@ export default class EditDialogController {
         }
       }
     );
-  }
-
-  $onInit() {
-    // TODO: {Arthur} the $onInit can't be invoked
   }
 
   /**
