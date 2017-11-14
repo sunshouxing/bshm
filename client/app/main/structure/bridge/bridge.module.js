@@ -12,8 +12,8 @@ export default angular
   .module('app.structure.bridge', ['flow'])
   .config(config)
   .controller('BridgeController', BridgeController)
-  .controller('EditDialogController', EditDialogController)
-  .controller('DeleteDialogController', DeleteDialogController)
+  .controller('BridgeEditController', EditDialogController)
+  .controller('BridgeDeleteController', DeleteDialogController)
   .name;
 
 /* vim:set sw=2 ts=2 sts=2: */
