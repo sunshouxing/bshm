@@ -8,7 +8,7 @@ export default class EditDialogController {
 
   bridges = [];
   sections = [];
-  channels = [];
+  channels = [{}];
   types = [];
 
   // ngflow will be injected into here through its directive
@@ -47,13 +47,17 @@ export default class EditDialogController {
     );
   }
 
+  newChannel() {
+    this.channels.push({});
+  }
+
   /**
    * Search for sensor types
    *
    * @param {String} text
    */
   searchTypes(text) {
-    if (!text) { return this.types; } 
+    if (!text) { return this.types; }
 
     text = angular.lowercase(text);
     return this.types.filter(type => (type.indexOf(text) != -1));

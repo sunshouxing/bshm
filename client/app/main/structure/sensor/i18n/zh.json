@@ -85,6 +85,11 @@
         "SELECT_MESSAGE_TO_READ": "Select a message to read",
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
+        "CHANNEL": {
+            "NEW": "新增",
+            "NAME": "名称",
+            "DESC": "描述"
+        },
         "COORDINATE": "坐标",
         "IMAGE": "传感器图片",
         "EDIT": {

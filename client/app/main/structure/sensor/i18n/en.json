@@ -85,6 +85,11 @@
         "SELECT_MESSAGE_TO_READ": "Select a message to read",
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
+        "CHANNEL": {
+            "NEW": "New",
+            "NAME": "Name",
+            "DESC": "Description"
+        },
         "COORDINATE": "Coordinate",
         "IMAGE": "Sensor image",
         "EDIT": {

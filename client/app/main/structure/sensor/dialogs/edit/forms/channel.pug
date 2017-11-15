@@ -1,17 +1,32 @@
 .md-inline-form
-    p
-        | Fill the 
-        span.text-bold Lastname
-        |  field to reveal the conditional step!
-    div(layout='column', layout-gt-xs='row', flex='')
-        md-input-container(flex='100', flex-gt-xs='50')
-            input(type='text', name='firstname', ng-model='vm.verticalStepper.step1.firstname', placeholder='Firstname', required='')
-            div(ng-messages='verticalStep1.firstname.$error', ng-show='verticalStep1.firstname.$touched', role='alert')
-                div(ng-message='required')
-                    span Firstname field is required.
-        md-input-container(flex='100', flex-gt-xs='50')
-            input(type='text', name='lastname', ng-model='vm.verticalStepper.step1.lastname', placeholder='Lastname')
-            div(ng-messages='verticalStep1.lastname.$error', ng-show='verticalStep1.lastname.$touched', role='alert')
-                div(ng-message='required')
-                    span Lastname field is required.
 
+    .channel(ng-repeat='channel in vm.channels')
+        md-card
+            md-card-content
+                //- CHANNEL NAME
+                md-input-container.md-block
+                    label(translate='SENSOR.CHANNEL.NAME') Name
+                    md-icon(md-font-icon='icon-label')
+                    input(name='name', type='text', ng-model='channel.name', required)
+
+                //- CHANNEL DESC
+                md-input-container.md-block
+                    label(translate='SENSOR.CHANNEL.DESC') Description
+                    md-icon(md-font-icon='icon-document')
+                    textarea(
+                        name='desc'
+                        ng-model='channel.desc'
+                        ng-maxlength=50
+                        md-maxlength='50'
+                    )
+
+    div(layout='row', layout-align='end center')
+        md-button.md-fab.md-mini(
+            ng-click="vm.newChannel()"
+            aria-label='SENSOR.CHANNEL.NEW'
+            translate
+            translate-attr-aria-label='SENSOR.CHANNEL.NEW'
+        )
+            md-icon(md-font-icon='icon-plus-circle')
+            md-tooltip
+                span(translate='SENSOR.CHANNEL.NEW')
