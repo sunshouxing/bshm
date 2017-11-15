@@ -39,7 +39,7 @@ export default class EditDialogController {
 
         if (this.mode === 'update') {
           angular.forEach(this.bridges, bridge => {
-            if (bridge._id == this.section.bid) {
+            if (bridge._id == this.section.pid) {
               this.associatedBridge = bridge;
             }
           });
