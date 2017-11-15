@@ -86,11 +86,12 @@
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
         "CHANNEL": {
-            "NEW": "新增",
+            "NEW": "新增通道",
             "NAME": "名称",
             "DESC": "描述"
         },
-        "COORDINATE": "坐标",
+        "ABSCISSA": "横坐标",
+        "ORDINATE": "纵坐标",
         "IMAGE": "传感器图片",
         "EDIT": {
             "BASIC_INFO": "基础信息",

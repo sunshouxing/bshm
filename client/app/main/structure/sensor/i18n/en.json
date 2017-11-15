@@ -86,11 +86,12 @@
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
         "CHANNEL": {
-            "NEW": "New",
+            "NEW": "New channel",
             "NAME": "Name",
             "DESC": "Description"
         },
-        "COORDINATE": "Coordinate",
+        "ABSCISSA": "Abscissa",
+        "ORDINATE": "Ordinate",
         "IMAGE": "Sensor image",
         "EDIT": {
             "BASIC_INFO": "Basic Information",

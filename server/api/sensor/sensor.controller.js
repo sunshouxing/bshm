@@ -67,8 +67,6 @@ function handleError(res, statusCode) {
 
 // Gets a list of Sensors
 export function index(req, res) {
-  console.log(req);
-
   return Sensor.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));

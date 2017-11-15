@@ -59,14 +59,15 @@ doctype html
     div(layout-gt-sm='row')
 
         md-input-container.md-block(flex-gt-sm)
-            label(translate='SENSOR.COORDINATE') coordinate
+            label(translate='SENSOR.ABSCISSA') Abscissa
             md-icon(md-font-icon='icon-map-marker-radius')
-            input(
-                type='text'
-                ng-model='vm.sensor.axis'
-                ng-disabled='true'
-            )
+            input(type='number', ng-model='vm.sensor.axis.x' required)
+
+        div(flex='5', hide-xs, hide-sm)
+
+        md-input-container.md-block(flex-gt-sm)
+            label(translate='SENSOR.ORDINATE') Ordinate
+            input(type='number', ng-model='vm.sensor.axis.y' required)
 
         md-button.md-fab.md-mini(ng-click='vm.setCoordinate()')
             md-icon(md-font-icon='icon-crosshairs-gps')
-

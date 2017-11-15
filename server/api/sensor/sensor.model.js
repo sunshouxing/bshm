@@ -30,7 +30,26 @@ var SensorSchema = new mongoose.Schema({
       type: Number,
       required: true
     }
-  }
+  },
+  image: {
+    name: {
+      type: String,
+      required: true
+    },
+    path: {
+      type: String,
+      required: true
+    }
+  },
+  channels: [{
+    name: {
+      type: String,
+      required: true
+    },
+    desc: {
+      type: String
+    }
+  }]
 });
 
 registerEvents(SensorSchema);

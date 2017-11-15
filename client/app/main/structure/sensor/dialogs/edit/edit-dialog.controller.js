@@ -8,7 +8,6 @@ export default class EditDialogController {
 
   bridges = [];
   sections = [];
-  channels = [{}];
   types = [];
 
   // ngflow will be injected into here through its directive
@@ -25,8 +24,9 @@ export default class EditDialogController {
   };
 
   /**@ngInject*/
-  constructor($http, $mdDialog, api, mode, sensor) {
+  constructor($http, $q, $mdDialog, api, mode, sensor) {
     this.$http = $http;
+    this.$q = $q;
     this.$mdDialog = $mdDialog;
     this.api = api;
     this.mode = mode;
@@ -38,17 +38,35 @@ export default class EditDialogController {
       response => { this.types = response.data; }
     );
 
-    this.api.bridges.query(
-      bridges => { this.bridges = bridges; }
-    );
+    this.$q.all([
+      this.api.bridges.query().$promise,
+      this.api.sections.query().$promise
+    ]).then(associates => {
+      this.bridges = associates[0];
+      this.sections = associates[1];
 
-    this.api.sections.query(
-      sections => { this.sections = sections; }
-    );
+      if (this.mode === 'update') {
+        angular.forEach(this.sections, section => {
+          if (section._id === this.sensor.pid) {
+            this.associatedSection = section;
+          }
+        });
+
+        angular.forEach(this.bridges, bridge => {
+          if (bridge._id === this.associatedSection.pid) {
+            this.associatedBridge = bridge;
+          }
+        });
+      }
+    });
+
+    if (!angular.isDefined(this.sensor.channels)) {
+      this.sensor.channels = [{}];
+    }
   }
 
   newChannel() {
-    this.channels.push({});
+    this.sensor.channels.push({});
   }
 
   /**
@@ -128,7 +146,7 @@ export default class EditDialogController {
   uploadSuccess(file, message) {}
 
   setCoordinate() {
-    this.sensor.axis = '123, 456';
+    // this.sensor.axis = {x: 123, y: 456};
   }
 
   /**
