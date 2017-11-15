@@ -2,6 +2,14 @@
 
     .channel(ng-repeat='channel in vm.sensor.channels')
         md-card
+
+            md-card-actions(
+                layout='row', layout-align='end center'
+                ng-if='$index > 0'
+            )
+                md-button.md-icon-button.md-accent(ng-click='vm.deleteChannel($index)')
+                    md-icon(md-font-icon='icon-close-circle')
+
             md-card-content
                 //- CHANNEL NAME
                 md-input-container.md-block

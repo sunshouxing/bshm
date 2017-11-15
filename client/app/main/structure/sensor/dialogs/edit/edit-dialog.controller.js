@@ -65,8 +65,20 @@ export default class EditDialogController {
     }
   }
 
+  /**
+   * Create a new sensor channel.
+   */
   newChannel() {
     this.sensor.channels.push({});
+  }
+
+  /**
+   * Delete a sensor channel from given index.
+   *
+   * @param {Number} index
+   */
+  deleteChannel(index) {
+    this.sensor.channels.splice(index, 1);
   }
 
   /**
