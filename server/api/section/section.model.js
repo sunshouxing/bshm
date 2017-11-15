@@ -1,7 +1,9 @@
+/* eslint-disable no-invalid-this */
 'use strict';
 
 import mongoose from 'mongoose';
 import {registerEvents} from './section.events';
+import Sensor from '../sensor/sensor.model';
 
 var SectionSchema = new mongoose.Schema({
   pid: {
@@ -38,6 +40,15 @@ var SectionSchema = new mongoose.Schema({
       required: true
     }
   }
+});
+
+SectionSchema.pre('remove', function(next) {
+  Sensor.find({pid: this._id}).exec()
+    .then(sensors => {
+      sensors.forEach(sensor => { sensor.remove(); });
+    });
+
+  next();
 });
 
 registerEvents(SectionSchema);

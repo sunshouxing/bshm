@@ -1,7 +1,9 @@
+/* eslint-disable no-invalid-this */
 'use strict';
 
 import mongoose from 'mongoose';
 import {registerEvents} from './bridge.events';
+import Section from '../section/section.model';
 
 var BridgeSchema = new mongoose.Schema({
   name: {
@@ -40,6 +42,15 @@ var BridgeSchema = new mongoose.Schema({
       required: true
     }
   }
+});
+
+BridgeSchema.pre('remove', function(next) {
+  Section.find({pid: this._id}).exec()
+    .then(sections => {
+      sections.forEach(section => { section.remove(); });
+    });
+
+  next();
 });
 
 registerEvents(BridgeSchema);
