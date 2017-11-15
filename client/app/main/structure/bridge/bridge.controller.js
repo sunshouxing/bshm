@@ -177,7 +177,7 @@ export default class BridgeController {
   createBridge(event) {
     this.$mdDialog.show({
       template: require('./dialogs/edit/edit-dialog.pug'),
-      controller: 'EditDialogController',
+      controller: 'BridgeEditController',
       controllerAs: 'vm',
       locals: {
         mode: 'create',
