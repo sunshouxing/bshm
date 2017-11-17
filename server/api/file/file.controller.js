@@ -15,7 +15,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import File from './file.model';
-import * as flow from './flow';
+import * as flow from '../../components/flow';
 
 const ACCESS_CONTROLL_ALLOW_ORIGIN = false;
 
