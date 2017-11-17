@@ -20,7 +20,7 @@
         "OUTLOOK_VIEW": "Outlook View",
         "SPLIT_VIEW": "Split View",
         "TOGGLE_SIDENAV": "Toggle Sidenav",
-        "SEARCH_PLACEHOLDER": "Search for bridges",
+        "SEARCH_PLACEHOLDER": "Search for sensors",
         "FILTERS": "Filters",
         "ACTIONS": "Mail Actions",
         "MORE": "More",
@@ -65,12 +65,13 @@
         "INSERT_PICTURE": "Insert picture",
         "INSERT_EMOTICON": "Insert emoticon",
         "DELETE": "Delete",
-        "DELETE_BRIDGES": "Delete Bridges",
-        "DELETE_WARN_MSG": "Please check the following bridges you want to delete",
-        "NEW_BRIDGE": "New Bridge",
-        "UPDATE_BRIDGE": "Update Bridge",
+        "DELETE_SENSORS": "Delete Sensors",
+        "DELETE_WARN_MSG": "Please check the following sensors you want to delete",
+        "NEW_SENSOR": "New Sensor",
+        "UPDATE_SENSOR": "Update Sensor",
         "NAME": "Name",
         "DESC": "Description",
+        "TYPE": "Type",
         "PROVINCE": "Province",
         "CITY": "City",
         "LATITUDE": "Latitude",
@@ -84,14 +85,28 @@
         "SELECT_MESSAGE_TO_READ": "Select a message to read",
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
-        "IMAGE": "Bridge image",
-        "INFO": {
-            "TO": "to"
+        "CHANNEL": {
+            "NEW": "New channel",
+            "NAME": "Name",
+            "DESC": "Description"
         },
-        "DETAILS": {
-            "TO": "To:",
-            "FROM": "From:",
-            "DATE": "Date:"
+        "ABSCISSA": "Abscissa",
+        "ORDINATE": "Ordinate",
+        "IMAGE": "Sensor image",
+        "EDIT": {
+            "BASIC_INFO": "Basic Information",
+            "ASSOCIATED_INFO": "Associated Information",
+            "CHANNELS": "Channels"
+        },
+        "ASSOCIATED_BRIDGE": {
+          "LABEL":  "Associated bridge",
+          "REQUIRED": "You must specify associated bridge for the sensor",
+          "REQUIRED_MATCH": "Please select an existing bridge"
+        },
+        "ASSOCIATED_SECTION": {
+          "LABEL":  "Associated section",
+          "REQUIRED": "You must specify associated section for the sensor",
+          "REQUIRED_MATCH": "Please select an existing section"
         }
     }
 }

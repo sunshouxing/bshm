@@ -3,8 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const FILE_PARAM_NAME = 'file';
-const TMP_DIR = 'tmp';
+const UPLOAD_DIR = 'client/assets/uploads';
 
 function cleanIdentifier(identifier) {
   return identifier.replace(/[^0-9A-Za-z_-]/g, '');
@@ -14,7 +13,7 @@ function getChunkFileName(chunkNumber, identifier) {
   // Clean up the identifier
   identifier = cleanIdentifier(identifier);
   // What would the file name be?
-  return path.resolve(TMP_DIR, `./flow-${identifier}.${chunkNumber}`);
+  return path.resolve(UPLOAD_DIR, `./flow-${identifier}.${chunkNumber}`);
 }
 
 function validateRequest(chunkNumber, chunkSize, totalSize, identifier, filename, fileSize, maxFileSize) {
@@ -93,28 +92,26 @@ export function get(req, handle) {
  * @param {Function} handle
  */
 export function post(req, handle) {
-  var fields = req.body;
-  var files = req.files;
+  var file = req.files.file;
+  var options = req.body;
 
-  var chunkNumber = fields.flowChunkNumber;
-  var chunkSize = fields.flowChunkSize;
-  var totalSize = fields.flowTotalSize;
-  var identifier = cleanIdentifier(fields.flowIdentifier);
-  var filename = fields.flowFilename;
+  var chunkNumber = options.flowChunkNumber;
+  var chunkSize = options.flowChunkSize;
+  var totalSize = options.flowTotalSize;
+  var identifier = cleanIdentifier(options.flowIdentifier);
+  var filename = options.flowFilename;
 
-  if (!files[FILE_PARAM_NAME] || !files[FILE_PARAM_NAME].size) {
+  if (!file || !file.size) {
     handle('invalid_flow_request');
     return;
   }
 
-  // var originalFilename = files[FILE_PARAM_NAME].originalFilename;
-  var fileSize = files[FILE_PARAM_NAME].size;
-  var validation = validateRequest(chunkNumber, chunkSize, totalSize, identifier, filename, fileSize);
+  var validation = validateRequest(chunkNumber, chunkSize, totalSize, identifier, filename, file.size);
   if (validation == 'valid') {
     var chunkFilename = getChunkFileName(chunkNumber, identifier);
 
     // Save the chunk (TODO: OVERWRITE)
-    fs.rename(files[FILE_PARAM_NAME].path, chunkFilename, function() {
+    fs.rename(file.path, chunkFilename, function() {
       // Do we have all the chunks?
       var currentTestChunk = 1;
       var numberOfChunks = Math.max(Math.floor(totalSize / (chunkSize * 1.0)), 1);

@@ -1,4 +1,4 @@
-#bridge {
+#section {
 
     .center {
 
@@ -9,11 +9,11 @@
                 .content-wrapper {
                     background: #FAFAFA;
 
-                    .bridge-list {
+                    .section-list {
                         position: relative;
                         padding: 0;
 
-                        .no-bridges {
+                        .no-sections {
                             background: #FAFAFA;
                             width: 100%;
                             text-align: center;
@@ -21,7 +21,7 @@
                             font-size: 20px;
                         }
 
-                        .loading-bridges {
+                        .loading-sections {
                             background: #FAFAFA;
                             width: 100%;
                             text-align: center;
@@ -29,7 +29,7 @@
                             font-size: 20px;
                         }
 
-                        .bridge {
+                        .section {
                             background: #FAFAFA;
                             position: relative;
                             padding: 16px 24px;
@@ -69,7 +69,7 @@
                                 }
                             }
 
-                            &.current-bridge {
+                            &.current-section {
                                 background: #E3F2FD;
 
                                 .info {

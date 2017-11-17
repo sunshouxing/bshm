@@ -1,4 +1,4 @@
-#bridge {
+#sensor {
 
     .center {
 
@@ -9,11 +9,11 @@
                 .content-wrapper {
                     background: #FAFAFA;
 
-                    .bridge-list {
+                    .sensor-list {
                         position: relative;
                         padding: 0;
 
-                        .no-bridges {
+                        .no-sensors {
                             background: #FAFAFA;
                             width: 100%;
                             text-align: center;
@@ -21,7 +21,7 @@
                             font-size: 20px;
                         }
 
-                        .loading-bridges {
+                        .loading-sensors {
                             background: #FAFAFA;
                             width: 100%;
                             text-align: center;
@@ -29,7 +29,7 @@
                             font-size: 20px;
                         }
 
-                        .bridge {
+                        .sensor {
                             background: #FAFAFA;
                             position: relative;
                             padding: 16px 24px;
@@ -69,7 +69,7 @@
                                 }
                             }
 
-                            &.current-bridge {
+                            &.current-sensor {
                                 background: #E3F2FD;
 
                                 .info {

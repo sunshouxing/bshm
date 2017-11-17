@@ -1,8 +1,15 @@
 'use strict';
 
-export default function($translateProvider) {
+export default function($translateProvider, $mdIconProvider) {
   'ngInject';
   // put your common app configurations here
+
+  // register icons from outsides
+  $mdIconProvider
+    .icon('icon-navigate-first', 'assets/icons/navigate-first.svg', 24)
+    .icon('icon-navigate-last', 'assets/icons/navigate-last.svg', 24)
+    .icon('icon-navigate-next', 'assets/icons/navigate-next.svg', 24)
+    .icon('icon-navigate-previous', 'assets/icons/navigate-previous.svg', 24);
 
   // angular-translate configuration
   $translateProvider.useLoader('$translatePartialLoader', {

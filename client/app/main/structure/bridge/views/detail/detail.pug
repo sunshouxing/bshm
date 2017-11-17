@@ -73,15 +73,16 @@ doctype html
                             md-icon(md-font-icon='icon-printer')
                             span(translate='BRIDGE.PRINT') Print
         div(ng-bind-html='vm.currentBridge.desc')
-    .bridge-attachments(ng-if='vm.currentBridge.attachments')
+
+    .bridge-attachments
         .title
             span(translte='BRIDGE.ATTACHMENTS') Attachments
-            |  ({{vm.currentBridge.attachments.length}})
+            |  ({{vm.currentBridge.image.name}})
         .attachment-list(layout-wrap, layout='row')
-            .attachment(layout='column', ng-repeat='attachment in vm.currentBridge.attachments')
-                img.preview(ng-src='{{attachment.preview}}')
+            .attachment(layout='column')
+                img.preview(ng-src='assets/uploads/flow-{{vm.currentBridge.image.path}}.1')
                 div(layout='column')
                     a.md-accent-color.link(href='#', translate='BRIDGE.VIEW') View
                     a.md-accent-color.link(href='#', translate='BRIDGE.DOWNLOAD') Download
                     .size ({{attachment.size}})
-    
+

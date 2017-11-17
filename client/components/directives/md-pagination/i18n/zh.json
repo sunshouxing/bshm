@@ -1,0 +1,13 @@
+{
+  "COMPONENTS": {
+    "PAGINATION": {
+      "PAGE": "页码:",
+      "ROWS_PER_PAGE": "每页行数:",
+      "OF": "共计",
+      "FIRST_PAGE": "首页",
+      "LAST_PAGE": "尾页",
+      "PREVIOUS_PAGE": "上一页",
+      "NEXT_PAGE": "下一页"
+    }
+  }
+}

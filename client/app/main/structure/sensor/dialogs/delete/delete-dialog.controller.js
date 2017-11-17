@@ -2,36 +2,35 @@
 
 import angular from 'angular';
 
-export default class BridgeDeleteController {
+export default class DeleteDialogController {
   // data
-  bridges = [];
+  sensors = [];
 
-  constructor($mdDialog, bridges) {
+  constructor($mdDialog, sensors) {
     'ngInject';
 
     this.$mdDialog = $mdDialog;
-    this.bridges = bridges;
+    this.sensors = sensors;
 
-    // set all bridges' delete flag to be true
-    angular.forEach(this.bridges, bridge => {
-      bridge.delete = true;
+    // set all sensors' delete flag to be true
+    angular.forEach(this.sensors, sensor => {
+      sensor.delete = true;
     });
   }
 
   $onInit() {}
 
   /**
-   * Cancel the operation of deleting bridges.
+   * Cancel the operation of deleting sensors.
    */
   cancel() {
     this.$mdDialog.cancel();
   }
 
   /**
-   * Confirm the operation of deleting bridges.
+   * Confirm the operation of deleting sensors.
    */
   confirm() {
-    console.log(this.bridges);
-    this.$mdDialog.hide(this.bridges);
+    this.$mdDialog.hide(this.sensors);
   }
 }

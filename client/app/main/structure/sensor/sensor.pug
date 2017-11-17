@@ -1,6 +1,6 @@
 doctype html
 
-div#bridge.page-layout.carded.left-sidenav(layout='row')
+div#sensor.page-layout.carded.left-sidenav(layout='row')
     // TOP BACKGROUND
     div.top-bg.md-accent-bg
 
@@ -23,20 +23,17 @@ div#bridge.page-layout.carded.left-sidenav(layout='row')
                     hide-gt-md
                     aria-label='Toggle Sidenav'
                     translate
-                    translate-attr-aria-label='BRIDGE.TOGGLE_SIDENAV'
+                    translate-attr-aria-label='SENSOR.TOGGLE_SIDENAV'
                 )
                     md-icon.icon(md-font-icon='icon-menu')
-                div.search(
-                    flex, layout='row', layout-align='start center'
-                    ng-hide='vm.$state.current.name != "app.structure.bridge"'
-                )
+                div.search(flex, layout='row', layout-align='start center')
                     md-icon.icon.s24(md-font-icon='icon-magnify')
                     input(
                         flex
                         ng-model='vm.search'
                         type='text'
-                        placeholder='Search for bridges'
-                        translate-attr='{placeholder: "BRIDGE.SEARCH_PLACEHOLDER"}'
+                        placeholder='Search for sensors'
+                        translate-attr='{placeholder: "SENSOR.SEARCH_PLACEHOLDER"}'
                     )
 
         // CONTENT CARD

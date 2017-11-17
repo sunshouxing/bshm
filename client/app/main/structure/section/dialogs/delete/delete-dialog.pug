@@ -1,9 +1,9 @@
 doctype html
 
-md-dialog.delete-dialog(aria-label='Delete bridges')
+md-dialog.delete-dialog(aria-label='Delete sections')
     md-toolbar.md-accent.md-hue-2
         .md-toolbar-tools(layout='row', layout-align='space-between center')
-            span.title(translate='SECTION.DELETE_BRIDGES') Delete Bridges
+            span.title(translate='SECTION.DELETE_SECTIONS') Delete Sections
             md-button.md-icon-button(
                 ng-click='vm.cancel()'
                 aria-label='Close dialog'
@@ -13,11 +13,11 @@ md-dialog.delete-dialog(aria-label='Delete bridges')
     md-dialog-content(ms-scroll)
         div.delete-warn-message.md-title
             md-icon.md-warn(md-font-icon='icon-alert-circle')
-            span.md-warn(translate='SECTION.DELETE_WARN_MSG') Do you really want to delete the bridges?
-        md-list(ng-repeat='bridge in vm.bridges')
+            span.md-warn(translate='SECTION.DELETE_WARN_MSG') Do you really want to delete the sections?
+        md-list(ng-repeat='section in vm.sections')
             md-list-item
-                p.md-subhead {{bridge.name}}
-                md-checkbox.md-secondary(ng-model='bridge.delete')
+                p.md-subhead {{section.name}}
+                md-checkbox.md-secondary(ng-model='section.delete')
     md-dialog-actions(layout='row', layout-align='space-between center')
         div(layout='row', layout-align='start center')
             md-button.send-button.md-accent.md-raised(

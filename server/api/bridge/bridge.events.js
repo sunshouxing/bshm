@@ -13,7 +13,8 @@ BridgeEvents.setMaxListeners(0);
 // Model events
 var events = {
   save: 'save',
-  remove: 'remove'
+  remove: 'remove',
+  findOneAndUpdate: 'save'
 };
 
 // Register the event emitter to the model events

@@ -1,55 +1,67 @@
 doctype html
 
-// BRIDGE LIST
-.bridge-list(ms-scroll, flex)
-    .no-bridges(ng-if='vm.bridges.length === 0') There are no bridges in '{{vm.currentFilter.filter}}'!
-    .loading-bridges(layout='column', layout-align='center center', ng-if='!vm.bridges && vm.loadingBridges')
+// SECTION LIST
+.section-list(ms-scroll, flex)
+    .no-sections(ng-if='vm.sections.length === 0') There are no sections in '{{vm.currentFilter.filter}}'!
+    .loading-sections(layout='column', layout-align='center center', ng-if='!vm.sections && vm.loadingSections')
         md-progress-circular.md-accent(md-mode='indeterminate', md-diameter='64')
-        div Loading your bridges...
-    .bridge(
-        class='{{bridge.status}}'
+        div Loading your sections...
+    .section(
+        class='{{section.status}}'
         md-ink-ripple
-        ng-if='!vm.loadingBridges'
-        ng-repeat='bridge in vm.bridges | filter: vm.search | filter: global.search | limitTo: vm.pageSize:(vm.currentPage-1)*vm.pageSize'
-        ng-click='vm.inspectDetail(bridge)'
-        ng-class="{'unread': !bridge.read, 'current-bridge': vm.currentBridge === bridge, 'selected': vm.isSelected(bridge)}"
+        ng-if='!vm.loadingSections'
+        ng-repeat='section in vm.sections | filter: vm.search | filter: global.search | limitTo: vm.pagination.size:(vm.pagination.page-1)*vm.pagination.size'
+        ng-click='vm.inspectDetail(section)'
+        ng-class="{'unread': !section.read, 'current-section': vm.currentSection === section, 'selected': vm.isSelected(section)}"
     )
         div(layout='row', layout-align='start center')
             md-checkbox.no-label(
-                ng-checked='vm.isSelected(bridge)'
-                ng-click='vm.toggleSelectBridge(bridge, $event)'
-                aria-label="{{vm.isSelected(bridge) ? 'Deselect' : 'Select'}}"
+                ng-checked='vm.isSelected(section)'
+                ng-click='vm.toggleSelectSection(section, $event)'
+                aria-label="{{vm.isSelected(section) ? 'Deselect' : 'Select'}}"
             )
             .info(flex, layout='column')
                 .name(layout='row', layout-align='start center')
-                    img.avatar(ng-if='bridge.from.avatar', alt='{{bridge.from.name}}', ng-src='{{bridge.from.avatar}}')
-                    .avatar(ng-if='!bridge.from.avatar', ms-random-class='vm.colors')
-                        | {{bridge.name[0]}}
-                    span.text-truncate {{bridge.name}}
-                    md-icon.has-attachment.s16(md-font-icon='icon-paperclip', ng-if='bridge.hasAttachments')
+                    img.avatar(ng-if='section.from.avatar', alt='{{section.from.name}}', ng-src='{{section.from.avatar}}')
+                    .avatar(ng-if='!section.from.avatar', ms-random-class='vm.colors')
+                        | {{section.name[0]}}
+                    span.text-truncate {{section.name}}
+                    md-icon.has-attachment.s16(md-font-icon='icon-paperclip', ng-if='section.hasAttachments')
                 .subject.text-truncate
-                    | {{bridge.subject}}
+                    | {{section.subject}}
                 .message.text-truncate
-                    | {{bridge.desc | htmlToPlaintext | limitTo:180}}{{bridge.message.desc > 180 ? '...' : ''}}
+                    | {{section.desc | htmlToPlaintext | limitTo:180}}{{section.message.desc > 180 ? '...' : ''}}
                     .labels
-                        .label(ng-repeat='labelId in bridge.labels', ng-class='vm.getLabelColor(labelId)')
+                        .label(ng-repeat='labelId in section.labels', ng-class='vm.getLabelColor(labelId)')
                             | {{vm.getLabelTitle(labelId)}}
             div(layout='column', layout-align='space-between end')
-                .time {{bridge.time}}
+                .time {{section.time}}
                 .actions(layout='row', layout-align='start center')
                     md-button.md-icon-button(
-                        ng-click="vm.toggleThreadStatus('starred', bridge, $event)"
+                        ng-click="vm.toggleThreadStatus('starred', section, $event)"
                         aria-label='Toggle starred'
                         translate
                         translate-attr-aria-label='SECTION.TOGGLE_STARRED'
                     )
-                        md-icon.amber-fg(ng-if='bridge.starred', md-font-icon='icon-star')
-                        md-icon(ng-if='!bridge.starred', md-font-icon='icon-star-outline')
+                        md-icon.amber-fg(ng-if='section.starred', md-font-icon='icon-star')
+                        md-icon(ng-if='!section.starred', md-font-icon='icon-star-outline')
                     md-button.md-icon-button(
-                        ng-click="vm.toggleThreadStatus('important', bridge, $event)"
+                        ng-click="vm.toggleThreadStatus('important', section, $event)"
                         aria-label='Toggle important'
                         translate
                         translate-attr-aria-label='SECTION.TOGGLE_IMPORTANT'
                     )
-                        md-icon.amber-300-fg(ng-if='bridge.important', md-font-icon='icon-label')
-                        md-icon(ng-if='!bridge.important', md-font-icon='icon-label-outline')
+                        md-icon.amber-300-fg(ng-if='section.important', md-font-icon='icon-label')
+                        md-icon(ng-if='!section.important', md-font-icon='icon-label-outline')
+
+    //- PAGE INFO
+    div(layout='row', layout-align='end center')
+        md-pagination(
+            md-limit='vm.pagination.size'
+            md-limit-options='[5, 10, 20]'
+            md-page='vm.pagination.page'
+            md-page-select
+            md-boundary-links
+            md-total='{{vm.sections.length}}'
+            md-on-paginate='vm.onPaginate'
+        )

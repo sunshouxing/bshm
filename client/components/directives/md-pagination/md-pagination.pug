@@ -1,0 +1,74 @@
+.page-select(ng-if='$pagination.showPageSelect()')
+    .label {{'COMPONENTS.PAGINATION.PAGE' | translate}}
+    md-select.md-table-select(
+        virtual-page-select
+        total='{{$pagination.pages()}}'
+        ng-model='$pagination.page'
+        md-container-class='md-pagination-select'
+        ng-change='$pagination.onPaginationChange()'
+        ng-disabled='$pagination.disabled'
+        aria-label='Page'
+    )
+        md-content
+            md-option(ng-repeat='page in $pageSelect.pages', ng-value='page') {{page}}
+
+.limit-select(ng-if='$pagination.limitOptions')
+    .label {{'COMPONENTS.PAGINATION.ROWS_PER_PAGE' | translate}}
+    md-select.md-table-select(
+        ng-model='$pagination.limit'
+        md-container-class='md-pagination-select'
+        ng-disabled='$pagination.disabled'
+        aria-label='Rows'
+        placeholder='{{ $pagination.limitOptions[0] }}'
+    )
+        md-option(
+            ng-repeat='option in $pagination.limitOptions'
+            ng-value='option.value ? $pagination.eval(option.value) : option'
+        ) {{::option.label ? option.label : option}}
+
+.buttons
+    .label
+        | {{$pagination.min()}} - {{$pagination.max()}} {{'COMPONENTS.PAGINATION.OF' | translate}} {{$pagination.total}}
+
+    md-button.md-icon-button(
+        type='button'
+        ng-if='$pagination.showBoundaryLinks()'
+        ng-click='$pagination.first()'
+        ng-disabled='$pagination.disabled || !$pagination.hasPrevious()'
+        aria-label='First'
+    )
+        md-icon(md-svg-icon='icon-navigate-first')
+        md-tooltip
+            span(translate='COMPONENTS.PAGINATION.FIRST_PAGE') First page
+
+    md-button.md-icon-button(
+        type='button'
+        ng-click='$pagination.previous()'
+        ng-disabled='$pagination.disabled || !$pagination.hasPrevious()'
+        aria-label='Previous'
+    )
+        md-icon(md-svg-icon='icon-navigate-previous')
+        md-tooltip
+            span(translate='COMPONENTS.PAGINATION.PREVIOUS_PAGE') Previous page
+
+    md-button.md-icon-button(
+        type='button'
+        ng-click='$pagination.next()'
+        ng-disabled='$pagination.disabled || !$pagination.hasNext()'
+        aria-label='Next'
+    )
+        md-icon(md-svg-icon='icon-navigate-next')
+        md-tooltip
+            span(translate='COMPONENTS.PAGINATION.NEXT_PAGE') Next page
+
+    md-button.md-icon-button(
+        type='button'
+        ng-if='$pagination.showBoundaryLinks()'
+        ng-click='$pagination.last()'
+        ng-disabled='$pagination.disabled || !$pagination.hasNext()'
+        aria-label='Last'
+    )
+        md-icon(md-svg-icon='icon-navigate-last')
+        md-tooltip
+            span(translate='COMPONENTS.PAGINATION.LAST_PAGE') Last page
+

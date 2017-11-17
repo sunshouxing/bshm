@@ -16,6 +16,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/channel/channel.socket').register(socket);
   require('../api/sensor/sensor.socket').register(socket);
   require('../api/section/section.socket').register(socket);
   require('../api/bridge/bridge.socket').register(socket);

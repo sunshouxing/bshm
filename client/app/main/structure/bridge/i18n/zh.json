@@ -84,7 +84,7 @@
         "SELECT_MESSAGE_TO_READ": "Select a message to read",
         "SHOW_DETAILS": "Show Details",
         "HIDE_DETAILS": "Hide Details",
-        "IMAGE": "Bridge image",
+        "IMAGE": "桥梁图片",
         "INFO": {
             "TO": "to"
         },
@@ -92,6 +92,11 @@
             "TO": "To:",
             "FROM": "From:",
             "DATE": "Date:"
+        },
+        "PAGINATION": {
+            "PAGE": "页码:",
+            "ROWS_PER_PAGE": "每页行数:",
+            "OF": "共计"
         }
     }
 }

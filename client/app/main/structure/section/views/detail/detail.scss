@@ -1,4 +1,4 @@
-#bridge {
+#section {
 
     .center {
 
@@ -8,10 +8,10 @@
 
                 .content-wrapper {
 
-                    .bridge-detail {
+                    .section-detail {
                         background: #FFFFFF;
 
-                        .bridge-header {
+                        .section-header {
                             padding-bottom: 24px;
                             border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
@@ -38,7 +38,7 @@
                             }
                         }
 
-                        .bridge-content {
+                        .section-content {
                             padding: 24px 0;
 
                             .to {
@@ -84,7 +84,7 @@
                             }
                         }
 
-                        .bridge-attachments {
+                        .section-attachments {
                             padding: 24px 0;
                             border-top: 1px solid rgba(0, 0, 0, 0.12);
 

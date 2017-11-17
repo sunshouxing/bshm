@@ -12,6 +12,12 @@ export default function(schema, options) {
     next();
   });
 
+  schema.pre('findOneAndUpdate', function(next) {
+    let document = this._update;
+    document.updated = new Date();
+    next();
+  });
+
   if (options && options.index) {
     schema.path('created').index(options.index);
     schema.path('updated').index(options.index);
