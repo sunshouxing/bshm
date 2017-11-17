@@ -47,10 +47,9 @@ doctype html
     //- SENSOR IMAGE
     div(
         layout-gt-sm='row'
-        flow-init='vm.ngFlowOptions'
+        flow-init='vm.ngFlow.options'
         flow-name='vm.ngFlow.flow'
         flow-files-submitted='vm.upload()'
-        flow-file-added='vm.imageAdded($file)'
         flow-file-success='vm.uploadSuccess($file, $message)'
     )
 

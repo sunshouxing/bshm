@@ -11,16 +11,11 @@ export default class EditDialogController {
   types = [];
 
   // ngflow will be injected into here through its directive
-  ngFlow = {flow: {}};
-
-  // you can configure the ngflow from here
-  ngFlowOptions = {
-    target: 'api/files/upload',
-    chunkSize: 10 * 1024 * 1024
-    // maxChunkRetries          : 1,
-    // simultaneousUploads      : 1,
-    // testChunks               : false,
-    // progressCallbacksInterval: 1000
+  ngFlow = {
+    flow: {},
+    options: { // you can config the ngflow here
+      target: 'api/files/upload'
+    }
   };
 
   /**@ngInject*/
@@ -122,19 +117,6 @@ export default class EditDialogController {
   }
 
   /**
-   * ngflow's file added callback
-   * triggers when sensor image added to the uploader
-   *
-   * @param file
-   */
-  imageAdded(file) {
-    this.sensor.image = {
-      name: file.name,
-      path: file.uniqueIdentifier
-    };
-  }
-
-  /**
    * Upload the sensor image
    * automatically triggers when files added to the uploader
    */
@@ -153,9 +135,13 @@ export default class EditDialogController {
    * triggers when single upload completed
    *
    * @param file
-   * @param message
    */
-  uploadSuccess(file, message) {}
+  uploadSuccess(file) {
+    this.sensor.image = {
+      name: file.name,
+      path: file.uniqueIdentifier
+    };
+  }
 
   setCoordinate() {
     // this.sensor.axis = {x: 123, y: 456};

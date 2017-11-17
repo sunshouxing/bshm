@@ -10,17 +10,10 @@ export default class EditDialogController {
 
   // ngflow will be injected into here through its directive
   ngFlow = {
-    flow: {}
-  };
-
-  // you can configure the ngflow from here
-  ngFlowOptions = {
-    target: 'api/files/upload',
-    chunkSize: 10 * 1024 * 1024
-    // maxChunkRetries          : 1,
-    // simultaneousUploads      : 1,
-    // testChunks               : false,
-    // progressCallbacksInterval: 1000
+    flow: {},
+    options: { // you can config the ngflow here
+      target: 'api/files/upload'
+    }
   };
 
   constructor($mdDialog, api, mode, section) {
@@ -49,19 +42,6 @@ export default class EditDialogController {
   }
 
   /**
-   * ngflow's file added callback
-   * triggers when section image added to the uploader
-   *
-   * @param file
-   */
-  imageAdded(file) {
-    this.section.image = {
-      name: file.name,
-      path: file.uniqueIdentifier
-    };
-  }
-
-  /**
    * Upload the section image
    * automatically triggers when files added to the uploader
    */
@@ -80,9 +60,13 @@ export default class EditDialogController {
    * triggers when single upload completed
    *
    * @param file
-   * @param message
    */
-  uploadSuccess(file, message) { }
+  uploadSuccess(file) {
+    this.section.image = {
+      name: file.name,
+      path: file.uniqueIdentifier
+    };
+  }
 
   /**
    * Search for associated bridges

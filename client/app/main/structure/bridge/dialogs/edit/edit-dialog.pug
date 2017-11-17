@@ -55,10 +55,9 @@ md-dialog.compose-dialog(aria-label='New Bridge')
                     input(type='number', ng-model='vm.bridge.latitude' required)
             div(
                 layout-gt-sm='row'
-                flow-init='vm.ngFlowOptions'
+                flow-init='vm.ngFlow.options'
                 flow-name='vm.ngFlow.flow'
                 flow-files-submitted='vm.upload()'
-                flow-file-added='vm.imageAdded($file)'
                 flow-file-success='vm.uploadSuccess($file, $message)'
             )
                 md-input-container.md-block(flex-gt-sm)
