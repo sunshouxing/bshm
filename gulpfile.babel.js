@@ -28,19 +28,25 @@ const paths = {
     client: {
         assets: `${clientPath}/assets/**/*`,
         images: `${clientPath}/assets/images/**/*`,
+        uploads: `${clientPath}/assets/uploads/**/*`,
         revManifest: `${clientPath}/assets/rev-manifest.json`,
         scripts: [
             `${clientPath}/**/!(*.spec|*.mock).js`
         ],
-        fuseScripts: [
-            `${clientPath}/app/fuse/**/*.js`
-        ],
+        fuse: {
+            scripts: [
+                `${clientPath}/app/fuse/**/*.js`
+            ],
+            html: `${clientPath}/app/fuse/**/*.html`,
+            data: `${clientPath}/app/data/**/*.json`
+        },
         styles: [
           `${clientPath}/{app,components}/**/*.scss`,
           // scss files in fuse core were injected manually
           `!${clientPath}/app/fuse/core/**/*.scss`
         ],
         mainStyle: `${clientPath}/app/app.scss`,
+        i18n: `${clientPath}/{app,components}/**/i18n/*.json`,
         views: `${clientPath}/{app,components}/**/*.pug`,
         mainView: `${clientPath}/index.html`,
         test: [`${clientPath}/{app,components}/**/*.{spec,mock}.js`],
@@ -267,7 +273,7 @@ gulp.task('lint:scripts:client', () => {
     return gulp.src(_.union(
         paths.client.scripts,
         _.map(paths.client.test, blob => '!' + blob),
-        _.map(paths.client.fuseScripts, blob => '!' + blob)
+        _.map(paths.client.fuse.scripts, blob => '!' + blob)
     ))
         .pipe(lintClientScripts());
 });
@@ -468,11 +474,12 @@ gulp.task('build', cb => {
         ],
         'inject',
         'transpile:server',
-        [
-            'build:images'
-        ],
+        // 'build:images',
         [
             'copy:extras',
+            'copy:html',
+            'copy:data',
+            'copy:i18n',
             'copy:assets',
             'copy:fonts:dist',
             'copy:server',
@@ -539,14 +546,30 @@ gulp.task('copy:fonts:dev', () => {
         .pipe(flatten())
         .pipe(gulp.dest(`${clientPath}/assets/fonts`));
 });
+
 gulp.task('copy:fonts:dist', () => {
     return gulp.src('node_modules/{bootstrap,font-awesome}/fonts/*')
         .pipe(flatten())
         .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/fonts`));
 });
 
+gulp.task('copy:html', () => {
+    return gulp.src(paths.client.fuse.html)
+        .pipe(gulp.dest(`${paths.dist}/${clientPath}/app/fuse`));
+});
+
+gulp.task('copy:i18n', () => {
+    return gulp.src(paths.client.i18n)
+        .pipe(gulp.dest(`${paths.dist}/${clientPath}`));
+});
+
+gulp.task('copy:data', () => {
+    return gulp.src(paths.client.fuse.data)
+        .pipe(gulp.dest(`${paths.dist}/${clientPath}/app/data`));
+});
+
 gulp.task('copy:assets', () => {
-    return gulp.src([paths.client.assets, '!' + paths.client.images])
+    return gulp.src([paths.client.assets, '!' + paths.client.uploads])
         .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`));
 });
 
