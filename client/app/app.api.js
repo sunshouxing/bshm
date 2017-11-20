@@ -207,6 +207,15 @@ export default function($resource) {
     }
   );
 
+  // rest api for processors
+  api.processors = $resource(
+    `${api.baseUrl}/processors/:id`,
+    {id: '@_id'},
+    {
+      update: {method: 'PUT'}
+    }
+  );
+
   // rest api for file manager
   api.files = $resource(`${api.baseUrl}/files/:id`);
 
