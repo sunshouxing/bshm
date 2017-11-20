@@ -8,7 +8,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
   // state
   $stateProvider
     .state('app.processor', {
-      url: '/processor',
+      url: '/processors',
       views: {
         'content@app': {
           template: require('./processor.pug'),
