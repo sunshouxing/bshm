@@ -6,7 +6,7 @@
         "CONFIRM": "确认",
         "CREATE": "新 建",
         "ASSOCIATED_BRIDGE": {
-          "LABEL": "关联截面",
+          "LABEL": "关联桥梁",
           "REQUIRED": "您必须为截面指定关联截面信息",
           "REQUIRED_MATCH": "请选择已存在的截面"
         },
