@@ -1,5 +1,6 @@
 {
     "SECTION": {
+        "SECTION_NAV": "截面",
         "SECTIONS": "截面",
         "CANCEL": "取消",
         "CONFIRM": "确认",

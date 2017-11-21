@@ -1,5 +1,6 @@
 {
     "FM": {
+        "FILE_MANAGER_NAV": "File Manager",
         "TOOGLE_MAIN_SIDENAV": "Toggle Main Sidenav",
         "SEARCH": "Search",
         "SEARCH_FOR_FILE": "Search for file",
