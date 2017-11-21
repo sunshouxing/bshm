@@ -1,5 +1,6 @@
 {
     "BRIDGE": {
+        "BRIDGE_NAV": "Bridge",
         "BRIDGES": "Bridges",
         "COMPOSE": "COMPOSE",
         "CANCEL": "Cancel",

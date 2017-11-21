@@ -29,13 +29,13 @@ export default class SensorController {
     this.$mdSidenav = $mdSidenav;
 
     this.socket = socket;
-    this.Sensors = api.sensors;
+    this.api = api;
     this.folders = folders;
     this.labels = Labels.data;
   }
 
   $onInit() {
-    this.Sensors.query(
+    this.api.sensors.query(
       // success callback
       sensors => {
         // set sensor list data
@@ -187,7 +187,7 @@ export default class SensorController {
       targetEvent: event,
     }).then(
       sensor => { // dialog confirm callback
-        this.Sensors.save(
+        this.api.sensors.save(
           sensor,
           (...res) => { // res incluces [value, responseHeaders(function), status, message]
             console.log(`manage to save sensor info to db with response status ${res[2]}`);
@@ -219,7 +219,8 @@ export default class SensorController {
       targetEvent: event
     }).then(
       sensor => { // dialog confirm callback
-        sensor.$update(
+        this.api.sensors.update(
+          sensor,
           (...res) => {
             this.currentSensor = res[0];
           }
@@ -253,21 +254,19 @@ export default class SensorController {
       targetEvent: event,
       clickOutsideToClose: false
     }).then(
-      confirmed => {
-        angular.forEach(confirmed, sensor => {
-          if (sensor.delete) {
-            sensor.$delete(
-              () => { // success callback
-                if (this.$state.current.name == 'app.structure.sensor.detail') {
-                  this.currentSensor = null;
-                  this.$state.go('app.structure.sensor');
-                }
+      confirmed => { // dialog confirm callback
+        confirmed.filter(sensor => sensor.delete).forEach(sensor => {
+          this.api.sensors.delete(
+            {id: sensor._id},
+            () => { // delete success callback
+              if (this.$state.current.name == 'app.structure.sensor.detail') {
+                this.surveySensors();
               }
-            );
-          }
+            }
+          );
         });
       },
-      () => {}
+      () => { /* dialog cancel callback */ }
     );
   }
 

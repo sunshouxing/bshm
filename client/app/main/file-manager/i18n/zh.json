@@ -1,5 +1,6 @@
 {
     "FM": {
+        "FILE_MANAGER_NAV": "文件管理器",
         "TOOGLE_MAIN_SIDENAV": "隐藏/显示侧边栏",
         "SEARCH": "搜索",
         "SEARCH_FOR_FILE": "搜索文件",

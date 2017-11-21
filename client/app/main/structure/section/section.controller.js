@@ -31,13 +31,13 @@ export default class SectionController {
     this.$mdSidenav = $mdSidenav;
 
     this.socket = socket;
-    this.Sections = api.sections;
+    this.api = api;
     this.folders = folders;
     this.labels = Labels.data;
   }
 
   $onInit() {
-    this.Sections.query(
+    this.api.sections.query(
       // success callback
       sections => {
         // set section list data
@@ -189,7 +189,7 @@ export default class SectionController {
       targetEvent: event,
     }).then(
       section => { // dialog confirm callback
-        this.Sections.save(
+        this.api.sections.save(
           section,
           (...res) => { // res incluces [value, responseHeaders(function), status, message]
             console.log(`manage to save section info to db with response status ${res[2]}`);
@@ -221,7 +221,8 @@ export default class SectionController {
       targetEvent: event
     }).then(
       section => { // dialog confirm callback
-        section.$update(
+        this.api.sections.update(
+          section,
           (...res) => {
             this.currentSection = res[0];
           }
@@ -256,21 +257,19 @@ export default class SectionController {
       targetEvent: event,
       clickOutsideToClose: false
     }).then(
-      confirmed => {
-        angular.forEach(confirmed, section => {
-          if (section.delete) {
-            section.$delete(
-              () => { // success callback
-                if (this.$state.current.name == 'app.structure.section.detail') {
-                  this.currentSection = null;
-                  this.$state.go('app.structure.section');
-                }
+      confirmed => { // dialog confirm callback
+        confirmed.filter(section => section.delete).forEach(section => {
+          this.api.sections.delete(
+            {id: section._id},
+            () => { // delete success callback
+              if (this.$state.current.name == 'app.structure.section.detail') {
+                this.surveySections();
               }
-            );
-          }
+            }
+          );
         });
       },
-      () => {}
+      () => { /* dialog cancel callback */ }
     );
   }
 

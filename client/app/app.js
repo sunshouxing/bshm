@@ -28,6 +28,7 @@ import main from './main/main.module';
 import sample from './main/sample/sample.module';
 import fileManager from './main/file-manager';
 import structure from './main/structure';
+import processor from './main/processor';
 
 import routes from './app.route';
 import config from './app.config';
@@ -57,6 +58,7 @@ angular
     'app.toolbar',
     'app.quick-panel',
     // add your apps here
+    processor,
     structure,
     fileManager,
     sample,

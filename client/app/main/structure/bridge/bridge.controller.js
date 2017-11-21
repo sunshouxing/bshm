@@ -29,13 +29,13 @@ export default class BridgeController {
     this.$mdSidenav = $mdSidenav;
 
     this.socket = socket;
-    this.Bridges = api.bridges;
+    this.api = api;
     this.folders = folders;
     this.labels = Labels.data;
   }
 
   $onInit() {
-    this.Bridges.query(
+    this.api.bridges.query(
       // success callback
       bridges => {
         // set bridge list data
@@ -187,7 +187,7 @@ export default class BridgeController {
       targetEvent: event,
     }).then(
       bridge => { // dialog confirm callback
-        this.Bridges.save(
+        this.api.bridges.save(
           bridge,
           (...res) => { // res incluces [value, responseHeaders(function), status, message]
             console.log(`manage to save bridge info to db with response status ${res[2]}`);
@@ -219,7 +219,8 @@ export default class BridgeController {
       targetEvent: event
     }).then(
       bridge => { // dialog confirm callback
-        bridge.$update(
+        this.api.bridges.update(
+          bridge,
           (...res) => {
             this.currentBridge = res[0];
           }
@@ -253,21 +254,19 @@ export default class BridgeController {
       targetEvent: event,
       clickOutsideToClose: false
     }).then(
-      confirmed => {
-        angular.forEach(confirmed, bridge => {
-          if (bridge.delete) {
-            bridge.$delete(
-              () => { // success callback
-                if (this.$state.current.name == 'app.structure.bridge.detail') {
-                  this.currentBridge = null;
-                  this.$state.go('app.structure.bridge');
-                }
+      confirmed => { // dialog confirm callback
+        confirmed.filter(bridge => bridge.delete).forEach(bridge => {
+          this.api.bridges.delete(
+            {id: bridge._id},
+            () => { // delete success callback
+              if (this.$state.current.name == 'app.structure.bridge.detail') {
+                this.surveyBridges();
               }
-            );
-          }
+            }
+          );
         });
       },
-      () => {}
+      () => { /* dialog cancel callback */ }
     );
   }
 

@@ -1,5 +1,6 @@
 {
     "SENSOR": {
+        "SENSOR_NAV": "传感器",
         "SENSORS": "传感器",
         "COMPOSE": "COMPOSE",
         "CANCEL": "取消",

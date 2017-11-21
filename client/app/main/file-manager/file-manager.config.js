@@ -28,7 +28,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
     title: 'File Manager',
     icon: 'icon-folder',
     state: 'app.file-manager',
-    //translate: 'SAMPLE.SAMPLE_NAV',
+    translate: 'FM.FILE_MANAGER_NAV',
     weight: FILE_MANAGER_WEIGHT
   });
 }

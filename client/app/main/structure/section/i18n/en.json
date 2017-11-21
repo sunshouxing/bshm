@@ -1,5 +1,6 @@
 {
     "SECTION": {
+        "SECTION_NAV": "Section",
         "SECTIONS": "Sections",
         "COMPOSE": "COMPOSE",
         "CANCEL": "Cancel",
