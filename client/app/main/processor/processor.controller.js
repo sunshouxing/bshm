@@ -166,7 +166,7 @@ export default class ProcessorController {
     this.currentProcessor = null;
 
     // update the state without reloading the controller
-    this.$state.go('app.structure.processor');
+    this.$state.go('app.processor');
   }
 
   /**
@@ -219,7 +219,8 @@ export default class ProcessorController {
       targetEvent: event
     }).then(
       processor => { // dialog confirm callback
-        processor.$update(
+        this.api.processors.update(
+          processor,
           (...res) => {
             this.currentProcessor = res[0];
           }
@@ -253,21 +254,19 @@ export default class ProcessorController {
       targetEvent: event,
       clickOutsideToClose: false
     }).then(
-      confirmed => {
-        angular.forEach(confirmed, processor => {
-          if (processor.delete) {
-            processor.$delete(
-              () => { // success callback
-                if (this.$state.current.name == 'app.processing-unit.detail') {
-                  this.currentProcessor = null;
-                  this.$state.go('app.processing-unit');
-                }
+      confirmed => { // dialog confirm callback
+        confirmed.filter(processor => processor.delete).forEach(processor => {
+          this.api.processors.delete(
+            {id: processor._id},
+            () => { // delete success callback
+              if (this.$state.current.name == 'app.processor.detail') {
+                this.surveyProcessors();
               }
-            );
-          }
+            }
+          );
         });
       },
-      () => {}
+      () => { /* dialog cancel callback */ }
     );
   }
 
