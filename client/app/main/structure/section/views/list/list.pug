@@ -54,8 +54,8 @@ doctype html
                         md-icon.amber-300-fg(ng-if='section.important', md-font-icon='icon-label')
                         md-icon(ng-if='!section.important', md-font-icon='icon-label-outline')
 
-    //- PAGE INFO
-    div(layout='row', layout-align='end center')
+    //- PAGINATION
+    div(layout='row', layout-align='end center', ng-show='vm.sections.length')
         md-pagination(
             md-limit='vm.pagination.size'
             md-limit-options='[5, 10, 20]'
