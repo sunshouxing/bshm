@@ -25,6 +25,7 @@ import mdPagination from '../components/directives/md-pagination';
 import './fuse';
 
 import main from './main/main.module';
+import homepage from './main/homepage';
 import sample from './main/sample/sample.module';
 import fileManager from './main/file-manager';
 import structure from './main/structure';
@@ -58,6 +59,7 @@ angular
     'app.toolbar',
     'app.quick-panel',
     // add your apps here
+    homepage,
     processor,
     structure,
     fileManager,
