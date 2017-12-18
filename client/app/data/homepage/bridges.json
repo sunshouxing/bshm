@@ -1,0 +1,21 @@
+{
+    "data": [
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u53f6\u69ad\u5927\u6865", "conditionAssessment": 89, "location": [121.334907, 30.957056]},
+        {"url": "http://www.163.com/", "realtimeWarning": [1, 2], "name": "\u5148\u950b\u6e2f\u6865", "conditionAssessment": 65, "location": [121.35181, 30.958117]},
+        {"url": "http://www.qq.com/", "realtimeWarning": [], "name": "\u5343\u6b65\u6cfe\u6865", "conditionAssessment": 92, "location": [121.369238, 30.958488]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u5927\u5be8\u6cb3\u6865", "conditionAssessment": 96, "location": [121.379848, 30.95766]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u5de8\u6f6e\u6e2f\u6865", "conditionAssessment": 81, "location": [121.389036, 30.958976]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u7ea2\u65d7\u6e2f\u6865", "conditionAssessment": 88, "location": [121.401515, 30.961608]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u6c99\u6e2f\u6865", "conditionAssessment": 82, "location": [121.412284, 30.963776]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u5149\u8f89\u6cb3\u6865", "conditionAssessment": 84, "location": [121.419571, 30.965533]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u7af9\u6e2f\u6865", "conditionAssessment": 87, "location": [121.427382, 30.967829]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u6a2a\u6cfe\u6865", "conditionAssessment": 83, "location": [121.449525, 30.973897]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [1, 2], "name": "\u767d\u5e99\u6e2f\u6865", "conditionAssessment": 69, "location": [121.474699, 30.980028]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u91d1\u6c47\u6e2f\u6865", "conditionAssessment": 86, "location": [121.503949, 30.982894]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u65b0\u5f3a\u6e2f\u6865", "conditionAssessment": 79, "location": [121.532579, 30.981778]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [2], "name": "\u897f\u65b0\u6e2f\u6865", "conditionAssessment": 75, "location": [121.554062, 30.98393]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u6cf0\u9752\u6e2f\u6865", "conditionAssessment": 77, "location": [121.565489, 30.984981]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [], "name": "\u6cf0\u4e1c\u6e2f\u6865", "conditionAssessment": 79, "location": [121.574593, 30.985683]},
+        {"url": "https://www.baidu.com/", "realtimeWarning": [1, 1], "name": "\u4e00\u53f7\u6e2f\u6865", "conditionAssessment": 83, "location": [121.584775, 30.986654]}
+    ]
+}

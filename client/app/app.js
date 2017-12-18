@@ -20,6 +20,7 @@ import socket from '../components/socket/socket.service';
 import fsize from '../components/fsize/fsize.filter';
 import mdAutocompleteIcon from '../components/directives/md-autocomplete-icon';
 import mdPagination from '../components/directives/md-pagination';
+import ngEcharts from '../components/directives/ng-echarts';
 
 // import fuse scripts
 import './fuse';
@@ -53,6 +54,7 @@ angular
     fsize,
     mdAutocompleteIcon,
     mdPagination,
+    ngEcharts,
     'btford.socket-io',
     'app.core',
     'app.navigation',

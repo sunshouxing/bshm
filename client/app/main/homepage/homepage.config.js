@@ -2,7 +2,7 @@
 
 import { HOMEPAGE_WEIGHT } from '../apps.weight';
 
-export default function($stateProvider, $translatePartialLoaderProvider, msNavigationServiceProvider) {
+export default function($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
   'ngInject';
 
   // state
@@ -14,8 +14,14 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
           template: require('./homepage.pug'),
           controller: 'HomepageController as vm'
         }
+      },
+      resolve: {
+        bridges: msApi => msApi.resolve('homepage.bridges@get')
       }
     });
+
+  // api
+  msApiProvider.register('homepage.bridges', ['app/data/homepage/bridges.json']);
 
   // translation
   $translatePartialLoaderProvider.addPart('app/main/homepage');
