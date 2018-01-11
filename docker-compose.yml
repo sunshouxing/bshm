@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+
+    webapp:
+        build: .
+        command: pm2-runtime start ecosystem.config.js --env production
+        networks:
+            - bshm_net
+        ports:
+            - "80:80"
+        volumes:
+            - "./dist:/webapp/dist"
+            - "./ecosystem.config.js:/webapp/ecosystem.config.js"
+            - "./logs:/root/.pm2/logs"
+        tty: true
+        stdin_open: true
+        restart: always
+
+networks:
+    bshm_net:
+        external: true
