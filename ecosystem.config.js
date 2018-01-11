@@ -8,7 +8,9 @@ module.exports = {
       name: 'bshm',
       script: 'dist/server/index.js',
       env_production: {
-        NODE_ENV: 'production'
+        NODE_ENV: 'production',
+        PORT: 8080,
+        MONGODB_URI: 'mongodb://mongodb:27017/bshm'
       }
     }
   ]
