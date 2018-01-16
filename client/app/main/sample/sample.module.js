@@ -15,7 +15,7 @@ function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, 
   // State
   $stateProvider
     .state('app.sample', {
-      url: '/sample',
+      url: '/video',
       views: {
         'content@app': {
           template: require('./sample.pug'),
@@ -34,20 +34,17 @@ function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, 
   msApiProvider.register('sample', ['app/data/sample/sample.json']);
 
   // navigation
-  msNavigationServiceProvider.saveItem('fuse', {
-    title: 'SAMPLE',
-    group: true,
-    weight: 1
-  });
+  // msNavigationServiceProvider.saveItem('fuse', {
+  //   title: 'SAMPLE',
+  //   group: true,
+  //   weight: 1
+  // });
 
-  msNavigationServiceProvider.saveItem('fuse.sample', {
+  msNavigationServiceProvider.saveItem('apps.video', {
     title: 'Sample',
-    icon: 'icon-tile-four',
+    icon: 'icon-video',
     state: 'app.sample',
-    /*stateParams: {
-      'param1': 'page'
-      },*/
     translate: 'SAMPLE.SAMPLE_NAV',
-    weight: 1
+    weight: 7
   });
 }

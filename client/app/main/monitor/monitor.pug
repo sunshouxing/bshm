@@ -1,4 +1,8 @@
 doctype html
 
-#monitor.page-layout.simple.fullwidth(layout='row')
+iframe(src='http://192.168.16.202:5555/UI_Main.html', height='100%', width='100%')
+    p Your browser does not support iframes.
+
+
+//- #monitor.page-layout.simple.fullwidth(layout='row')
     ng-echarts(config="vm.chart.config", option="vm.chart.option", flex)
