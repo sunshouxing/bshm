@@ -38,7 +38,7 @@ export default class AssessmentController {
     },
     option: {
       title: {
-        text: '闵浦二桥结构性能在线评估',
+        text: '南澧河大桥结构性能在线评估',
         left: 'center'
       },
       visualMap: {

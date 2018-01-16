@@ -15,7 +15,7 @@ function onClick(params) {
       visualMap: [{}, {seriesIndex: [2, 3, 4]}],
       bmap: {
         center: assessments[params.dataIndex].value,
-        zoom: 14
+        zoom: 15
       },
       series: [
         {}, {}, {}, {},
@@ -90,7 +90,7 @@ export default class HomepageController {
         {
           show: true,
           right: 0,
-          width: 300,
+          width: 320,
           top: '0%',
           height: '100%',
           backgroundColor: 'rgba(18, 89, 147, 0.8)'
@@ -98,7 +98,7 @@ export default class HomepageController {
       ],
       title: [
         {
-          text: '上海大叶公路交通安全可视化',
+          text: '邢临高速公路交通安全可视化',
           textStyle: {
             color: 'rgba(18, 89, 147, 1)',
             fontSize: 30
@@ -122,8 +122,8 @@ export default class HomepageController {
       ],
       tooltip: {show: false},
       bmap: {
-        center: [121.503949, 30.982894],
-        zoom: 13,
+        center: [114.740186,36.98852],
+        zoom: 14,
         roam: true,
         mapStyle: {
           styleJson: [
