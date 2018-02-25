@@ -16,7 +16,7 @@ export default function($translateProvider, $mdIconProvider) {
     urlTemplate: '{part}/i18n/{lang}.json'
   });
   // tell the module what language to use by default
-  $translateProvider.preferredLanguage('en');
+  $translateProvider.preferredLanguage('zh');
   // tell the module to store the language in the cookies
   $translateProvider.useCookieStorage();
 
