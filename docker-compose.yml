@@ -7,7 +7,7 @@ services:
         networks:
             - bshm_net
         ports:
-            - "8080:8080"
+            - "8000:8000"
         volumes:
             - "./dist:/webapp/dist"
             - "./ecosystem.config.js:/webapp/ecosystem.config.js"
