@@ -31,13 +31,13 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
   msApiProvider.register('mail.labels', ['app/data/mail/labels.json']);
 
   // navigation
-  msNavigationServiceProvider.saveItem('apps.processor', {
-    title: 'Processing Unit',
-    icon: 'icon-select-inverse',
-    state: 'app.processor',
-    translate: 'PROCESSOR.PROCESSOR_NAV',
-    weight: PROCESSOR_WEIGHT
-  });
+  // msNavigationServiceProvider.saveItem('apps.processor', {
+  //   title: 'Processing Unit',
+  //   icon: 'icon-select-inverse',
+  //   state: 'app.processor',
+  //   translate: 'PROCESSOR.PROCESSOR_NAV',
+  //   weight: PROCESSOR_WEIGHT
+  // });
 }
 
 /* vim:set sw=2 ts=2 sts=2: */
