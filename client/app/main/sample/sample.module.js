@@ -3,6 +3,7 @@
 import angular from 'angular';
 
 import SampleController from './sample.controller';
+import { VIDEO_WEIGHT } from '../apps.weight';
 
 export default angular
   .module('app.sample', [])
@@ -45,6 +46,6 @@ function config($stateProvider, $translatePartialLoaderProvider, msApiProvider, 
     icon: 'icon-video',
     state: 'app.sample',
     translate: 'SAMPLE.SAMPLE_NAV',
-    weight: 7
+    weight: VIDEO_WEIGHT
   });
 }
