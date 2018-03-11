@@ -69,7 +69,7 @@ export default class AssessmentController {
         nodes: [],
         links: [],
         nodeWidth: 30,
-        nodeGap: 10,
+        nodeGap: 43,
         layoutIterations: 2048,
         itemStyle: {
           normal: {
