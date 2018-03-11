@@ -15,7 +15,10 @@ export default angular.module('bshm.directives.ng-echarts', [])
 
         function refreshChart() {
           let theme = ($scope.config && $scope.config.theme) ? $scope.config.theme : 'default';
+          /* eslint-disable no-undef */
+          // echart is imported from bootcdn
           let chart = echarts.init($element[0], theme);
+          /* eslint-enable */
 
           if ($scope.config && $scope.config.dataLoaded === false) {
             chart.showLoading();

@@ -122,7 +122,7 @@ export default class HomepageController {
       ],
       tooltip: {show: false},
       bmap: {
-        center: [114.740186,36.98852],
+        center: [114.740186, 36.98852],
         zoom: 14,
         roam: true,
         mapStyle: {

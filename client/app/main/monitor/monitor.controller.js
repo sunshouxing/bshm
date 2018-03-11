@@ -1,14 +1,14 @@
 'use strict';
 
-import angular from 'angular';
+// import angular from 'angular';
 
 function randomData() {
-    let time = new Date();
-    let data = Math.floor(500 + Math.random() * 1000);
-    return {
-        name: time.toString(),
-        value: [time, data]
-    }
+  let time = new Date();
+  let data = Math.floor(500 + Math.random() * 1000);
+  return {
+    name: time.toString(),
+    value: [time, data]
+  };
 }
 
 export default class MonitorController {
@@ -66,8 +66,8 @@ export default class MonitorController {
       xAxis: {
         type: 'time',
         // 把min与max注释掉，数据更新会变成向左移动的模式
-        min: function (value) { return Math.ceil(value.max/30000) * 30000 - 300000 },
-        max: function (value) { return Math.ceil(value.max/30000) * 30000 },
+        min(value) { return Math.ceil(value.max / 30000) * 30000 - 300000; },
+        max(value) { return Math.ceil(value.max / 30000) * 30000; },
         splitNumber: 10,
         axisLine: {
           show: true,
@@ -121,10 +121,10 @@ export default class MonitorController {
                 fontWeigth: 'bolder',
                 textBorderColor: 'auto',
                 textBorderWidth: 2,
-                formatter: function (params) { return params.name }
+                formatter(params) { return params.name; }
               },
               emphasis: {
-                formatter: function (params) { return params.name + '：' + params.value }
+                formatter(params) { return `${params.name}：${params.value}`; }
               }
             },
             data: [
@@ -151,7 +151,7 @@ export default class MonitorController {
               {
                 name: '最大值',
                 type: 'max',
-                itemStyle:{
+                itemStyle: {
                   normal: {color: 'rgb(194, 53, 49)'}
                 }
               },
