@@ -1,15 +1,6 @@
 'use strict';
 
-// import angular from 'angular';
-
-function randomData() {
-  let time = new Date();
-  let data = Math.floor(500 + Math.random() * 1000);
-  return {
-    name: time.toString(),
-    value: [time, data]
-  };
-}
+import angular from 'angular';
 
 export default class MonitorController {
   /*********************
@@ -45,16 +36,16 @@ export default class MonitorController {
           return `${params[0].value[0].toLocaleTimeString()}<br>${params[0].value[1]}`;
         }
       },
-      visualMap: {
-        type: 'piecewise',
-        pieces: [
-          {min: 2000},
-          {min: 1500, max: 2000},
-          {min: 0, max: 1500}
-        ],
-        color: ['red', 'orange', 'green'],
-        show: false
-      },
+      // visualMap: {
+      //   type: 'piecewise',
+      //   pieces: [
+      //     {min: 2000},
+      //     {min: 1500, max: 2000},
+      //     {min: 0, max: 1500}
+      //   ],
+      //   color: ['red', 'orange', 'green'],
+      //   show: false
+      // },
       toolbox: {
         feature: {
           dataZoom: {show: true},
@@ -99,8 +90,8 @@ export default class MonitorController {
           textStyle: {color: 'rgba(18, 89, 147, 0.8)', fontWeight: 'bold'}
         },
         splitLine: {show: true},
-        min: 0,
-        max: 3000
+        // min: 0,
+        // max: 3000
       },
       series: [
         {
@@ -110,36 +101,36 @@ export default class MonitorController {
           showSymbol: false,
           hoverAnimation: false,
           data: [],
-          markLine: {
-            lineStyle: {
-              normal: {width: 1.5, opacity: 0.8}
-            },
-            label: {
-              normal: {
-                color: '#fff',
-                fontSize: 13,
-                fontWeigth: 'bolder',
-                textBorderColor: 'auto',
-                textBorderWidth: 2,
-                formatter(params) { return params.name; }
-              },
-              emphasis: {
-                formatter(params) { return `${params.name}：${params.value}`; }
-              }
-            },
-            data: [
-              {
-                name: '橙色预警阈值',
-                yAxis: 1500,
-                lineStyle: {normal: {color: 'orange'}}
-              },
-              {
-                name: '红色预警阈值',
-                yAxis: 2000,
-                lineStyle: {normal: {color: 'red'}}
-              }
-            ]
-          },
+          // markLine: {
+          //   lineStyle: {
+          //     normal: {width: 1.5, opacity: 0.8}
+          //   },
+          //   label: {
+          //     normal: {
+          //       color: '#fff',
+          //       fontSize: 13,
+          //       fontWeigth: 'bolder',
+          //       textBorderColor: 'auto',
+          //       textBorderWidth: 2,
+          //       formatter(params) { return params.name; }
+          //     },
+          //     emphasis: {
+          //       formatter(params) { return `${params.name}：${params.value}`; }
+          //     }
+          //   },
+          //   data: [
+          //     {
+          //       name: '橙色预警阈值',
+          //       yAxis: 1500,
+          //       lineStyle: {normal: {color: 'orange'}}
+          //     },
+          //     {
+          //       name: '红色预警阈值',
+          //       yAxis: 2000,
+          //       lineStyle: {normal: {color: 'red'}}
+          //     }
+          //   ]
+          // },
           markPoint: {
             itemStyle: {
               normal: {opacity: 0.8}
@@ -189,28 +180,63 @@ export default class MonitorController {
     }
   };
 
-  MAX_DATA_LEN = 60;
+  // only display data in latest 30 nimutes
+  MAX_DATA_LEN = 50 * 60 * 30;
+
+  queryTime = parseInt(Date.now() / 1000) - 1800;
 
   /*********************
    *      Methods      *
    *********************/
-  constructor($interval, monitor) {
+  constructor($state, $interval, $http) {
     'ngInject';
+    this.$state = $state;
     this.$interval = $interval;
-    this.monitor = monitor;
+    this.$http = $http;
   }
 
   $onInit() {
     this.$interval(() => {
-      let latest = randomData();
-      let series = this.chart.option.series;
-
-      if (series[0].data.length > this.MAX_DATA_LEN) { series[0].data.shift(); }
-      series[0].data.push(latest);
-      series[1].data = [latest];
-    }, 1000);
+      this.getRealtimeData(this.queryTime);
+    }, 5000);
 
     this.chart.config.dataLoaded = true;
+  }
+
+  getRealtimeData(timestamp) {
+    let channel = this.$state.params.channel;
+
+    this.$http.get(`/api/realtime-data/${channel}`, {
+      params: {timestamp}
+    }).then(response => {
+      angular.forEach(response.data, record => {
+        let startTime = record.timestamp * 1000;
+        let increment = 5000 / record.data.length;
+
+        for (let i = 0; i < record.data.length; i++) {
+          let time = new Date(startTime + i * increment);
+          let timeStr = [time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds()].join(':');
+
+          this.updateChart({
+            name: timeStr,
+            value: [timeStr, record.data[i]]
+          });
+        }
+
+        this.queryTime = record.timestamp + 4;
+      });
+    });
+  }
+
+  updateChart(data) {
+    let series = this.chart.option.series;
+
+    if (series[0].data.length > this.MAX_DATA_LEN) {
+      series[0].data.shift();
+    }
+
+    series[0].data.push(data);
+    series[1].data = [data];
   }
 }
 
