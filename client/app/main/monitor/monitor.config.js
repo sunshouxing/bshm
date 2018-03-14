@@ -8,7 +8,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
   // state
   $stateProvider
     .state('app.monitor', {
-      url: '/monitor',
+      url: '/monitor/:channel',
       views: {
         'content@app': {
           template: require('./monitor.pug'),
