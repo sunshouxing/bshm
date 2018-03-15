@@ -6,6 +6,41 @@ export default class MonitorController {
   /*********************
    *       Data        *
    *********************/
+  channels = [
+    'FCXF-X-02-T01',
+    'FCXF-X-02-T02',
+    'FCXF-X-02-T03',
+    'FCXF-X-02-T04',
+    'FCXF-X-03-T01',
+    'FCXF-X-03-T02',
+    'FCXF-X-03-T03',
+    'FCXF-X-03-T04',
+    'FCXF-X-03-T05',
+    'FCXF-X-03-T06',
+    'FCXF-X-04-T01',
+    'FCXF-X-04-T02',
+    'FCXF-X-04-T03',
+    'FCXF-X-04-T04',
+    'FCXF-X-02-S01',
+    'FCXF-X-02-S02',
+    'FCXF-X-02-S03',
+    'FCXF-X-02-S04',
+    'FCXF-X-02-A01',
+    'FCXF-X-03-A01',
+    'FCXF-X-03-A02',
+    'FCXF-X-04-A01',
+    'FCXF-X-03-S05',
+    'FCXF-X-03-S06',
+    'FCXF-X-03-S01',
+    'FCXF-X-03-S02',
+    'FCXF-X-03-S03',
+    'FCXF-X-03-S04',
+    'FCXF-X-04-S01',
+    'FCXF-X-04-S02',
+    'FCXF-X-04-S03',
+    'FCXF-X-04-S04'
+  ];
+
   chart = {
     config: {
       theme: 'default',
@@ -62,6 +97,7 @@ export default class MonitorController {
         splitNumber: 10,
         axisLine: {
           show: true,
+          onZero: false,
           lineStyle: {color: 'rgba(18, 89, 147, 1)', width: 2}
         },
         axisTick: {
@@ -76,9 +112,12 @@ export default class MonitorController {
       },
       yAxis: {
         type: 'value',
+        min: 'dataMin',
+        max: 'dataMax',
         boundaryGap: [0, '100%'],
         axisLine: {
           show: true,
+          onZero: false,
           lineStyle: {color: 'rgba(18, 89, 147, 1)', width: 2}
         },
         axisTick: {
@@ -197,19 +236,26 @@ export default class MonitorController {
 
   $onInit() {
     this.$interval(() => {
-      this.getRealtimeData(this.queryTime);
+      this.getRealtimeData();
     }, 5000);
 
     this.chart.config.dataLoaded = true;
   }
 
-  getRealtimeData(timestamp) {
+  getRealtimeData() {
     let channel = this.$state.params.channel;
 
     this.$http.get(`/api/realtime-data/${channel}`, {
-      params: {timestamp}
+      params: {timestamp: this.queryTime}
     }).then(response => {
+      console.log(response);
+
       angular.forEach(response.data, record => {
+        if (record.timestamp > this.queryTime) {
+          this.queryTime = record.timestamp;
+          console.log(`query time: ${this.queryTime}`);
+        }
+
         let startTime = record.timestamp * 1000;
         let increment = 5000 / record.data.length;
 
@@ -219,12 +265,12 @@ export default class MonitorController {
 
           this.updateChart({
             name: timeStr,
-            value: [timeStr, record.data[i]]
+            value: [time, record.data[i]]
           });
         }
-
-        this.queryTime = record.timestamp + 4;
       });
+
+      console.log(`query time: ${this.queryTime}`);
     });
   }
 
@@ -237,6 +283,10 @@ export default class MonitorController {
 
     series[0].data.push(data);
     series[1].data = [data];
+  }
+
+  changeChannel(channel) {
+    this.$state.go('app.monitor', {channel: channel});
   }
 }
 

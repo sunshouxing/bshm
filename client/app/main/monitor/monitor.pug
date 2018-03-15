@@ -1,4 +1,28 @@
-doctype html
+// doctype html
 
-#monitor.page-layout.simple.fullwidth(layout='row')
-    ng-echarts(config="vm.chart.config", option="vm.chart.option", flex)
+// #monitor.page-layout.simple.fullwidth(layout='row')
+//     ng-echarts(config="vm.chart.config", option="vm.chart.option", flex)
+
+.page-layout.simple.left-sidenav(layout='row')
+    // SIDENAV
+    md-sidenav.sidenav(md-is-locked-open="$mdMedia('gt-md')", md-component-id='sidenav', ms-scroll, ms-sidenav-helper)
+        // DEMO SIDENAV
+        .demo-sidenav
+            md-list
+                md-subheader.md-no-sticky 保阜大桥
+                md-list-item(ng-repeat="channel in vm.channels")
+                    a(ng-click="vm.changeChannel(channel)") {{channel}}
+                md-divider
+
+    // CENTER
+    .center(flex, ms-scroll)
+        // HEADER
+        .header.md-accent-bg(layout='row')
+            md-button.md-icon-button.sidenav-toggle(ng-click="vm.toggleSidenav('sidenav')", hide-gt-md, aria-label='Toggle sidenav')
+                md-icon.icon(md-font-icon='icon-menu')
+            div
+                span.h2 {{vm.$state.params.channel}}
+        // CONTENT
+        .content.md-background-bg
+            // DEMO CONTENT
+            ng-echarts.chart(config="vm.chart.config", option="vm.chart.option", style='height:700px; width:1000px;')
