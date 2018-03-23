@@ -7,7 +7,7 @@ import config from './monitor.config';
 import MonitorController from './monitor.controller';
 
 export default angular
-  .module('app.monitor', [uiRouter])
+  .module('app.monitor', [uiRouter, 'kendo.directives'])
   .config(config)
   .controller('MonitorController', MonitorController)
   .name;
