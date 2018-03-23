@@ -1,0 +1,11 @@
+// DEMO SIDENAV
+
+.monitor-sidenav
+    .box-col
+        div(
+            kendo-tree-view='tree'
+            k-data-source='vm.treeData'
+            k-on-change='vm.gotoNode(dataItem)'
+        )
+            span(k-template)
+                | {{dataItem.text}}

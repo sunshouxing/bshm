@@ -1,18 +1,14 @@
-// doctype html
-
-// #monitor.page-layout.simple.fullwidth(layout='row')
-//     ng-echarts(config="vm.chart.config", option="vm.chart.option", flex)
+doctype html
 
 .page-layout.simple.left-sidenav(layout='row')
     // SIDENAV
-    md-sidenav.sidenav(md-is-locked-open="$mdMedia('gt-md')", md-component-id='sidenav', ms-scroll, ms-sidenav-helper)
-        // DEMO SIDENAV
-        .demo-sidenav
-            md-list
-                md-subheader.md-no-sticky 保阜大桥
-                md-list-item(ng-repeat="channel in vm.channels")
-                    a(ng-click="vm.changeChannel(channel)") {{channel}}
-                md-divider
+    md-sidenav.sidenav(
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-component-id='sidenav'
+        ms-scroll
+        ms-sidenav-helper
+    )
+        include ./sidenav/sidenav.pug
 
     // CENTER
     .center(flex, ms-scroll)
