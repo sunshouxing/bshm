@@ -1,11 +1,12 @@
-// DEMO SIDENAV
+// MONITOR SIDENAV
 
 .monitor-sidenav
+    //- BRIDGE STRUCTURE NAVIGATION
     .box-col
         div(
             kendo-tree-view='tree'
-            k-data-source='vm.treeData'
-            k-on-change='vm.gotoNode(dataItem)'
+            k-data-source='vm.navigation'
+            k-on-change='vm.selectNode(dataItem)'
         )
             span(k-template)
                 | {{dataItem.text}}
