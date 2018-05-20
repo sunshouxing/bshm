@@ -16,12 +16,14 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
         }
       },
       resolve: {
-        monitor: msApi => msApi.resolve('monitor.bridge@get')
+        navigation: msApi => msApi.resolve('monitor.navigation@get'),
+        thresholds: msApi => msApi.resolve('warning.thresholds@get')
       }
     });
 
   // api
-  msApiProvider.register('monitor.bridge', ['app/data/monitor/monitor.json']);
+  msApiProvider.register('monitor.navigation', ['app/data/monitor/navigation.json']);
+  msApiProvider.register('warning.thresholds', ['app/data/warning/thresholds.json']);
 
   // translation
   $translatePartialLoaderProvider.addPart('app/main/monitor');
