@@ -64,7 +64,9 @@ export default class MonitorController {
             snap: true
           },
           formatter(params) {
-            return `${params[0].value[0].toLocaleTimeString()} / ${params[0].value[1]}`;
+            let time = params[0].value[0].toLocaleTimeString();
+            let data = params[0].value[1].toPrecision(5);
+            return `${time} / ${data}`;
           }
         },
         visualMap: {
@@ -167,25 +169,37 @@ export default class MonitorController {
               ]
             },
             markPoint: {
+              symbolSize: 25,
               itemStyle: {
-                normal: {opacity: 0.8}
+                opacity: 0.8
               },
               label: {
-                normal: {fontWeight: 'bold'}
+                normal: {
+                  fontSize: 13,
+                  fontWeight: 'bold',
+                  formatter(params) {return `${params.name}:${params.value.toPrecision(5)}`;}
+                }
               },
               data: [
                 {
                   name: '最大值',
                   type: 'max',
                   itemStyle: {
-                    normal: {color: 'rgb(194, 53, 49)'}
+                    normal: { color: 'rgb(194, 53, 49)' }
+                  },
+                  label: {
+                    normal: { position: 'top' }
                   }
                 },
                 {
                   name: '最小值',
+                  symbolRotate: '180',
                   type: 'min',
                   itemStyle: {
-                    normal: {color: 'rgb(18, 89, 147)'}
+                    normal: { color: 'rgb(18, 89, 147)' }
+                  },
+                  label: {
+                    normal: { position: 'bottom' }
                   }
                 }
               ]
@@ -207,8 +221,8 @@ export default class MonitorController {
                 textBorderWidth: 2,
                 formatter(params) {
                   let time = params.data.value[0].toLocaleTimeString();
-                  let data = params.data.value[1];
-                  return `${time} / ${data}`;
+                  let data = params.data.value[1].toPrecision(5);
+                  return `${time}\n${data}`;
                 }
               }
             }
@@ -223,17 +237,13 @@ export default class MonitorController {
     }, this.FETCH_DATA_INTERVAL);
   }
 
-  //TODO for test
+  //TODO generate random data for test
   getRealtimeData() {
     let time = new Date(Date.now() / 1000 * 1000);
     let data = Math.random() * 200;
-
     let name = [time.getHours(), time.getMinutes(), time.getSeconds()].join(':');
 
     this.updateChart({name, value: [time, data]});
-
-    // set dataLoaded flag true to make echart draw realtime data line
-    this.chart.config.dataLoaded = true;
   }
 
   // getRealtimeData() {
@@ -276,6 +286,9 @@ export default class MonitorController {
 
     series[0].data.push(data);
     series[1].data = [data];
+
+    // set dataLoaded flag true to make echart draw realtime data line
+    this.chart.config.dataLoaded = true;
   }
 
   selectNode(node) {
