@@ -23,11 +23,13 @@ doctype html
             div
                 span.h2 {{vm.$state.params.channel}}
 
-        // CONTENT
-        .content.md-background-bg
-            // DEMO CONTENT
-            .chartwrapper(flex)
-                ng-echarts.chart(
-                    config="vm.chart.config"
-                    option="vm.chart.option"
-                )
+        .content.md-background-bg(ui-view="module")
+
+        // // CONTENT
+        // .content.md-background-bg
+        //     // DEMO CONTENT
+        //     .chartwrapper(flex)
+        //         ng-echarts.chart(
+        //             config="vm.chart.config"
+        //             option="vm.chart.option"
+        //         )

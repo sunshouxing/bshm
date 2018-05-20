@@ -8,7 +8,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
   // state
   $stateProvider
     .state('app.monitor', {
-      url: '/monitor/:channel',
+      url: '/monitor',
       views: {
         'content@app': {
           template: require('./monitor.pug'),
@@ -18,6 +18,24 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
       resolve: {
         navigation: msApi => msApi.resolve('monitor.navigation@get'),
         thresholds: msApi => msApi.resolve('warning.thresholds@get')
+      }
+    })
+    .state('app.monitor.sensor', {
+      url: '/sensor',
+      views: {
+        'module@app.monitor': {
+          template: require('./sensor/sensor.pug'),
+          controller: 'SensorMonitor as vm'
+        }
+      }
+    })
+    .state('app.monitor.section', {
+      url: '/section',
+      views: {
+        'module@app.monitor': {
+          template: require('./section/section.pug'),
+          controller: 'SectionMonitor as vm'
+        }
       }
     });
 
