@@ -1,6 +1,6 @@
 {
     "WARNING": {
-        "FILE_MANAGER_NAV": "File Manager",
+        "WARNING_NAV": "Warning",
         "TOOGLE_MAIN_SIDENAV": "Toggle Main Sidenav",
         "SEARCH": "Search",
         "SEARCH_FOR_FILE": "Search for file",
@@ -13,7 +13,7 @@
         "OWNER": "Owner",
         "SIZE": "Size",
         "LAST_MODIFIED": "Last Modified",
-        "FILE_MANAGER": "File Manager",
+        "WARNING": "File Manager",
         "SELECT_ACCOUNT": "Select Account",
         "MY_FILES": "My Files",
         "STARRED": "Starred",

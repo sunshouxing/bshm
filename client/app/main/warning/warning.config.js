@@ -25,10 +25,10 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
 
   // navigation
   msNavigationServiceProvider.saveItem('apps.warning', {
-    title: 'File Manager',
-    icon: 'icon-warn',
+    title: 'Warning',
+    icon: 'icon-alert-circle',
     state: 'app.warning',
-    translate: 'WARNING.FILE_MANAGER_NAV',
+    translate: 'WARNING.WARNING_NAV',
     weight: WARNING_WEIGHT
   });
 }
