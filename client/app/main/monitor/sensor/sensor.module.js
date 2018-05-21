@@ -2,10 +2,12 @@
 
 import angular from 'angular';
 
+import config from './sensor.config';
 import SensorMonitor from './sensor.controller';
 
 export default angular
   .module('app.monitor.sensor', [])
+  .config(config)
   .controller('SensorMonitor', SensorMonitor)
   .name;
 

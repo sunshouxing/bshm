@@ -1,3 +1,4 @@
-h2 This is sensor module view
-
-p {{vm.MAX_DATA_LEN}}
+// SENSOR MONITOR
+.sensor-monitor
+    .chartwrapper(flex)
+        ng-echarts.chart(config="vm.chart.config" option="vm.chart.option")
