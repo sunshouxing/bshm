@@ -1,0 +1,63 @@
+doctype html
+
+#warning.page-layout.simple.right-sidenav(layout='row')
+    // MAIN SIDENAV (EXTRA SIDENAV)
+    md-sidenav.main-sidenav(md-component-id='warning.sidenav', ms-scroll, ms-sidenav-helper)
+        include ./sidenavs/main/main-sidenav.pug
+    // CENTER
+    .center(layout='column', flex)
+        // HEADER
+        .header.md-accent-bg
+            .header-content(layout='column', layout-align='space-between')
+                // TOOLBAR
+                .toolbar(layout='row', layout-align='space-between center')
+                    //- TOGGLE MAIN SIDENAV BUTTON
+                    md-button.md-icon-button.main-sidenav-toggle(
+                        ng-click="vm.toggleSidenav('warning.sidenav')"
+                        aria-label='Toggle Main Sidenav'
+                        translate
+                        translate-attr-aria-label='FILE.TOOGLE_MAIN_SIDENAV'
+                    )
+                        md-icon.icon(md-font-icon='icon-menu')
+                    //- FILE SEARCH BAR
+                    .search-input-wrapper.right-side(layout='row', layout-align='start center')
+                        label
+                            md-icon(md-font-icon='icon-magnify')
+                        md-input-container(md-no-float)
+                            input(
+                                type='text'
+                                placeholder='Search for file'
+                                ng-model='vm.search'
+                                translate-attr='{placeholder: "WARNING.SEARCH_FOR_FILE"}'
+                            )
+
+                // BREADCRUMB
+                .breadcrumb.text-truncate(layout='row', layout-align='start center')
+                    span(data-ng-repeat='path in vm.path')
+                        | {{path}}
+                        md-icon.icon.separator(md-font-icon='icon-chevron-right')
+            // ADD FILE BUTTON
+            #file-uploader(
+                flow-init='vm.ngFlowOptions'
+                flow-name='vm.ngFlow.flow'
+                flow-files-submitted='vm.upload()'
+                flow-file-added='vm.fileAdded($file)'
+                flow-file-success='vm.fileSuccess($file, $message)'
+                flow-complete='vm.uploadComplete()'
+            )
+                md-button.add-file-button.md-fab.md-warn(flow-btn, aria-label='Add file', translate, translate-attr-aria-label='WARNING.ADD_FILE')
+                    md-icon(md-font-icon='icon-plus')
+
+        // CONTENT
+        md-content.content(flex, ms-scroll)
+            include ./views/list/list-view.pug
+
+    // SIDENAV
+    md-sidenav.sidenav.details-sidenav.md-sidenav-right(
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-component-id='details-sidenav'
+        ms-scroll
+        ms-sidenav-helper
+    )
+        include ./sidenavs/details/details-sidenav.pug
+

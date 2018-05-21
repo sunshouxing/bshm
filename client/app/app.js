@@ -33,6 +33,7 @@ import sample from './main/sample/sample.module';
 import fileManager from './main/file-manager';
 import structure from './main/structure';
 import processor from './main/processor';
+import warning from './main/warning';
 
 import routes from './app.route';
 import config from './app.config';
@@ -63,6 +64,7 @@ angular
     'app.toolbar',
     'app.quick-panel',
     // add your apps here
+    warning,
     monitor,
     assessment,
     homepage,
