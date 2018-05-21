@@ -5,9 +5,11 @@ import uiRouter from 'angular-ui-router';
 
 import config from './monitor.config';
 import MonitorController from './monitor.controller';
+import sensor from './sensor/sensor.module';
+import section from './section/section.module';
 
 export default angular
-  .module('app.monitor', [uiRouter, 'kendo.directives'])
+  .module('app.monitor', [uiRouter, 'kendo.directives', sensor, section])
   .config(config)
   .controller('MonitorController', MonitorController)
   .name;
