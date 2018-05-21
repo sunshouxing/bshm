@@ -1,5 +1,7 @@
 'use strict';
 
+import angular from 'angular';
+
 export default class MonitorController {
   /*********************
    *       Data        *
@@ -11,15 +13,18 @@ export default class MonitorController {
   organizedBy = 'type';
 
   // the current monitoring sensor
-  currentSensor = null;
+  currentNode = null;
+
+  nodePath = [];
 
   /*********************
    *      Methods      *
    *********************/
-  constructor($state, $interval, msApi) {
+  constructor($state, $mdSidenav, msApi) {
     'ngInject';
 
     this.$state = $state;
+    this.$mdSidenav = $mdSidenav;
     this.msApi = msApi;
   }
 
@@ -36,12 +41,14 @@ export default class MonitorController {
     // when the selected node is a sensor(leaf node)
     if (!node.hasChildren) {
       // selected another sensor
-      if (node.text != this.currentSensor) {
-        this.currentSensor = node.text;
+      if (node != this.currentNode) {
+        this.currentNode = node;
+        this.nodePath = this._nodePath(node);
         this.$state.go('app.monitor.sensor', {sensorName: node.text});
       }
     } else if (this.organizedBy == 'section') {
       if (node.type == 'section') {
+        this.nodePath = this._nodePath(node);
         this.$state.go('app.monitor.section', {id: node.text});
       }
     }
@@ -59,6 +66,26 @@ export default class MonitorController {
         /* eslint-enable */
       }
     );
+  }
+
+  /**
+   * Toggle side navigation.
+   *
+   * @param {String} sidenavId -- the ID of this sidenav
+   */
+  toggleSidenav(sidenavId) {
+    this.$mdSidenav(sidenavId).toggle();
+  }
+
+  _nodePath(node) {
+    let path = [];
+    let n = node;
+    while (!angular.isUndefined(n)) {
+      path.splice(0, 0, n.text);
+      n = n.parent().parent();
+    }
+
+    return path;
   }
 }
 
