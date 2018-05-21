@@ -1,5 +1,10 @@
 {
-    "monitor": {
-        "MONITOR_NAV": "Monitor"
+    "MONITOR": {
+        "MONITOR_NAV": "Monitor",
+        "SIDENAV": {
+            "ORGANIZED_DESC": "Organize Sensors By:",
+            "ORGANIZED_BY_TYPE": "Type",
+            "ORGANIZED_BY_SECTION": "Section"
+        }
     }
 }

@@ -14,23 +14,22 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
           template: require('./monitor.pug'),
           controller: 'MonitorController as vm'
         }
-      },
-      resolve: {
-        navigation: msApi => msApi.resolve('monitor.navigation@get'),
-        thresholds: msApi => msApi.resolve('warning.thresholds@get')
       }
     })
     .state('app.monitor.sensor', {
-      url: '/sensor',
+      url: '/sensor/:sensorName',
       views: {
         'module@app.monitor': {
           template: require('./sensor/sensor.pug'),
           controller: 'SensorMonitor as vm'
         }
+      },
+      resolve: {
+        thresholds: msApi => msApi.resolve('warning.thresholds@get')
       }
     })
     .state('app.monitor.section', {
-      url: '/section',
+      url: '/section/:id',
       views: {
         'module@app.monitor': {
           template: require('./section/section.pug'),
@@ -40,8 +39,15 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
     });
 
   // api
-  msApiProvider.register('monitor.navigation', ['app/data/monitor/navigation.json']);
-  msApiProvider.register('warning.thresholds', ['app/data/warning/thresholds.json']);
+  msApiProvider.register('warning.thresholds', [
+    'app/data/warning/thresholds.json'
+  ]);
+  msApiProvider.register('monitor.navigation.type', [
+    'app/data/monitor/navigation-type.json'
+  ]);
+  msApiProvider.register('monitor.navigation.section', [
+    'app/data/monitor/navigation-section.json'
+  ]);
 
   // translation
   $translatePartialLoaderProvider.addPart('app/main/monitor');
@@ -51,7 +57,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
     title: 'monitor',
     icon: 'icon-chart-areaspline',
     state: 'app.monitor',
-    translate: 'monitor.MONITOR_NAV',
+    translate: 'MONITOR.MONITOR_NAV',
     weight: MONITOR_WEIGHT
   });
 }
