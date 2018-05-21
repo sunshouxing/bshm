@@ -3,7 +3,7 @@
         "WARNING_NAV": "实时预警",
         "TOOGLE_MAIN_SIDENAV": "隐藏/显示侧边栏",
         "SEARCH": "搜索",
-        "SEARCH_FOR_FILE": "搜索文件",
+        "SEARCH_FOR_WARNING": "搜索预警",
         "GRID_VIEW": "网格视图",
         "LIST_VIEW": "列表视图",
         "ADD_FILE": "新增文档",

@@ -26,27 +26,10 @@ doctype html
                         md-input-container(md-no-float)
                             input(
                                 type='text'
-                                placeholder='Search for file'
+                                placeholder='Search for warning'
                                 ng-model='vm.search'
-                                translate-attr='{placeholder: "WARNING.SEARCH_FOR_FILE"}'
+                                translate-attr='{placeholder: "WARNING.SEARCH_FOR_WARNING"}'
                             )
-
-                // BREADCRUMB
-                .breadcrumb.text-truncate(layout='row', layout-align='start center')
-                    span(data-ng-repeat='path in vm.path')
-                        | {{path}}
-                        md-icon.icon.separator(md-font-icon='icon-chevron-right')
-            // ADD FILE BUTTON
-            #file-uploader(
-                flow-init='vm.ngFlowOptions'
-                flow-name='vm.ngFlow.flow'
-                flow-files-submitted='vm.upload()'
-                flow-file-added='vm.fileAdded($file)'
-                flow-file-success='vm.fileSuccess($file, $message)'
-                flow-complete='vm.uploadComplete()'
-            )
-                md-button.add-file-button.md-fab.md-warn(flow-btn, aria-label='Add file', translate, translate-attr-aria-label='WARNING.ADD_FILE')
-                    md-icon(md-font-icon='icon-plus')
 
         // CONTENT
         md-content.content(flex, ms-scroll)
