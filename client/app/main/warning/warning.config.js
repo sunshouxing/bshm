@@ -16,7 +16,7 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
         }
       },
       resolve: {
-        documents: apiResolver => apiResolver.resolve('files@query')
+        warnings: apiResolver => apiResolver.resolve('warnings@query')
       }
     });
 

@@ -216,6 +216,15 @@ export default function($resource) {
     }
   );
 
+  // rest api for warnings
+  api.warnings = $resource(
+    `${api.baseUrl}/warnings/:id`,
+    {id: '@_id'},
+    {
+      update: {method: 'PUT'}
+    }
+  );
+
   // rest api for file manager
   api.files = $resource(`${api.baseUrl}/files/:id`);
 
