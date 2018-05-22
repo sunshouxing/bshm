@@ -6,17 +6,30 @@ export default class WarningController {
   // data
   warnings = [];
 
+  FETCH_DATA_INTERVAL = 60 * 1000;
+
   // methods
-  constructor($mdSidenav, api, warnings) {
+  constructor($mdSidenav, $interval, api, warnings) {
     'ngInject';
 
     this.$mdSidenav = $mdSidenav;
+    this.$interval = $interval;
     this.Warnings = api.warnings;
     this.warnings = warnings;
   }
 
   $onInit() {
     this.selected = this.warnings[0];
+
+    // fetch warnings from database periodically
+    this.$interval(() => { this._fetchWarnings(); }, this.FETCH_DATA_INTERVAL);
+  }
+
+  _fetchWarnings() {
+    this.Warnings.query(warnings => {
+      this.warnings = warnings;
+      console.log(this.warnings);
+    })
   }
 
   /**

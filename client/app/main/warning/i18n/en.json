@@ -1,6 +1,12 @@
 {
     "WARNING": {
         "WARNING_NAV": "Warning",
+        "CHANNEL": "Channel",
+        "LEVEL": "Level",
+        "START_TIME": "Start Time",
+        "END_TIME": "End Time",
+        "PRINCIPAL": "Principal",
+        "STATUS": "Status",
         "TOOGLE_MAIN_SIDENAV": "Toggle Main Sidenav",
         "SEARCH": "Search",
         "SEARCH_FOR_WARNING": "Search for warning",

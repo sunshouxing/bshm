@@ -1,6 +1,12 @@
 {
     "WARNING": {
         "WARNING_NAV": "实时预警",
+        "CHANNEL": "通道",
+        "LEVEL": "级别",
+        "START_TIME": "开始时间",
+        "END_TIME": "结束时间",
+        "PRINCIPAL": "负责人",
+        "STATUS": "状态",
         "TOOGLE_MAIN_SIDENAV": "隐藏/显示侧边栏",
         "SEARCH": "搜索",
         "SEARCH_FOR_WARNING": "搜索预警",

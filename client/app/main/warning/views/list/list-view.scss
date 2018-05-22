@@ -37,25 +37,39 @@
                     padding: 24px 8px;
                     border-bottom: none;
 
-                    &.file-icon {
+                    .orange {
+                        background-color: rgb(255,152,0);
+                    }
+
+                    .red {
+                        background-color: rgb(244,67,54);
+                    }
+
+                    &.level-icon {
                         padding: 24px;
                         text-align: center;
                     }
 
-                    &.name {
+                    &.channel {
                         font-weight: 500;
                     }
 
-                    &.type {
+                    &.level {
                         text-transform: capitalize;
                     }
 
-                    &.owner {
+                    &.start-time {
                         text-transform: capitalize;
                     }
 
-                    &.last-modified {
+                    &.end-time {
+                        text-transform: capitalize;
+                    }
 
+                    &.principal {
+                    }
+
+                    &.status {
                     }
 
                     &.show-details {

@@ -5,43 +5,32 @@ table.simple.list-view
     thead
         tr
             th
-            th(translate='WARNING.NAME') Name
-            th(hide, show-gt-sm, translate='WARNING.TYPE') Type
-            th(hide-xs, translate='WARNING.OWNER') Owner
-            th(hide-xs, translate='WARNING.SIZE') Size
-            th(hide, show-gt-md, translate='WARNING.LAST_MODIFIED') Last Modified
+            th(translate='WARNING.CHANNEL') Channel
+            th(translate='WARNING.LEVEL') Level
+            th(hide, show-gt-md, translate='WARNING.START_TIME') Start Time
+            th(hide, show-gt-md, translate='WARNING.END_TIME') End Time
+            th(translate='WARNING.PRINCIPAL') Principal
+            th(translate='WARNING.STATUS') Status
             th(hide-gt-md)
     tbody
-        tr(
-            ng-repeat='folder in vm.folders | filter:global.search | filter:vm.search'
-            ng-click='vm.select(folder)'
-            ng-class="{'selected' : vm.selected === folder}"
-        )
-            td.file-icon
-                i.icon-folder
-            td.name {{folder.name}}
-            td.type(hide, show-gt-sm) {{folder.type}}
-            td.owner(hide-xs) {{folder.owner}}
-            td.size(hide-xs) {{folder.size === '' ? '-': folder.size | fsize}}
-            td.last-modified(hide, show-gt-md) {{folder.modified | date:'mediumDate'}}
-            td.show-details(hide-gt-md)
-                md-button.md-icon-button.sidenav-toggle(ng-click='vm.toggleDetails(folder)', aria-label='Toggle details sidenav')
-                    md-icon(md-font-icon='icon-information-outline')
         tr(
             ng-repeat='warning in vm.warnings | filter:global.search | filter:vm.search'
             ng-click='vm.select(warning)'
             ng-class="{'selected' : vm.selected === warning}"
         )
-            td.file-icon
-                i(class='icon-{{warning.type}}')
-            td.name {{warning.name}}
-            td.type(hide, show-gt-sm) {{warning.type}}
-            td.owner(hide-xs) {{warning.owner}}
-            td.size(hide-xs) {{warning.size === '' ? '-': warning.size | fsize}}
-            td.last-modified(hide, show-gt-md) {{warning.modified | date:'mediumDate'}}
+            td.level-icon
+                .h-15.w-15.ml-35(
+                    ng-class="{orange: warning.level==0, red: warning.level==1}"
+                )
+            td.channel {{warning.channel}}
+            td.level {{warning.level}}
+            td.start-time(hide, show-gt-md) {{warning.startTime | date:'mediumDate'}}
+            td.end-time(hide, show-gt-md) {{warning.endTime | date:'mediumDate'}}
+            td.principal(hide-xs) {{warning.principal}}
+            td.status(hide-xs) {{warning.status}}
             td.show-details(hide-gt-md)
                 md-button.md-icon-button.sidenav-toggle(
-                    ng-click='vm.toggleDetails(warning)'
+                    ng-click="vm.toggleSidenav('warning.sidenav.details')"
                     aria-label='Details'
                     translate
                     translate-attr-aria-label='WARNING.DETAILS'

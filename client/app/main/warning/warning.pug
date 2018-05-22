@@ -2,7 +2,7 @@ doctype html
 
 #warning.page-layout.simple.right-sidenav(layout='row')
     // MAIN SIDENAV (EXTRA SIDENAV)
-    md-sidenav.main-sidenav(md-component-id='warning.sidenav', ms-scroll, ms-sidenav-helper)
+    md-sidenav.main-sidenav(md-component-id='warning.sidenav.main', ms-scroll, ms-sidenav-helper)
         include ./sidenavs/main/main-sidenav.pug
     // CENTER
     .center(layout='column', flex)
@@ -13,7 +13,7 @@ doctype html
                 .toolbar(layout='row', layout-align='space-between center')
                     //- TOGGLE MAIN SIDENAV BUTTON
                     md-button.md-icon-button.main-sidenav-toggle(
-                        ng-click="vm.toggleSidenav('warning.sidenav')"
+                        ng-click="vm.toggleSidenav('warning.sidenav.main')"
                         aria-label='Toggle Main Sidenav'
                         translate
                         translate-attr-aria-label='FILE.TOOGLE_MAIN_SIDENAV'
@@ -38,7 +38,7 @@ doctype html
     // SIDENAV
     md-sidenav.sidenav.details-sidenav.md-sidenav-right(
         md-is-locked-open="$mdMedia('gt-md')"
-        md-component-id='details-sidenav'
+        md-component-id='warning.sidenav.details'
         ms-scroll
         ms-sidenav-helper
     )

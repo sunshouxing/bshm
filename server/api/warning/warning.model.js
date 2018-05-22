@@ -4,9 +4,30 @@ import mongoose from 'mongoose';
 import {registerEvents} from './warning.events';
 
 var WarningSchema = new mongoose.Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  channel: {
+    type: String,
+    required: true
+  },
+  startTime: {
+    type: Date,
+    required: true
+  }, 
+  endTime: {
+    type: Date,
+    required: false
+  }, 
+  level: {
+    type: Number,
+    required: true
+  },
+  principal: {
+    type: String,
+    required: true
+  },
+  status: {
+    type: Number,
+    required: true
+  }
 });
 
 registerEvents(WarningSchema);
