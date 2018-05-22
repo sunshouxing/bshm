@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/warnings', require('./api/warning'));
   app.use('/api/realtime-data', require('./api/realtime-data'));
   app.use('/api/processors', require('./api/processor'));
   app.use('/api/channels', require('./api/channel'));
