@@ -1,14 +1,22 @@
 'use strict';
 
-import angular from 'angular';
-
 export default class WarningController {
-  // data
+  /*********************
+   *       Data        *
+   *********************/
+
+  /* all the warnings  */
   warnings = [];
 
+  /* pagination settings */
+  pagination = {size: 10, page: 1};
+
+  /* the interval to fetch and update warnings */
   FETCH_DATA_INTERVAL = 60 * 1000;
 
-  // methods
+  /*********************
+   *     Methods       *
+   *********************/
   constructor($mdSidenav, $interval, api, warnings) {
     'ngInject';
 
@@ -25,13 +33,6 @@ export default class WarningController {
     this.$interval(() => { this._fetchWarnings(); }, this.FETCH_DATA_INTERVAL);
   }
 
-  _fetchWarnings() {
-    this.Warnings.query(warnings => {
-      this.warnings = warnings;
-      console.log(this.warnings);
-    })
-  }
-
   /**
    * Toggle warning app's sidenav.
    *
@@ -46,6 +47,12 @@ export default class WarningController {
    */
   select(item) {
     this.selected = item;
+  }
+
+  _fetchWarnings() {
+    this.Warnings.query(warnings => {
+      this.warnings = warnings;
+    });
   }
 }
 

@@ -14,7 +14,7 @@ table.simple.list-view
             th(hide-gt-md)
     tbody
         tr(
-            ng-repeat='warning in vm.warnings | filter:global.search | filter:vm.search'
+            ng-repeat='warning in vm.warnings | filter:global.search | filter:vm.search | limitTo: vm.pagination.size:(vm.pagination.page-1)*vm.pagination.size'
             ng-click='vm.select(warning)'
             ng-class="{'selected' : vm.selected === warning}"
         )
@@ -38,3 +38,16 @@ table.simple.list-view
                     translate-attr-aria-label='WARNING.DETAILS'
                 )
                     md-icon(md-font-icon='icon-information-outline')
+
+
+//- PAGINATION
+div(layout='row', layout-align='end center', ng-show='vm.warnings.length')
+    md-pagination(
+        md-limit='vm.pagination.size'
+        md-limit-options='[5, 10, 20]'
+        md-page='vm.pagination.page'
+        md-page-select
+        md-boundary-links
+        md-total='{{vm.warnings.length}}'
+        md-on-paginate='vm.onPaginate'
+    )

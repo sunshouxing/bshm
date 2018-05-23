@@ -42,6 +42,76 @@ export default function seedDatabaseIfNeeded() {
           principal: 'Arthur',
           status: 0
         }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
           channel: 'FCXF-X-02-A02',
           startTime: new Date(2018, 4, 22, 10, 5, 20),
           endTime: new Date(2018, 4, 22, 10, 7, 20),
