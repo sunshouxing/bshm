@@ -46,25 +46,22 @@ md-content.content(flex, ms-scroll)
         .title(translate='WARNING.INFO') Info
         table
             tr.type
-                th(translate='WARNING.TYPE') Type
-                td {{vm.selected.type}}
+                th(translate='WARNING.CHANNEL') Channel
+                td {{vm.selected.channel}}
             tr.size
-                th(translate='WARNING.SIZE') Size
-                td {{vm.selected.size === '' ? '-': vm.selected.size | fsize}}
+                th(translate='WARNING.LEVEL') Level
+                td {{vm.selected.level | level}}
             tr.location
-                th(translate='WARNING.LOCATION') Location
-                td {{vm.selected.location}}
+                th(translate='WARNING.START_TIME') Start Time
+                td {{vm.selected.startTime | date:'yyyy-MM-dd HH:mm:ss'}}
             tr.owner
-                th(translate='WARNING.OWNER') Owner
-                td {{vm.selected.owner}}
+                th(translate='WARNING.END_TIME') End Time
+                td {{vm.selected.endTime | date:'yyyy-MM-dd HH:mm:ss'}}
             tr.modified
-                th(translate='WARNING.MODIFIED') Modified
-                td {{vm.selected.modified | date:'mediumDate'}}
+                th(translate='WARNING.PRINCIPAL') Principal
+                td {{vm.selected.principal}}
             tr.opened
-                th(translate='WARNING.OPENED') Opened
-                td {{vm.selected.opened | date:'mediumDate'}}
-            tr.created
-                th(translate='WARNING.CREATED') Created
-                td {{vm.selected.created | date:'mediumDate'}}
+                th(translate='WARNING.STATUS') Status
+                td {{vm.selected.status | status}}
 
 //- vim:set sw=4 ts=4 sts=4:
