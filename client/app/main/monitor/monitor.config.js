@@ -2,7 +2,7 @@
 
 import { MONITOR_WEIGHT } from '../apps.weight';
 
-export default function($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
+export default function($stateProvider, $stateParamsProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
   'ngInject';
 
   // state
@@ -14,6 +14,9 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
           template: require('./monitor.pug'),
           controller: 'MonitorController as vm'
         }
+      },
+      resolve: {
+        thresholds: msApi => msApi.resolve('warning.thresholds@get')
       }
     })
     .state('app.monitor.sensor', {
@@ -23,17 +26,20 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
           template: require('./sensor/sensor.pug'),
           controller: 'SensorMonitor as vm'
         }
-      },
-      resolve: {
-        thresholds: msApi => msApi.resolve('warning.thresholds@get')
       }
     })
     .state('app.monitor.section', {
-      url: '/section/:id',
+      url: '/section/:name',
       views: {
         'module@app.monitor': {
           template: require('./section/section.pug'),
           controller: 'SectionMonitor as vm'
+        }
+      },
+      resolve: {
+        section: (msApi, $stateParams) => {
+          let sectionName = $stateParams.name;
+          return msApi.resolve(`monitor.sections.${sectionName}@get`);
         }
       }
     });
@@ -47,6 +53,9 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
   ]);
   msApiProvider.register('monitor.navigation.section', [
     'app/data/monitor/navigation-section.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-03', [
+    'app/data/monitor/sections/FCXF-X-03.json'
   ]);
 
   // translation
