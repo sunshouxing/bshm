@@ -40,7 +40,8 @@ export default function($stateProvider, $stateParamsProvider, $translatePartialL
         section: (msApi, $stateParams) => {
           let sectionName = $stateParams.name;
           return msApi.resolve(`monitor.sections.${sectionName}@get`);
-        }
+        },
+        sensors: msApi => msApi.resolve('monitor.sensors.basicInfo@get')
       }
     });
 
@@ -56,6 +57,9 @@ export default function($stateProvider, $stateParamsProvider, $translatePartialL
   ]);
   msApiProvider.register('monitor.sections.FCXF-X-03', [
     'app/data/monitor/sections/FCXF-X-03.json'
+  ]);
+  msApiProvider.register('monitor.sensors.basicInfo', [
+    'app/data/monitor/sensors-basic-info.json'
   ]);
 
   // translation

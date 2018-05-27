@@ -8,38 +8,13 @@ export default class SectionMonitor {
    *       Data        *
    *********************/
 
-  basicInfo = {
-    'FCXF-X-03-S01': {type: '应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T01': {type: '温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-S02': {type: '应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T02': {type: '温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-S03': {type: '应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T03': {type: '温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-S04': {type: '应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T04': {type: '温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-S05': {type: '应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T05': {type: '温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-S06': {type: '应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T06': {type: '温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-A01': {type: '加速度传感器', unit: 'gal', url: ''},
-    'FCXF-X-03-A02': {type: '加速度传感器', unit: 'gal', url: ''},
-    'FCXF-X-03-S07': {type: '振弦应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T07': {type: '振弦温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-S08': {type: '振弦应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T08': {type: '振弦温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-S09': {type: '振弦应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T09': {type: '振弦温度传感器', unit: '℃', url: ''},
-    'FCXF-X-03-S10': {type: '振弦应变传感器', unit: 'με', url: ''},
-    'FCXF-X-03-T10': {type: '振弦温度传感器', unit: '℃', url: ''}
-  };
-
   ORIGINAL_CHART_WIDTH = 1200;
   FETCH_DATA_INTERVAL = 2000;
 
   /*********************
    *      Methods      *
    *********************/
-  constructor($state, $interval, $scope, section, thresholds) {
+  constructor($state, $interval, $scope, section, sensors, thresholds) {
     'ngInject';
 
     this.$state = $state;
@@ -47,12 +22,11 @@ export default class SectionMonitor {
     this.$scope = $scope;
 
     this.section = section;
+    this.sensors = sensors.data;
     this.thresholds = thresholds;
   }
 
   $onInit() {
-    console.log(JSON.stringify(this.basicInfo));
-
     this.subsetCenters = this.section.subsets.map(subset => subset.center);
     this.scaledCenters = this.subsetCenters.map(center => center.slice());
 
@@ -61,7 +35,6 @@ export default class SectionMonitor {
       background: `url("${this.section.image.url}") no-repeat center`,
       'background-size': 'contain'
     });
-
 
     this.$scope.$watch(
       () => chartWrapper.width(),
@@ -77,8 +50,6 @@ export default class SectionMonitor {
       true
     );
 
-    // init sensors with basic info
-    this.sensors = _.assign({}, this.basicInfo);
     // extend sensors info with name and activated
     for (const name in this.sensors) {
       this.sensors[name].name = name;
