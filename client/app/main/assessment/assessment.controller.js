@@ -38,7 +38,8 @@ export default class AssessmentController {
     },
     option: {
       title: {
-        text: '南澧河大桥结构性能在线评估',
+        //TODO: extract bridge name to a variable
+        text: '阜长线分离式立交结构性能在线评估',
         left: 'center'
       },
       visualMap: {
