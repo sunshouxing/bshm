@@ -49,6 +49,13 @@ export default class WarningController {
     this.selected = item;
   }
 
+  /**
+   * Show the warning guide lines
+   */
+  showGuide() {
+    console.log('show the warning guide.');
+  }
+
   _fetchWarnings() {
     this.Warnings.query(warnings => {
       this.warnings = warnings;
