@@ -1,0 +1,28 @@
+{
+    "name": "FCXF-X-02",
+    "image": {
+        "url": "/assets/images/sections/FCXF-X-02.png"
+    },
+    "subsets": [
+        {
+            "center": [289, 323],
+            "sensors": ["FCXF-X-02-S02", "FCXF-X-02-T02"]
+        },
+        {
+            "center": [289, 283],
+            "sensors": ["FCXF-X-02-S01", "FCXF-X-02-T01"]
+        },
+        {
+            "center": [878, 320],
+            "sensors": ["FCXF-X-02-S04", "FCXF-X-02-T04"]
+        },
+        {
+            "center": [878, 280],
+            "sensors": ["FCXF-X-02-S03", "FCXF-X-02-T03"]
+        },
+        {
+            "center": [319, 387],
+            "sensors": ["FCXF-X-02-A01"]
+        }
+    ]
+}

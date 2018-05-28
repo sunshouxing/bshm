@@ -29,6 +29,12 @@ export default class MonitorController {
   }
 
   $onInit() {
+    let currentState = this.$state.current.name;
+
+    if (currentState === 'app.monitor.section') {
+      this.organizedBy = 'section';
+    }
+
     this.organizeSensors();
   }
 
@@ -49,7 +55,7 @@ export default class MonitorController {
     } else if (this.organizedBy == 'section') {
       if (node.type == 'section') {
         this.nodePath = this._nodePath(node);
-        this.$state.go('app.monitor.section', {id: node.text});
+        this.$state.go('app.monitor.section', {name: node.text});
       }
     }
   }

@@ -55,8 +55,20 @@ export default function($stateProvider, $stateParamsProvider, $translatePartialL
   msApiProvider.register('monitor.navigation.section', [
     'app/data/monitor/navigation-section.json'
   ]);
+  msApiProvider.register('monitor.sections.FCXF-X-01', [
+    'app/data/monitor/sections/FCXF-X-01.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-02', [
+    'app/data/monitor/sections/FCXF-X-02.json'
+  ]);
   msApiProvider.register('monitor.sections.FCXF-X-03', [
     'app/data/monitor/sections/FCXF-X-03.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-04', [
+    'app/data/monitor/sections/FCXF-X-04.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-05', [
+    'app/data/monitor/sections/FCXF-X-05.json'
   ]);
   msApiProvider.register('monitor.sensors.basicInfo', [
     'app/data/monitor/sensors-basic-info.json'
