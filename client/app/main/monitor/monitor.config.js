@@ -2,7 +2,7 @@
 
 import { MONITOR_WEIGHT } from '../apps.weight';
 
-export default function($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
+export default function($stateProvider, $stateParamsProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
   'ngInject';
 
   // state
@@ -14,6 +14,9 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
           template: require('./monitor.pug'),
           controller: 'MonitorController as vm'
         }
+      },
+      resolve: {
+        thresholds: msApi => msApi.resolve('warning.thresholds@get')
       }
     })
     .state('app.monitor.sensor', {
@@ -23,18 +26,23 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
           template: require('./sensor/sensor.pug'),
           controller: 'SensorMonitor as vm'
         }
-      },
-      resolve: {
-        thresholds: msApi => msApi.resolve('warning.thresholds@get')
       }
     })
     .state('app.monitor.section', {
-      url: '/section/:id',
+      url: '/section/:name',
       views: {
         'module@app.monitor': {
           template: require('./section/section.pug'),
           controller: 'SectionMonitor as vm'
         }
+      },
+      resolve: {
+        section: (msApi, $stateParams) => {
+          let sectionName = $stateParams.name;
+          return msApi.resolve(`monitor.sections.${sectionName}@get`);
+        },
+        fakeData: msApi => msApi.resolve('monitor.fakeData@get'),
+        sensors: msApi => msApi.resolve('monitor.sensors.basicInfo@get')
       }
     });
 
@@ -42,11 +50,32 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
   msApiProvider.register('warning.thresholds', [
     'app/data/warning/thresholds.json'
   ]);
+  msApiProvider.register('monitor.fakeData', [
+    'app/data/monitor/realtime-data.json'
+  ]);
   msApiProvider.register('monitor.navigation.type', [
     'app/data/monitor/navigation-type.json'
   ]);
   msApiProvider.register('monitor.navigation.section', [
     'app/data/monitor/navigation-section.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-01', [
+    'app/data/monitor/sections/FCXF-X-01.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-02', [
+    'app/data/monitor/sections/FCXF-X-02.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-03', [
+    'app/data/monitor/sections/FCXF-X-03.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-04', [
+    'app/data/monitor/sections/FCXF-X-04.json'
+  ]);
+  msApiProvider.register('monitor.sections.FCXF-X-05', [
+    'app/data/monitor/sections/FCXF-X-05.json'
+  ]);
+  msApiProvider.register('monitor.sensors.basicInfo', [
+    'app/data/monitor/sensors-basic-info.json'
   ]);
 
   // translation

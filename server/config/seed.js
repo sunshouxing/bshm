@@ -8,6 +8,7 @@
 // import models
 import User from '../api/user/user.model';
 import Folder from '../api/folder/folder.model';
+import Warning from '../api/warning/warning.model';
 
 import config from './environment/';
 
@@ -29,6 +30,97 @@ export default function seedDatabaseIfNeeded() {
         })
         .then(() => console.log('finished populating users'))
         .catch(err => console.log('error populating users', err));
+      });
+
+    Warning.find({}).remove()
+      .then(() => {
+        Warning.create({
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A01',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 1,
+          principal: 'Arthur',
+          status: 0
+        }, {
+          channel: 'FCXF-X-02-A02',
+          startTime: new Date(2018, 4, 22, 10, 5, 20),
+          endTime: new Date(2018, 4, 22, 10, 7, 20),
+          level: 0,
+          principal: 'Arthur',
+          status: 1
+        })
+        .then(() => console.log('finished populating warnings'))
+        .catch(err => console.log('error populating warnings', err));
       });
 
     // mail folders sample data

@@ -1,0 +1,68 @@
+doctype html
+
+// SIDENAV HEADER
+.header.md-accent-bg(layout='column', layout-align='space-between')
+    .toolbar(layout='row', layout-align='end center')
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id'
+            ng-click='vm.showGuide()'
+            aria-label='Guide'
+            translate, translate-attr-aria-label='WARNING.GUIDE'
+        )
+            md-icon(md-font-icon='icon-file-document')
+            md-tooltip
+                span(translate='WARNING.GUIDE') Guide
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id || vm.selected.status !== 0'
+            ng-click='vm.selected.status=1'
+            aria-label='Handling'
+            translate, translate-attr-aria-label='WARNING.HANDLING'
+        )
+            md-icon(md-font-icon='icon-worker')
+            md-tooltip
+                span(translate='WARNING.HANDLING') Handling
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id || vm.selected.status !== 1'
+            ng-click='vm.selected.status=2'
+            aria-label='Handled'
+            translate, translate-attr-aria-label='WARNING.HANDLED'
+        )
+            md-icon(md-font-icon='icon-thumb-up')
+            md-tooltip
+                span(translate='WARNING.HANDLED') Handled
+    div
+        .title {{vm.selected.name}}
+        .subtitle.secondary-text
+            span(translate='WARNING.EDITED') Edited
+            | : {{vm.selected.modified | date:'mediumDate'}}
+// SIDENAV CONTENT
+md-content.content(flex, ms-scroll)
+    .file-details
+        .preview.file-icon(layout='row', layout-align='center center')
+            i.s48(class='icon-{{vm.selected.type}}')
+        md-list.offline-switch
+            md-list-item
+                p(translate='WARNING.AVAILABLE_OFFLINE') Available Offline
+                md-switch.md-secondary(ng-model='vm.selected.offline', aria-label='Toggle offline', translate)
+        .title(translate='WARNING.INFO') Info
+        table
+            tr.type
+                th(translate='WARNING.CHANNEL') Channel
+                td {{vm.selected.channel}}
+            tr.size
+                th(translate='WARNING.LEVEL') Level
+                td {{vm.selected.level | level}}
+            tr.location
+                th(translate='WARNING.START_TIME') Start Time
+                td {{vm.selected.startTime | date:'yyyy-MM-dd HH:mm:ss'}}
+            tr.owner
+                th(translate='WARNING.END_TIME') End Time
+                td {{vm.selected.endTime | date:'yyyy-MM-dd HH:mm:ss'}}
+            tr.modified
+                th(translate='WARNING.PRINCIPAL') Principal
+                td {{vm.selected.principal}}
+            tr.opened
+                th(translate='WARNING.STATUS') Status
+                td {{vm.selected.status | status}}
+
+//- vim:set sw=4 ts=4 sts=4:
