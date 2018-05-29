@@ -9,12 +9,14 @@ export default class SectionMonitor {
    *********************/
 
   ORIGINAL_CHART_WIDTH = 1200;
-  FETCH_DATA_INTERVAL = 2000;
+  FETCH_DATA_INTERVAL = 1000;
+
+  dataIndex = 0;
 
   /*********************
    *      Methods      *
    *********************/
-  constructor($state, $interval, $scope, section, sensors, thresholds) {
+  constructor($state, $interval, $scope, section, sensors, thresholds, fakeData) {
     'ngInject';
 
     this.$state = $state;
@@ -24,6 +26,7 @@ export default class SectionMonitor {
     this.section = section;
     this.sensors = sensors.data;
     this.thresholds = thresholds;
+    this.fakeData = fakeData.data;
   }
 
   $onInit() {
@@ -187,33 +190,14 @@ export default class SectionMonitor {
   }
 
   _generateRandomData() {
-    let data = {
-      'FCXF-X-03-S01': { value: 0 },
-      'FCXF-X-03-T01': { value: 0 },
-      'FCXF-X-03-S02': { value: 0 },
-      'FCXF-X-03-T02': { value: 0 },
-      'FCXF-X-03-S03': { value: 0 },
-      'FCXF-X-03-T03': { value: 0 },
-      'FCXF-X-03-S04': { value: 0 },
-      'FCXF-X-03-T04': { value: 0 },
-      'FCXF-X-03-S05': { value: 0 },
-      'FCXF-X-03-T05': { value: 0 },
-      'FCXF-X-03-S06': { value: 0 },
-      'FCXF-X-03-T06': { value: 0 },
-      'FCXF-X-03-A01': { value: 0 },
-      'FCXF-X-03-A02': { value: 0 },
-      'FCXF-X-03-S07': { value: 0 },
-      'FCXF-X-03-T07': { value: 0 },
-      'FCXF-X-03-S08': { value: 0 },
-      'FCXF-X-03-T08': { value: 0 },
-      'FCXF-X-03-S09': { value: 0 },
-      'FCXF-X-03-T09': { value: 0 },
-      'FCXF-X-03-S10': { value: 0 },
-      'FCXF-X-03-T10': { value: 0 }
-    };
+    this.dataIndex = (this.dataIndex+1) % 250;
 
-    for (let sensor in data) {
-      data[sensor].value = Math.random() * 10;
+    let data = {};
+
+    for (const sensor in this.fakeData) {
+      if (sensor.startsWith('FCXF', 0)) {
+        data[sensor] = { value: this.fakeData[sensor][this.dataIndex] };
+      }
     }
 
     return data;

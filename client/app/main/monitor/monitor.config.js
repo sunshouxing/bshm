@@ -41,6 +41,7 @@ export default function($stateProvider, $stateParamsProvider, $translatePartialL
           let sectionName = $stateParams.name;
           return msApi.resolve(`monitor.sections.${sectionName}@get`);
         },
+        fakeData: msApi => msApi.resolve('monitor.fakeData@get'),
         sensors: msApi => msApi.resolve('monitor.sensors.basicInfo@get')
       }
     });
@@ -48,6 +49,9 @@ export default function($stateProvider, $stateParamsProvider, $translatePartialL
   // api
   msApiProvider.register('warning.thresholds', [
     'app/data/warning/thresholds.json'
+  ]);
+  msApiProvider.register('monitor.fakeData', [
+    'app/data/monitor/realtime-data.json'
   ]);
   msApiProvider.register('monitor.navigation.type', [
     'app/data/monitor/navigation-type.json'
