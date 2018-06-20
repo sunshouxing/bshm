@@ -29,7 +29,6 @@ import main from './main/main.module';
 import homepage from './main/homepage';
 import assessment from './main/assessment';
 import monitor from './main/monitor';
-import sample from './main/sample/sample.module';
 import fileManager from './main/file-manager';
 import structure from './main/structure';
 import processor from './main/processor';
@@ -71,7 +70,6 @@ angular
     processor,
     structure,
     fileManager,
-    sample,
     main
   ])
   .config(config)

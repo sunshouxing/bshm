@@ -174,8 +174,6 @@ export default function($resource) {
   // Base Url
   api.baseUrl = '/api';
 
-  api.sample = $resource(`${api.baseUrl}/sample/sample.json`);
-
   api.mail = {
     folders: $resource(`${api.baseUrl}/mail/folders`)
   };
