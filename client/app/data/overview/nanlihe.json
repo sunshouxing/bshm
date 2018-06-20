@@ -1,0 +1,137 @@
+{
+    "center": [
+        114.765119,
+        36.984654
+    ],
+    "data": [
+        {
+            "conditionAssessment": 91,
+            "location": [
+                114.672845,
+                37.006556
+            ],
+            "name": "\u5206\u79bb\u5f0f\u7acb\u4ea4\u4e00",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 85,
+            "location": [
+                114.687977,
+                37.002045
+            ],
+            "name": "\u62a4\u57ce\u6cb3\u4e2d\u6865",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 85,
+            "location": [
+                114.696336,
+                37.000594
+            ],
+            "name": "\u5206\u79bb\u7acb\u4ea4\u4e8c",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 72,
+            "location": [
+                114.70553,
+                36.999333
+            ],
+            "name": "\u6e9c\u5b50\u6cb3\u5927\u6865",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 85,
+            "location": [
+                114.707695,
+                36.999037
+            ],
+            "name": "\u5206\u79bb\u7acb\u4ea4\u4e09",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 85,
+            "location": [
+                114.724448,
+                36.993363
+            ],
+            "name": "\u5357\u6fa7\u6cb3\u5927\u6865",
+            "realtimeWarning": [
+                1
+            ]
+        },
+        {
+            "conditionAssessment": 87,
+            "location": [
+                114.730309,
+                36.990887
+            ],
+            "name": "\u5357\u548c\u4e92\u901a\u531d\u9053\u6865",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 87,
+            "location": [
+                114.740186,
+                36.98852
+            ],
+            "name": "\u5929\u6865\u4e00",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 65,
+            "location": [
+                114.744637,
+                36.988009
+            ],
+            "name": "\u677f\u5f0f\u901a\u9053\u4e8c",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 85,
+            "location": [
+                114.754842,
+                36.986928
+            ],
+            "name": "\u5206\u79bb\u7acb\u4ea4\u56db",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 83,
+            "location": [
+                114.765119,
+                36.984654
+            ],
+            "name": "\u5929\u6865\u4e8c",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 83,
+            "location": [
+                114.775912,
+                36.980737
+            ],
+            "name": "\u5c0f\u6865",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 72,
+            "location": [
+                114.788439,
+                36.976347
+            ],
+            "name": "\u90a2\u6ca7\u5e72\u6e20\u4e2d\u6865",
+            "realtimeWarning": []
+        },
+        {
+            "conditionAssessment": 80,
+            "location": [
+                114.803885,
+                36.974099
+            ],
+            "name": "\u897f\u4e09\u53ec\u4e2d\u6865",
+            "realtimeWarning": []
+        }
+    ],
+    "title": "\u90a2\u4e34\u9ad8\u901f\u5357\u6fa7\u6cb3\u5927\u6865\u5b89\u5168\u76d1\u6d4b\u7cfb\u7edf"
+}

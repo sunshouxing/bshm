@@ -90,7 +90,7 @@ export default class HomepageController {
         {
           show: true,
           right: 0,
-          width: 320,
+          width: 340,
           top: '0%',
           height: '100%',
           backgroundColor: 'rgba(18, 89, 147, 0.8)'
@@ -98,7 +98,6 @@ export default class HomepageController {
       ],
       title: [
         {
-          text: '邢临高速公路交通安全可视化',
           textStyle: {
             color: 'rgba(18, 89, 147, 1)',
             fontSize: 30
@@ -122,7 +121,6 @@ export default class HomepageController {
       ],
       tooltip: {show: false},
       bmap: {
-        center: [114.052989, 38.881409],
         zoom: 14,
         roam: true,
         mapStyle: {
@@ -379,10 +377,15 @@ export default class HomepageController {
    *********************/
   constructor(bridges) {
     'ngInject';
+    this.title = bridges.title;
+    this.center = bridges.center;
     this.bridges = bridges.data;
   }
 
   $onInit() {
+    this.chart.option.title[0].text = this.title;
+    this.chart.option.bmap.center = this.center;
+
     // load data
     let series = this.chart.option.series;
     let yAxis = this.chart.option.yAxis;
