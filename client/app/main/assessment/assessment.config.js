@@ -2,13 +2,13 @@
 
 import { ASSESSMENT_WEIGHT } from '../apps.weight';
 
-export default function($stateProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
+export default function($stateProvider, $stateParamsProvider, $translatePartialLoaderProvider, msApiProvider, msNavigationServiceProvider) {
   'ngInject';
 
   // state
   $stateProvider
     .state('app.assessment', {
-      url: '/assessment',
+      url: '/assessment/:bridge',
       views: {
         'content@app': {
           template: require('./assessment.pug'),
@@ -16,12 +16,13 @@ export default function($stateProvider, $translatePartialLoaderProvider, msApiPr
         }
       },
       resolve: {
-        assessment: msApi => msApi.resolve('assessment.bridge@get')
+        assessment: (msApi, $stateParams) => msApi.resolve(`assessment.${$stateParams.bridge}@get`)
       }
     });
 
   // api
-  msApiProvider.register('assessment.bridge', ['app/data/assessment/assessment.json']);
+  msApiProvider.register('assessment.baofu', ['app/data/assessment/baofu.json']);
+  msApiProvider.register('assessment.nanlihe', ['app/data/assessment/nanlihe.json']);
 
   // translation
   $translatePartialLoaderProvider.addPart('app/main/assessment');

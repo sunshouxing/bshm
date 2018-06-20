@@ -38,8 +38,6 @@ export default class AssessmentController {
     },
     option: {
       title: {
-        //TODO: extract bridge name to a variable
-        text: '阜长线分离式立交结构性能在线评估',
         left: 'center'
       },
       visualMap: {
@@ -93,10 +91,13 @@ export default class AssessmentController {
    *********************/
   constructor(assessment) {
     'ngInject';
-    this.assessment = assessment;
+    this.title = assessment.title;
+    this.assessment = assessment.data;
   }
 
   $onInit() {
+    this.chart.option.title.text = this.title;
+
     // assess the whole bridge
     this.assess(this.assessment);
 
