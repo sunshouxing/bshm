@@ -1,5 +1,7 @@
 'use strict';
 
+import angular from 'angular';
+
 export default class WarningController {
   /*********************
    *       Data        *
@@ -17,10 +19,12 @@ export default class WarningController {
   /*********************
    *     Methods       *
    *********************/
-  constructor($mdSidenav, $interval, api, warnings) {
+  constructor($mdSidenav, $mdDialog, $document, $interval, api, warnings) {
     'ngInject';
 
     this.$mdSidenav = $mdSidenav;
+    this.$mdDialog = $mdDialog;
+    this.$document = $document;
     this.$interval = $interval;
     this.Warnings = api.warnings;
     this.warnings = warnings;
@@ -51,9 +55,18 @@ export default class WarningController {
 
   /**
    * Show the warning guide lines
+   *
+   * @param {Event} event
    */
-  showGuide() {
-    console.log('show the warning guide.');
+  showGuides(event) {
+    this.$mdDialog.show({
+      template: require('./dialogs/guides.pug'),
+      controller: 'GuidesDialogController',
+      controllerAs: 'vm',
+      parent: angular.element(this.$document.body),
+      targetEvent: event,
+      clickOutsideToClose: true
+    });
   }
 
   _fetchWarnings() {

@@ -5,7 +5,7 @@ doctype html
     .toolbar(layout='row', layout-align='end center')
         md-button.md-icon-button(
             ng-disabled='!vm.selected._id'
-            ng-click='vm.showGuide()'
+            ng-click='vm.showGuides($event)'
             aria-label='Guide'
             translate, translate-attr-aria-label='WARNING.GUIDE'
         )
