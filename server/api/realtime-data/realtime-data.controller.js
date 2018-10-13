@@ -34,16 +34,17 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a single Bridge from the DB
+// Gets a single bridge from DB
 export function show(req, res) {
   let channel = req.params.channel;
   let timestamp = req.query.timestamp;
 
+  /* eslint-disable newline-per-chained-call, camelcase */
   return RealtimeData.find({channel_name: channel})
-    .where('timestamp').gt(timestamp)
-    .sort('timestamp').exec()
+    .where('timestamp').gt(timestamp).sort('timestamp').exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
+  /* eslint-enable */
 }
 

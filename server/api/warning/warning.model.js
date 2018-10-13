@@ -11,11 +11,11 @@ var WarningSchema = new mongoose.Schema({
   startTime: {
     type: Date,
     required: true
-  }, 
+  },
   endTime: {
     type: Date,
     required: false
-  }, 
+  },
   level: {
     type: Number,
     required: true

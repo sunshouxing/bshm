@@ -190,7 +190,7 @@ export default class SectionMonitor {
   }
 
   _generateRandomData() {
-    this.dataIndex = (this.dataIndex+1) % 250;
+    this.dataIndex = (this.dataIndex + 1) % 250;
 
     let data = {};
 

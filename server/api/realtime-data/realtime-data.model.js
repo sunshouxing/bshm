@@ -1,8 +1,7 @@
-/* eslint-disable no-invalid-this */
+/* eslint-disable no-invalid-this, camelcase */
 'use strict';
 
 import mongoose from 'mongoose';
-import Section from '../section/section.model';
 
 var RealtimeDataSchema = new mongoose.Schema({
   channel_name: {

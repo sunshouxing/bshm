@@ -11,7 +11,7 @@ var events = ['save', 'remove'];
 
 export function register(socket) {
   // Bind model events to socket events
-  for(var i = 0, eventsLength = events.length; i < eventsLength; i++) {
+  for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
     var listener = createListener(`warning:${event}`, socket);
 

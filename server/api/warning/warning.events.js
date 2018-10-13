@@ -18,7 +18,7 @@ var events = {
 
 // Register the event emitter to the model events
 function registerEvents(Warning) {
-  for(var e in events) {
+  for (var e in events) {
     let event = events[e];
     Warning.post(e, emitEvent(event));
   }
@@ -26,7 +26,7 @@ function registerEvents(Warning) {
 
 function emitEvent(event) {
   return function(doc) {
-    WarningEvents.emit(event + ':' + doc._id, doc);
+    WarningEvents.emit(`${event}:${doc._id}`, doc);
     WarningEvents.emit(event, doc);
   };
 }
