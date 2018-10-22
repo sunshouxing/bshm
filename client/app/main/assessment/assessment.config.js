@@ -18,6 +18,15 @@ export default function($stateProvider, $stateParamsProvider, $translatePartialL
       resolve: {
         assessment: (msApi, $stateParams) => msApi.resolve(`assessment.${$stateParams.bridge}@get`)
       }
+    })
+    .state('app.assessment.report', {
+      url: '/report',
+      views: {
+        'content@app': {
+          template: require('./report.pug'),
+          controller: 'AssessmentController as vm'
+        }
+      },
     });
 
   // api

@@ -38,7 +38,12 @@ export default class AssessmentController {
     },
     option: {
       title: {
-        left: 'center'
+        left: 'center',
+        subtext: '单击打开评估报告',
+        subtarget: 'self',
+        subtextStyle: {
+          fontSize: 16
+        }
       },
       visualMap: {
         type: 'piecewise',
@@ -86,13 +91,18 @@ export default class AssessmentController {
     }
   };
 
+  BACKEND = 'http://222.223.190.116:5555';
+
   /*********************
    *      Methods      *
    *********************/
-  constructor(assessment) {
+  constructor($stateParams, assessment) {
     'ngInject';
-    this.title = assessment.title;
     this.assessment = assessment.data;
+    this.title = assessment.title;
+    this.bridge = $stateParams.bridge;
+    this.chart.option.title.sublink = `${this.BACKEND}/assessment/${this.bridge}/report`;
+    this.assessmentReport = `${this.BACKEND}/reports/${this.bridge}.html`;
   }
 
   $onInit() {
