@@ -1,5 +1,7 @@
 'use strict';
 
+import angular from 'angular';
+
 export default class SensorMonitor {
   /*********************
    *       Data        *
@@ -21,11 +23,12 @@ export default class SensorMonitor {
    *      Methods      *
    *********************/
 
-  constructor($state, $interval, thresholds) {
+  constructor($state, $interval, $http, thresholds) {
     'ngInject';
 
     this.$state = $state;
     this.$interval = $interval;
+    this.$http = $http;
     this.thresholds = thresholds;
   }
 
@@ -228,44 +231,42 @@ export default class SensorMonitor {
     this.$interval(() => { this._getRealtimeData(); }, this.FETCH_DATA_INTERVAL);
   }
 
-  // getRealtimeData() {
-  //   let channel = this.$state.params.channel;
-
-  //   this.$http.get(`/api/realtime-data/${channel}`, {
-  //     params: {timestamp: this.queryTime}
-  //   }).then(response => {
-  //     angular.forEach(response.data, record => {
-  //       if (record.timestamp > this.queryTime) {
-  //         this.queryTime = record.timestamp;
-  //         console.log(`query time: ${this.queryTime}`);
-  //       }
-
-  //       let startTime = record.timestamp * 1000;
-  //       let increment = 5000 / record.data.length;
-
-  //       for (let i = 0; i < record.data.length; i++) {
-  //         let time = new Date(startTime + i * increment);
-  //         let timeStr = [time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds()].join(':');
-
-  //         this.updateChart({
-  //           name: timeStr,
-  //           value: [time, record.data[i]]
-  //         });
-  //       }
-  //     });
-
-  //     // set dataLoaded flag true to make echart draw realtime data line
-  //     this.chart.config.dataLoaded = true;
-  //   });
-  // }
-
   _getRealtimeData() {
-    let time = new Date(Date.now() / 1000 * 1000);
-    let data = Math.random() * 200;
-    let name = [time.getHours(), time.getMinutes(), time.getSeconds()].join(':');
+    this.$http.get(`/api/realtime-data/${this.$state.params.sensorName}`, {
+      params: {timestamp: this.queryTime}
+    }).then(response => {
+      angular.forEach(response.data, record => {
+        if (record.timestamp > this.queryTime) {
+          this.queryTime = record.timestamp;
+          console.log(`query time: ${this.queryTime}`);
+        }
 
-    this._updateChart({name, value: [time, data]});
+        let startTime = record.timestamp * 1000;
+        let increment = 5000 / record.data.length;
+
+        for (let i = 0; i < record.data.length; i++) {
+          let time = new Date(startTime + i * increment);
+          let timeStr = [time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds()].join(':');
+
+          this._updateChart({
+            name: timeStr,
+            value: [time, record.data[i]]
+          });
+        }
+      });
+
+      // set dataLoaded flag true to make echart draw realtime data line
+      this.chart.config.dataLoaded = true;
+    });
   }
+
+  // _getRealtimeData() {
+  //   let time = new Date(Date.now() / 1000 * 1000);
+  //   let data = Math.random() * 200;
+  //   let name = [time.getHours(), time.getMinutes(), time.getSeconds()].join(':');
+  //
+  //   this._updateChart({name, value: [time, data]});
+  // }
 
   _updateChart(data) {
     let series = this.chart.option.series;

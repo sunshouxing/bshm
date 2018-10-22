@@ -27,6 +27,7 @@ const serverPath = 'server';
 const paths = {
     client: {
         assets: `${clientPath}/assets/**/*`,
+        reports: `${clientPath}/reports/**/*`,
         images: `${clientPath}/assets/images/**/*`,
         uploads: `${clientPath}/assets/uploads/**/*`,
         revManifest: `${clientPath}/assets/rev-manifest.json`,
@@ -481,6 +482,7 @@ gulp.task('build', cb => {
             'copy:data',
             'copy:i18n',
             'copy:assets',
+            'copy:reports',
             'copy:fonts:dist',
             'copy:server',
             'webpack:dist'
@@ -571,6 +573,11 @@ gulp.task('copy:data', () => {
 gulp.task('copy:assets', () => {
     return gulp.src([paths.client.assets, '!' + paths.client.uploads])
         .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets`));
+});
+
+gulp.task('copy:reports', () => {
+    return gulp.src([paths.client.reports])
+        .pipe(gulp.dest(`${paths.dist}/${clientPath}/reports`));
 });
 
 gulp.task('copy:server', () => {
