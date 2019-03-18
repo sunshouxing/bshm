@@ -1,0 +1,87 @@
+doctype html
+
+// SENSOR DETAIL
+.sensor-detail(ms-scroll, flex)
+    .sensor-header(layout='row', layout-align='space-between center')
+        div
+            .subject(flex) {{vm.currentSensor.name}}
+            .labels
+                .label(ng-repeat='labelId in vm.currentSensor.labels', ng-class='vm.getLabelColor(labelId)')
+                    | {{vm.getLabelTitle(labelId)}}
+        .actions(layout='row', layout-align='start center')
+            md-button.md-icon-button(
+                ng-click="vm.toggleThreadStatus('starred')"
+                aria-label='Toggle starred'
+                translate
+                translate-attr-toogle-starred='SENSOR.TOGGLE_STARRED'
+            )
+                md-icon.amber-fg(ng-if='vm.currentSensor.starred', md-font-icon='icon-star')
+                md-icon(ng-if='!vm.currentSensor.starred', md-font-icon='icon-star-outline')
+            md-button.md-icon-button(
+                ng-click="vm.toggleThreadStatus('important')"
+                aria-label='Toggle important'
+                translate
+                translate-attr-toogle-starred='SENSOR.TOGGLE_IMPORTANT'
+            )
+                md-icon.amber-300-fg(ng-if='vm.currentSensor.important', md-font-icon='icon-label')
+                md-icon(ng-if='!vm.currentSensor.important', md-font-icon='icon-label-outline')
+    .sensor-content
+        .info(layout='row', layout-align='space-between start')
+            div(layout='column', layout-align='start start')
+                div(layout='row', layout-align='start start')
+                    div
+                        img.avatar(ng-if='vm.currentSensor.from.avatar', alt='{{vm.currentSensor.from.name}}', ng-src='{{vm.currentSensor.from.avatar}}')
+                        .avatar(ng-if='!vm.currentSensor.from.avatar', ms-random-class='vm.colors')
+                            | {{vm.currentSensor.from.name[0]}}
+                    div(layout='column', layout-align='start start')
+                        .name
+                            | {{vm.currentSensor.from.name}}
+                        .to(layout='row', layout-align='start center')
+                            .to-text(translate='SENSOR.INFO.TO') to
+                            div {{vm.currentSensor.to[0].name}}
+                a.toggle-details.md-accent-color(
+                    ng-hide='vm.selectedMailShowDetails'
+                    ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails'
+                    translate='SENSOR.SHOW_DETAILS'
+                )
+                    | Show Details
+                a.toggle-details.md-accent-color(ng-show='vm.selectedMailShowDetails', ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails', translate='SENSOR.HIDE_DETAILS')
+                    | Hide Details
+                .details(ng-show='vm.selectedMailShowDetails', layout='row', layout-align='start start')
+                    div(layout='column')
+                        span.title(translate='SENSOR.DETAILS.FROM') From:
+                        span.title(translate='SENSOR.DETAILS.TO') To:
+                        span.title(translate='SENSOR.DETAILS.DATE') Date:
+                    div(layout='column')
+                        span.detail {{vm.currentSensor.from.email}}
+                        span.detail {{vm.currentSensor.to[0].email}}
+                        span.detail {{vm.currentSensor.time}}
+            md-menu
+                md-button.md-icon-button(aria-label='More', ng-click='$mdOpenMenu($event)', translate, translate-aria-label='SENSOR.MORE')
+                    md-icon(md-font-icon='icon-dots-vertical')
+                md-menu-content(width='3')
+                    md-menu-item
+                        md-button(aria-label='Reply', translate-aria-label='SENSOR.REPLY', ng-click='vm.replyDialog($event)')
+                            md-icon(md-font-icon='icon-reply')
+                            span(translate='SENSOR.REPLY') Reply
+                    md-menu-item
+                        md-button(aria-label='Forward', translate-aria-label='SENSOR.FORWARD')
+                            md-icon(md-font-icon='icon-forward')
+                            span(translate='SENSOR.FORWARD') Forward
+                    md-menu-item
+                        md-button(aria-label='Print', translate-aria-label='SENSOR.PRINT')
+                            md-icon(md-font-icon='icon-printer')
+                            span(translate='SENSOR.PRINT') Print
+        div(ng-bind-html='vm.currentSensor.desc')
+    .sensor-attachments(ng-if='vm.currentSensor.attachments')
+        .title
+            span(translte='SENSOR.ATTACHMENTS') Attachments
+            |  ({{vm.currentSensor.attachments.length}})
+        .attachment-list(layout-wrap, layout='row')
+            .attachment(layout='column', ng-repeat='attachment in vm.currentSensor.attachments')
+                img.preview(ng-src='{{attachment.preview}}')
+                div(layout='column')
+                    a.md-accent-color.link(href='#', translate='SENSOR.VIEW') View
+                    a.md-accent-color.link(href='#', translate='SENSOR.DOWNLOAD') Download
+                    .size ({{attachment.size}})
+    

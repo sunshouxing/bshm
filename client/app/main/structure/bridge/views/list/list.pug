@@ -1,0 +1,68 @@
+doctype html
+
+// BRIDGE LIST
+.bridge-list(ms-scroll, flex)
+    .no-bridges(ng-if='vm.bridges.length === 0') There are no bridges in '{{vm.currentFilter.filter}}'!
+    .loading-bridges(layout='column', layout-align='center center', ng-if='!vm.bridges && vm.loadingBridges')
+        md-progress-circular.md-accent(md-mode='indeterminate', md-diameter='64')
+        div Loading your bridges...
+    .bridge(
+        class='{{bridge.status}}'
+        md-ink-ripple
+        ng-if='!vm.loadingBridges'
+        ng-repeat='bridge in vm.bridges | filter: vm.search | filter: global.search | limitTo: vm.pagination.size:(vm.pagination.page-1)*vm.pagination.size'
+        ng-click='vm.inspectDetail(bridge)'
+        ng-class="{'unread': !bridge.read, 'current-bridge': vm.currentBridge === bridge, 'selected': vm.isSelected(bridge)}"
+    )
+        div(layout='row', layout-align='start center')
+            md-checkbox.no-label(
+                ng-checked='vm.isSelected(bridge)'
+                ng-click='vm.toggleSelectBridge(bridge, $event)'
+                aria-label="{{vm.isSelected(bridge) ? 'Deselect' : 'Select'}}"
+            )
+            .info(flex, layout='column')
+                .name(layout='row', layout-align='start center')
+                    img.avatar(ng-if='bridge.from.avatar', alt='{{bridge.from.name}}', ng-src='{{bridge.from.avatar}}')
+                    .avatar(ng-if='!bridge.from.avatar', ms-random-class='vm.colors')
+                        | {{bridge.name[0]}}
+                    span.text-truncate {{bridge.name}}
+                    md-icon.has-attachment.s16(md-font-icon='icon-paperclip', ng-if='bridge.hasAttachments')
+                .subject.text-truncate
+                    | {{bridge.subject}}
+                .message.text-truncate
+                    | {{bridge.desc | htmlToPlaintext | limitTo:180}}{{bridge.message.desc > 180 ? '...' : ''}}
+                    .labels
+                        .label(ng-repeat='labelId in bridge.labels', ng-class='vm.getLabelColor(labelId)')
+                            | {{vm.getLabelTitle(labelId)}}
+            div(layout='column', layout-align='space-between end')
+                .time {{bridge.time}}
+                .actions(layout='row', layout-align='start center')
+                    md-button.md-icon-button(
+                        ng-click="vm.toggleThreadStatus('starred', bridge, $event)"
+                        aria-label='Toggle starred'
+                        translate
+                        translate-attr-aria-label='BRIDGE.TOGGLE_STARRED'
+                    )
+                        md-icon.amber-fg(ng-if='bridge.starred', md-font-icon='icon-star')
+                        md-icon(ng-if='!bridge.starred', md-font-icon='icon-star-outline')
+                    md-button.md-icon-button(
+                        ng-click="vm.toggleThreadStatus('important', bridge, $event)"
+                        aria-label='Toggle important'
+                        translate
+                        translate-attr-aria-label='BRIDGE.TOGGLE_IMPORTANT'
+                    )
+                        md-icon.amber-300-fg(ng-if='bridge.important', md-font-icon='icon-label')
+                        md-icon(ng-if='!bridge.important', md-font-icon='icon-label-outline')
+
+    //- PAGINATION
+    div(layout='row', layout-align='end center', ng-show='vm.bridges.length')
+        md-pagination(
+            md-limit='vm.pagination.size'
+            md-limit-options='[5, 10, 20]'
+            md-page='vm.pagination.page'
+            md-page-select
+            md-boundary-links
+            md-total='{{vm.bridges.length}}'
+            md-on-paginate='vm.onPaginate'
+        )
+

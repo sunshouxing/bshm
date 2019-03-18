@@ -1,0 +1,16 @@
+{
+    "name": "FCXF-X-01",
+    "image": {
+        "url": "/assets/images/sections/FCXF-X-01.png"
+    },
+    "subsets": [
+        {
+            "center": [581, 387],
+            "sensors": ["FCXF-X-01-D01", "FCXF-X-01-T01"]
+        },
+        {
+            "center": [903, 337],
+            "sensors": ["FCXF-X-01-D02"]
+        }
+    ]
+}

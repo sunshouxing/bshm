@@ -16,7 +16,14 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
-  require('../api/thing/thing.socket').register(socket);
+  require('../api/warning/warning.socket').register(socket);
+  require('../api/processor/processor.socket').register(socket);
+  require('../api/channel/channel.socket').register(socket);
+  require('../api/sensor/sensor.socket').register(socket);
+  require('../api/section/section.socket').register(socket);
+  require('../api/bridge/bridge.socket').register(socket);
+  require('../api/file/file.socket').register(socket);
+  require('../api/folder/folder.socket').register(socket);
 }
 
 export default function(socketio) {

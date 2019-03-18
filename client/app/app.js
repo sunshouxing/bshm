@@ -1,54 +1,87 @@
 'use strict';
 
 import angular from 'angular';
-// import ngAnimate from 'angular-animate';
+
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+import ngMaterial from 'angular-material';
+import ngMessage from 'angular-messages';
 
-import 'angular-socket-io';
+import ngTranslate from 'angular-translate';
+import 'angular-translate-loader-partial';
+import 'angular-translate-storage-cookie';
 
 import uiRouter from 'angular-ui-router';
-import uiBootstrap from 'angular-ui-bootstrap';
-import 'angular-validation-match';
+import 'angular-socket-io';
 
-import {
-  routeConfig
-} from './app.config';
-
-import _Auth from '../components/auth/auth.module';
-import account from './account';
-import admin from './admin';
-import navbar from '../components/navbar/navbar.component';
-import footer from '../components/footer/footer.component';
-import main from './main/main.component';
-import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import fsize from '../components/fsize/fsize.filter';
+import mdAutocompleteIcon from '../components/directives/md-autocomplete-icon';
+import mdPagination from '../components/directives/md-pagination';
+import ngEcharts from '../components/directives/ng-echarts';
+
+// import fuse scripts
+import './fuse';
+
+import main from './main/main.module';
+import homepage from './main/homepage';
+import assessment from './main/assessment';
+import monitor from './main/monitor';
+import fileManager from './main/file-manager';
+import structure from './main/structure';
+import processor from './main/processor';
+import warning from './main/warning';
+
+import routes from './app.route';
+import config from './app.config';
+import run from './app.run';
+import api from './app.api';
+import IndexController from './app.controller';
 
 import './app.scss';
 
-angular.module('bshmApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
-  socket, util
-])
-  .config(routeConfig)
-  .run(function($rootScope, $location, Auth) {
-    'ngInject';
-    // Redirect to login if route requires auth and you're not logged in
+angular
+  .module('fuse', [
+    ngCookies,
+    ngResource,
+    ngSanitize,
+    ngMaterial,
+    ngMessage,
+    ngTranslate,
+    uiRouter,
+    util,
+    socket,
+    fsize,
+    mdAutocompleteIcon,
+    mdPagination,
+    ngEcharts,
+    'btford.socket-io',
+    'app.core',
+    'app.navigation',
+    'app.toolbar',
+    'app.quick-panel',
+    // add your apps here
+    warning,
+    monitor,
+    assessment,
+    homepage,
+    processor,
+    structure,
+    fileManager,
+    main
+  ])
+  .config(config)
+  .config(routes)
+  .run(run)
+  .factory('api', api)
+  .controller('IndexController', IndexController);
 
-    $rootScope.$on('$stateChangeStart', function(event, next) {
-      Auth.isLoggedIn(function(loggedIn) {
-        if(next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
-      });
-    });
-  });
-
-angular.element(document)
+angular
+  .element(document)
   .ready(() => {
-    angular.bootstrap(document, ['bshmApp'], {
+    angular.bootstrap(document, ['fuse'], {
       strictDi: true
     });
   });

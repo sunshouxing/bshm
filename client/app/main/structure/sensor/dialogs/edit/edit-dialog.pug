@@ -1,0 +1,53 @@
+doctype html
+
+#sensor-edit
+    md-dialog.compose-dialog(aria-label='New Sensor')
+
+        md-toolbar.md-accent.md-hue-2
+            .md-toolbar-tools(layout='row', layout-align='space-between center')
+                span.title(
+                    ng-if='vm.mode == "create"'
+                    translate='SENSOR.NEW_SENSOR'
+                ) New Sensor
+                span.title(
+                    ng-if='vm.mode == "update"'
+                    translate='SENSOR.UPDATE_SENSOR'
+                ) Update Sensor
+                md-button.md-icon-button(
+                    ng-click='vm.cancel()'
+                    aria-label='Close dialog'
+                    tranlate, translate-aria-label='SENSOR.CLOSE_DIALOG'
+                )
+                    md-icon(md-font-icon='icon-close')
+
+        md-dialog-content(ms-scroll)
+            form(
+                name='sensorForm'
+                ng-submit='vm.confirm()'
+                ng-model='vm.verticalStepper'
+                ms-vertical-stepper
+                novalidate
+            )
+                ms-vertical-stepper-step(
+                    ng-form='basicInfo'
+                    step='1'
+                    step-title="'Basic Information'"
+                    step-title-translate="'SENSOR.EDIT.BASIC_INFO'"
+                )
+                    include ./forms/basic-info.pug
+
+                ms-vertical-stepper-step(
+                    ng-form='associatedInfo'
+                    step='2'
+                    step-title="'Associated Information'"
+                    step-title-translate="'SENSOR.EDIT.ASSOCIATED_INFO'"
+                )
+                    include ./forms/associated-info.pug
+
+                ms-vertical-stepper-step(
+                    ng-form='channels'
+                    step='3'
+                    step-title="'Channels'"
+                    step-title-translate="'SENSOR.EDIT.CHANNELS'"
+                )
+                    include ./forms/channel.pug

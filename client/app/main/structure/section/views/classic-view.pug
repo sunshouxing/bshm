@@ -1,0 +1,153 @@
+doctype html
+
+//- TOOLBAR
+.toolbar(layout='row', layout-align='space-between center')
+    div(layout='row', layout-align='start center')
+
+        //- THREAD LIST SPECIFIC ACTIONS (multi selection)
+        md-checkbox.no-label(aria-label="{{vm.selectedSections.length > 0 ? 'Deselect All' : 'Select All'}}", ng-checked='vm.selectedSections.length > 0', ng-click='vm.toggleSelectSections()', ng-if='!vm.currentSection')
+        md-menu.select-menu(ng-if='!vm.currentSection')
+            md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='Filters', translate, translate-attr-aria-label='SECTION.FILTERS')
+                md-icon(md-font-icon='icon-menu-down')
+            md-menu-content(width='3')
+                md-menu-item
+                    md-button(ng-click='vm.selectThreads()', aria-label='All', translate='SECTION.ALL', translate-attr-aria-label='SECTION.ALL')
+                        | All
+                md-menu-item
+                    md-button(ng-click='vm.deselectThreads()', aria-label='None', translate='SECTION.NONE', translate-attr-aria-label='SECTION.NONE')
+                        | None
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('read', true)", aria-label='Read', translate='SECTION.READ', translate-attr-aria-label='SECTION.READ')
+                        | Read
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('read', false)", aria-label='Unread', translate='SECTION.UNREAD', translate-attr-aria-label='SECTION.UNREAD')
+                        | Unread
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('important', true)", aria-label='Important', translate='SECTION.IMPORTANT', translate-attr-aria-label='SECTION.IMPORTANT')
+                        | Important
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('important', false)", aria-label='Not Important', translate='SECTION.NOT_IMPORTANT', translate-attr-aria-label='SECTION.NOT_IMPORTANT')
+                        | Not Important
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('starred', true)", aria-label='Starred', translate='SECTION.STARRED', translate-attr-aria-label='SECTION.STARRED')
+                        | Starred
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('starred', false)", aria-label='Unstarred', translate='SECTION.UNSTARRED', translate-attr-aria-label='SECTION.UNSTARRED')
+                        | Unstarred
+
+        //- SINGLE THREAD SPECIFIC ACTIONS (back to sections list page)
+        md-button.md-icon-button.close-section(
+            ng-if='vm.currentSection'
+            ng-click='vm.surveySections()'
+            aria-label='Back'
+            translate
+            translate-attr-aria-label='SECTION.BACK'
+        )
+            md-icon(md-font-icon='icon-keyboard-backspace')
+
+        //- ACTION BUTTONS (for both single section list and sections list)
+        .action-buttons(layout='row', layout-align='start center', ng-show='vm.selectedSections.length > 0 || vm.currentSection', hide, show-gt-xs)
+            .divider-vertical
+            md-button.md-icon-button(aria-label='Archive', translate, translate-attr-aria-label='SECTION.ARCHIVE')
+                md-icon(md-font-icon='icon-archive')
+                md-tooltip
+                    span(translate='SECTION.ARCHIVE') Archive
+            md-button.md-icon-button(aria-label='Spam', translate, translate-attr-aria-label='SECTION.SPAM')
+                md-icon(md-font-icon='icon-alert-octagon')
+                md-tooltip
+                    span(translate='SECTION.SPAM') Spam
+            md-button.md-icon-button(
+                ng-click='vm.deleteSections($event)'
+                aria-label='Delete'
+                translate, translate-attr-aria-label='SECTION.DELETE'
+            )
+                md-icon(md-font-icon='icon-delete')
+                md-tooltip
+                    span(translate='SECTION.DELETE') Delete
+            md-button.md-icon-button(
+                ng-click='vm.updateSection($event)'
+                ng-hide='vm.$state.current.name == "app.structure.section"'
+                aria-label='Update'
+                translate, translate-attr-aria-label='SECTION.UPDATE'
+            )
+                md-icon(md-font-icon='icon-pencil')
+                md-tooltip
+                    span(translate='SECTION.UPDATE') Update
+            .divider-vertical
+            md-button.md-icon-button(aria-label='Move to', translate, translate-attr-aria-label='SECTION.MOVE_TO')
+                md-icon(md-font-icon='icon-folder')
+                md-tooltip
+                    span(translate='SECTION.MOVE_TO') Move to
+            md-menu
+                md-button.md-icon-button(aria-label='Labels', translate, translate-attr-aria-label='SECTION.LABELS', ng-click='$mdOpenMenu($event)')
+                    md-icon(md-font-icon='icon-label')
+                    md-tooltip
+                        span(translate='SECTION.LABELS') Labels
+                md-menu-content.section-labels-toggle-list(width='3')
+                    md-list
+                        md-subheader.md-no-sticky
+                            span(translate='SECTION.LABELS') Labels
+                        md-list-item(ng-repeat='label in vm.labels', ng-click='vm.toggleLabel(label)')
+                            div(layout='row', layout-align='start center')
+                                .w-10.h-10.mr-16(ng-class='label.color')
+                                div {{label.title}}
+                            md-icon.md-secondary(md-font-icon='icon-checkbox-blank-outline', ng-if='vm.currentSection && !vm.isLabelExist(label)')
+                            md-icon.md-accent.md-secondary(md-font-icon='icon-checkbox-marked', ng-if='vm.currentSection && vm.isLabelExist(label)')
+            .divider-vertical
+            md-menu
+                md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='SECTION.MORE', translate, translate-attr-aria-label='SECTION.MORE')
+                    md-icon(md-font-icon='icon-dots-vertical')
+                md-menu-content(width='3')
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('read', true)")
+                            span(translate='SECTION.MARK_AS_READ') Mark as read
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('read', false)")
+                            span(translate='SECTION.MARK_AS_UNREAD') Mark as unread
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('important', true)")
+                            span(translate='SECTION.MARK_AS_IMPORTANT') Mark as important
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('important', false)")
+                            span(translate='SECTION.MARK_AS_NOT_IMPORTANT') Mark as not important
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('starred', true)")
+                            span(translate='SECTION.ADD_STAR') Add star
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('starred', false)")
+                            span(translate='SECTION.REMOVE_STAR') Remove star
+        //- ACTIONS MENU
+        md-menu.actions-menu(ng-show='vm.selectedSections.length > 0 || vm.currentSection', hide-gt-xs)
+            md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='Mail Actions', translate, translate-attr-aria-label='SECTION.ACTIONS')
+                md-icon(md-font-icon='icon-dots-vertical')
+            md-menu-content(width='3')
+                md-menu-item
+                    md-button(aria-label='Archive', translate-attr-aria-label='SECTION.ARCHIVE')
+                        md-icon(md-font-icon='icon-archive')
+                        span(translate='SECTION.ARCHIVE') Archive
+                md-menu-item
+                    md-button(aria-label='Spam', translate-attr-aria-label='SECTION.SPAM')
+                        md-icon(md-font-icon='icon-alert-octagon')
+                        span(translate='SECTION.SPAM') Spam
+                md-menu-item
+                    md-button(aria-label='Delete', translate-aria-label='SECTION.DELETE')
+                        md-icon(md-font-icon='icon-delete')
+                        span(translate='SECTION.DELETE') Delete
+                md-menu-item
+                    md-button(aria-label='Move To', translate-attr-aria-label='SECTION.MOVE_TO')
+                        md-icon(md-font-icon='icon-folder-move')
+                        span(translate='SECTION.MOVE_TO') Move To
+                md-menu-item
+                    md-button(aria-label='Labels', translate-attr-aria-label='SECTION.LABELS')
+                        md-icon(md-font-icon='icon-label')
+                        span(translate='SECTION.LABELS') Labels
+
+//- CONTENT WRAPPER
+.content-wrapper(layout='column', flex)
+    //- THREAD DETAIL VIEW
+    .content.section-detail(ng-if='vm.currentSection', ms-scroll, flex)
+        include ./detail/detail.pug
+
+    //- THREAD LIST VIEW
+    .content.section-list(ng-if='!vm.currentSection', ms-scroll, flex)
+        include ./list/list.pug

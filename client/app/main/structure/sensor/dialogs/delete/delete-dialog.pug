@@ -1,0 +1,38 @@
+doctype html
+
+md-dialog.delete-dialog(aria-label='Delete sensors')
+    md-toolbar.md-accent.md-hue-2
+        .md-toolbar-tools(layout='row', layout-align='space-between center')
+            span.title(translate='SENSOR.DELETE_SENSORS') Delete Sensors
+            md-button.md-icon-button(
+                ng-click='vm.cancel()'
+                aria-label='Close dialog'
+                tranlate, translate-aria-label='SENSOR.CLOSE_DIALOG'
+            )
+                md-icon(md-font-icon='icon-close')
+    md-dialog-content(ms-scroll)
+        div.delete-warn-message.md-title
+            md-icon.md-warn(md-font-icon='icon-alert-circle')
+            span.md-warn(translate='SENSOR.DELETE_WARN_MSG') Do you really want to delete the sensors?
+        md-list(ng-repeat='sensor in vm.sensors')
+            md-list-item
+                p.md-subhead {{sensor.name}}
+                md-checkbox.md-secondary(ng-model='sensor.delete')
+    md-dialog-actions(layout='row', layout-align='space-between center')
+        div(layout='row', layout-align='start center')
+            md-button.send-button.md-accent.md-raised(
+                ng-click='vm.cancel()'
+                aria-label='Cancel'
+                translate='SENSOR.CANCEL'
+                translate-attr-aria-label='SENSOR.CANCEL'
+            )
+                | CANCEL
+        div(layout='row')
+            md-button.send-button.md-warn.md-raised(
+                ng-click='vm.confirm()'
+                aria-label='Confirm'
+                translate='SENSOR.CONFIRM'
+                translate-attr-aria-label='SENSOR.CONFIRM'
+            )
+                | CONFIRM
+

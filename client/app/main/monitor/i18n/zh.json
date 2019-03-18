@@ -1,0 +1,10 @@
+{
+    "MONITOR": {
+        "MONITOR_NAV": "实时数据",
+        "SIDENAV": {
+            "ORGANIZED_DESC": "传感器组织方式:",
+            "ORGANIZED_BY_TYPE": "按类型",
+            "ORGANIZED_BY_SECTION": "按位置"
+        }
+     }
+}

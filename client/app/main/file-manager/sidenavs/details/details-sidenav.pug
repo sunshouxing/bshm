@@ -1,0 +1,70 @@
+doctype html
+
+// SIDENAV HEADER
+.header.md-accent-bg(layout='column', layout-align='space-between')
+    .toolbar(layout='row', layout-align='end center')
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id'
+            ng-click='vm.delete()'
+            aria-label='Delete'
+            translate, translate-attr-aria-label='FM.DELETE'
+        )
+            md-icon(md-font-icon='icon-delete')
+            md-tooltip
+                span(translate='FM.DELETE') Delete
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id'
+            ng-href='{{vm.backend}}/files/download/{{vm.selected._id}}'
+            aria-label='Download'
+            translate, translate-attr-aria-label='FM.DOWNLOAD'
+        )
+            md-icon(md-font-icon='icon-download')
+            md-tooltip
+                span(translate='FM.DOWNLOAD') Download
+        md-button.md-icon-button(
+            ng-disabled='!vm.selected._id'
+            aria-label='More'
+            translate, translate-attr-aria-label='FM.MORE'
+        )
+            md-icon(md-font-icon='icon-dots-vertical')
+            md-tooltip
+                span(translate='FM.MORE') More
+    div
+        .title {{vm.selected.name}}
+        .subtitle.secondary-text
+            span(translate='FM.EDITED') Edited
+            | : {{vm.selected.modified | date:'mediumDate'}}
+// SIDENAV CONTENT
+md-content.content(flex, ms-scroll)
+    .file-details
+        .preview.file-icon(layout='row', layout-align='center center')
+            i.s48(class='icon-{{vm.selected.type}}')
+        md-list.offline-switch
+            md-list-item
+                p(translate='FM.AVAILABLE_OFFLINE') Available Offline
+                md-switch.md-secondary(ng-model='vm.selected.offline', aria-label='Toggle offline', translate)
+        .title(translate='FM.INFO') Info
+        table
+            tr.type
+                th(translate='FM.TYPE') Type
+                td {{vm.selected.type}}
+            tr.size
+                th(translate='FM.SIZE') Size
+                td {{vm.selected.size === '' ? '-': vm.selected.size | fsize}}
+            tr.location
+                th(translate='FM.LOCATION') Location
+                td {{vm.selected.location}}
+            tr.owner
+                th(translate='FM.OWNER') Owner
+                td {{vm.selected.owner}}
+            tr.modified
+                th(translate='FM.MODIFIED') Modified
+                td {{vm.selected.modified | date:'mediumDate'}}
+            tr.opened
+                th(translate='FM.OPENED') Opened
+                td {{vm.selected.opened | date:'mediumDate'}}
+            tr.created
+                th(translate='FM.CREATED') Created
+                td {{vm.selected.created | date:'mediumDate'}}
+
+//- vim:set sw=4 ts=4 sts=4:

@@ -1,0 +1,56 @@
+{
+    "name": "FCXF-X-03",
+    "image": {
+        "url": "/assets/images/sections/FCXF-X-03.png"
+    },
+    "subsets": [
+        {
+            "center": [289, 363],
+            "sensors": ["FCXF-X-03-S03", "FCXF-X-03-T03"]
+        },
+        {
+            "center": [289, 343],
+            "sensors": ["FCXF-X-03-S08", "FCXF-X-03-T08"]
+        },
+        {
+            "center": [289, 323],
+            "sensors": ["FCXF-X-03-S02", "FCXF-X-03-T02"]
+        },
+        {
+            "center": [289, 303],
+            "sensors": ["FCXF-X-03-S07", "FCXF-X-03-T07"]
+        },
+        {
+            "center": [289, 283],
+            "sensors": ["FCXF-X-03-S01", "FCXF-X-03-T01"]
+        },
+        {
+            "center": [878, 360],
+            "sensors": ["FCXF-X-03-S06", "FCXF-X-03-T06"]
+        },
+        {
+            "center": [878, 340],
+            "sensors": ["FCXF-X-03-S10", "FCXF-X-03-T10"]
+        },
+        {
+            "center": [878, 320],
+            "sensors": ["FCXF-X-03-S05", "FCXF-X-03-T05"]
+        },
+        {
+            "center": [878, 300],
+            "sensors": ["FCXF-X-03-S09", "FCXF-X-03-T09"]
+        },
+        {
+            "center": [878, 280],
+            "sensors": ["FCXF-X-03-S04", "FCXF-X-03-T04"]
+        },
+        {
+            "center": [319, 387],
+            "sensors": ["FCXF-X-03-A01"]
+        },
+        {
+            "center": [844, 387],
+            "sensors": ["FCXF-X-03-A02"]
+        }
+    ]
+}

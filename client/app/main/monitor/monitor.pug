@@ -1,0 +1,34 @@
+doctype html
+
+#monitor.page-layout.simple.left-sidenav(layout='row')
+    // SIDENAV
+    md-sidenav.sidenav(
+        md-is-locked-open="$mdMedia('gt-md')"
+        md-component-id='monitor.sidenav'
+        ms-scroll
+        ms-sidenav-helper
+    )
+        include ./sidenav/sidenav.pug
+
+    // CENTER
+    .center(flex, ms-scroll)
+        // HEADER
+        .header.md-accent-bg(layout='row')
+            .header-content(layout='column', layout-align='space-between')
+                .toolbar(layout='row', layout-align='space-between center')
+                    //- TOGGLE MAIN SIDENAV BUTTON
+                    md-button.md-icon-button.sidenav-toggle(
+                        hide-gt-md
+                        ng-click="vm.toggleSidenav('monitor.sidenav')"
+                        aria-label='Toggle sidenav'
+                    )
+                        md-icon.icon(md-font-icon='icon-menu')
+
+                // BREADCRUMB
+                .breadcrumb.text-truncate(layout='row', layout-align='start center')
+                    span(data-ng-repeat='path in vm.nodePath')
+                        | {{path}}
+                        md-icon.icon.separator(md-font-icon='icon-chevron-right')
+
+        // SUBSTATE VIEW (SENSOR/SECTION)
+        .content.md-background-bg(ui-view="module")

@@ -1,0 +1,44 @@
+doctype html
+
+// LIST VIEW
+table.simple.list-view
+    thead
+        tr
+            th
+            th(translate='FM.NAME') Name
+            th(hide, show-gt-sm, translate='FM.TYPE') Type
+            th(hide-xs, translate='FM.OWNER') Owner
+            th(hide-xs, translate='FM.SIZE') Size
+            th(hide, show-gt-md, translate='FM.LAST_MODIFIED') Last Modified
+            th(hide-gt-md)
+    tbody
+        tr(
+            ng-repeat='folder in vm.folders | filter:global.search | filter:vm.search'
+            ng-click='vm.select(folder)'
+            ng-class="{'selected' : vm.selected === folder}"
+        )
+            td.file-icon
+                i.icon-folder
+            td.name {{folder.name}}
+            td.type(hide, show-gt-sm) {{folder.type}}
+            td.owner(hide-xs) {{folder.owner}}
+            td.size(hide-xs) {{folder.size === '' ? '-': folder.size | fsize}}
+            td.last-modified(hide, show-gt-md) {{folder.modified | date:'mediumDate'}}
+            td.show-details(hide-gt-md)
+                md-button.md-icon-button.sidenav-toggle(ng-click='vm.toggleDetails(folder)', aria-label='Toggle details sidenav')
+                    md-icon(md-font-icon='icon-information-outline')
+        tr(
+            ng-repeat='file in vm.files | filter:global.search | filter:vm.search'
+            ng-click='vm.select(file)'
+            ng-class="{'selected' : vm.selected === file}"
+        )
+            td.file-icon
+                i(class='icon-{{file.type}}')
+            td.name {{file.name}}
+            td.type(hide, show-gt-sm) {{file.type}}
+            td.owner(hide-xs) {{file.owner}}
+            td.size(hide-xs) {{file.size === '' ? '-': file.size | fsize}}
+            td.last-modified(hide, show-gt-md) {{file.modified | date:'mediumDate'}}
+            td.show-details(hide-gt-md)
+                md-button.md-icon-button.sidenav-toggle(ng-click='vm.toggleDetails(file)', aria-label='Details', translate, translate-attr-aria-label='FM.DETAILS')
+                    md-icon(md-font-icon='icon-information-outline')

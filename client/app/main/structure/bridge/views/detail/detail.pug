@@ -1,0 +1,88 @@
+doctype html
+
+// BRIDGE DETAIL
+.bridge-detail(ms-scroll, flex)
+    .bridge-header(layout='row', layout-align='space-between center')
+        div
+            .subject(flex) {{vm.currentBridge.name}}
+            .labels
+                .label(ng-repeat='labelId in vm.currentBridge.labels', ng-class='vm.getLabelColor(labelId)')
+                    | {{vm.getLabelTitle(labelId)}}
+        .actions(layout='row', layout-align='start center')
+            md-button.md-icon-button(
+                ng-click="vm.toggleThreadStatus('starred')"
+                aria-label='Toggle starred'
+                translate
+                translate-attr-toogle-starred='BRIDGE.TOGGLE_STARRED'
+            )
+                md-icon.amber-fg(ng-if='vm.currentBridge.starred', md-font-icon='icon-star')
+                md-icon(ng-if='!vm.currentBridge.starred', md-font-icon='icon-star-outline')
+            md-button.md-icon-button(
+                ng-click="vm.toggleThreadStatus('important')"
+                aria-label='Toggle important'
+                translate
+                translate-attr-toogle-starred='BRIDGE.TOGGLE_IMPORTANT'
+            )
+                md-icon.amber-300-fg(ng-if='vm.currentBridge.important', md-font-icon='icon-label')
+                md-icon(ng-if='!vm.currentBridge.important', md-font-icon='icon-label-outline')
+    .bridge-content
+        .info(layout='row', layout-align='space-between start')
+            div(layout='column', layout-align='start start')
+                div(layout='row', layout-align='start start')
+                    div
+                        img.avatar(ng-if='vm.currentBridge.from.avatar', alt='{{vm.currentBridge.from.name}}', ng-src='{{vm.currentBridge.from.avatar}}')
+                        .avatar(ng-if='!vm.currentBridge.from.avatar', ms-random-class='vm.colors')
+                            | {{vm.currentBridge.from.name[0]}}
+                    div(layout='column', layout-align='start start')
+                        .name
+                            | {{vm.currentBridge.from.name}}
+                        .to(layout='row', layout-align='start center')
+                            .to-text(translate='BRIDGE.INFO.TO') to
+                            div {{vm.currentBridge.to[0].name}}
+                a.toggle-details.md-accent-color(
+                    ng-hide='vm.selectedMailShowDetails'
+                    ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails'
+                    translate='BRIDGE.SHOW_DETAILS'
+                )
+                    | Show Details
+                a.toggle-details.md-accent-color(ng-show='vm.selectedMailShowDetails', ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails', translate='BRIDGE.HIDE_DETAILS')
+                    | Hide Details
+                .details(ng-show='vm.selectedMailShowDetails', layout='row', layout-align='start start')
+                    div(layout='column')
+                        span.title(translate='BRIDGE.DETAILS.FROM') From:
+                        span.title(translate='BRIDGE.DETAILS.TO') To:
+                        span.title(translate='BRIDGE.DETAILS.DATE') Date:
+                    div(layout='column')
+                        span.detail {{vm.currentBridge.from.email}}
+                        span.detail {{vm.currentBridge.to[0].email}}
+                        span.detail {{vm.currentBridge.time}}
+            md-menu
+                md-button.md-icon-button(aria-label='More', ng-click='$mdOpenMenu($event)', translate, translate-aria-label='BRIDGE.MORE')
+                    md-icon(md-font-icon='icon-dots-vertical')
+                md-menu-content(width='3')
+                    md-menu-item
+                        md-button(aria-label='Reply', translate-aria-label='BRIDGE.REPLY', ng-click='vm.replyDialog($event)')
+                            md-icon(md-font-icon='icon-reply')
+                            span(translate='BRIDGE.REPLY') Reply
+                    md-menu-item
+                        md-button(aria-label='Forward', translate-aria-label='BRIDGE.FORWARD')
+                            md-icon(md-font-icon='icon-forward')
+                            span(translate='BRIDGE.FORWARD') Forward
+                    md-menu-item
+                        md-button(aria-label='Print', translate-aria-label='BRIDGE.PRINT')
+                            md-icon(md-font-icon='icon-printer')
+                            span(translate='BRIDGE.PRINT') Print
+        div(ng-bind-html='vm.currentBridge.desc')
+
+    .bridge-attachments
+        .title
+            span(translte='BRIDGE.ATTACHMENTS') Attachments
+            |  ({{vm.currentBridge.image.name}})
+        .attachment-list(layout-wrap, layout='row')
+            .attachment(layout='column')
+                img.preview(ng-src='assets/uploads/flow-{{vm.currentBridge.image.path}}.1')
+                div(layout='column')
+                    a.md-accent-color.link(href='#', translate='BRIDGE.VIEW') View
+                    a.md-accent-color.link(href='#', translate='BRIDGE.DOWNLOAD') Download
+                    .size ({{attachment.size}})
+

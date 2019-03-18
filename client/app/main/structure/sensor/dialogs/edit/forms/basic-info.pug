@@ -1,0 +1,69 @@
+doctype html
+
+.md-inline-form(name='basicInfo')
+
+    //- SENSOR NAME
+    md-input-container.md-block
+        label(translate='SENSOR.NAME') Name
+        md-icon(md-font-icon='icon-label')
+        input(name='name', type='text', ng-model='vm.sensor.name', required)
+
+    //- SENSOR DESC
+    md-input-container.md-block
+        label(translate='SENSOR.DESC') Description
+        md-icon(md-font-icon='icon-document')
+        textarea(
+            name='desc'
+            ng-model='vm.sensor.desc'
+            ng-maxlength=200
+            md-maxlength='200'
+            required
+        )
+
+    //- ASSOCIATED BRIDGE INFO
+    md-autocomplete(
+        required
+        flex-gt-sm
+        md-min-length=0
+        md-no-cache='true'
+        md-autocomplete-icon='icon-tag-multiple'
+        md-input-name='type'
+        md-selected-item='vm.sensor.type'
+        md-search-text='searchText'
+        md-search-text-change='vm.sensor.type = searchText'
+        md-items='type in vm.searchTypes(searchText)'
+        md-item-text='type'
+        md-floating-label='{{"SENSOR.TYPE" | translate}}'
+    )
+        md-item-template
+            span(md-highlight-text='vm.typeKeyword') {{type}}
+        div(
+            ng-messages='associatedInfo.associatedBridge.$error'
+            ng-if='associatedInfo.associatedBridge.$touched'
+        )
+            div(ng-message='required') {{'SENSOR.ASSOCIATED_BRIDGE.REQUIRED' | translate}}
+            div(ng-message='md-require-match') {{'SENSOR.ASSOCIATED_BRIDGE.REQUIRED_MATCH' | translate}}
+
+    //- SENSOR IMAGE
+    div(
+        layout-gt-sm='row'
+        flow-init='vm.ngFlow.options'
+        flow-name='vm.ngFlow.flow'
+        flow-files-submitted='vm.upload()'
+        flow-file-success='vm.uploadSuccess($file, $message)'
+    )
+
+        md-input-container.md-block(flex-gt-sm)
+            label(translate='SENSOR.IMAGE') Image
+            md-icon(md-font-icon='icon-picture')
+            input(name='imageName', type='text', ng-model='vm.sensor.image.name', disabled, required)
+
+        md-button.md-fab.md-mini(
+            flow-btn
+            aria-label='Upload image'
+            translate-attr-aria-label='SENSOR.UPLOAD_IMAGE'
+        )
+            md-icon(md-font-icon='icon-plus')
+            md-tooltip
+                span(translate='SENSOR.UPLOAD_IMAGE')
+

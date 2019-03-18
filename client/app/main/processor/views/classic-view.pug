@@ -1,0 +1,153 @@
+doctype html
+
+//- TOOLBAR
+.toolbar(layout='row', layout-align='space-between center')
+    div(layout='row', layout-align='start center')
+
+        //- THREAD LIST SPECIFIC ACTIONS (multi selection)
+        md-checkbox.no-label(aria-label="{{vm.selectedProcessors.length > 0 ? 'Deselect All' : 'Select All'}}", ng-checked='vm.selectedProcessors.length > 0', ng-click='vm.toggleSelectProcessors()', ng-if='!vm.currentProcessor')
+        md-menu.select-menu(ng-if='!vm.currentProcessor')
+            md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='Filters', translate, translate-attr-aria-label='PROCESSOR.FILTERS')
+                md-icon(md-font-icon='icon-menu-down')
+            md-menu-content(width='3')
+                md-menu-item
+                    md-button(ng-click='vm.selectThreads()', aria-label='All', translate='PROCESSOR.ALL', translate-attr-aria-label='PROCESSOR.ALL')
+                        | All
+                md-menu-item
+                    md-button(ng-click='vm.deselectThreads()', aria-label='None', translate='PROCESSOR.NONE', translate-attr-aria-label='PROCESSOR.NONE')
+                        | None
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('read', true)", aria-label='Read', translate='PROCESSOR.READ', translate-attr-aria-label='PROCESSOR.READ')
+                        | Read
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('read', false)", aria-label='Unread', translate='PROCESSOR.UNREAD', translate-attr-aria-label='PROCESSOR.UNREAD')
+                        | Unread
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('important', true)", aria-label='Important', translate='PROCESSOR.IMPORTANT', translate-attr-aria-label='PROCESSOR.IMPORTANT')
+                        | Important
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('important', false)", aria-label='Not Important', translate='PROCESSOR.NOT_IMPORTANT', translate-attr-aria-label='PROCESSOR.NOT_IMPORTANT')
+                        | Not Important
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('starred', true)", aria-label='Starred', translate='PROCESSOR.STARRED', translate-attr-aria-label='PROCESSOR.STARRED')
+                        | Starred
+                md-menu-item
+                    md-button(ng-click="vm.selectThreads('starred', false)", aria-label='Unstarred', translate='PROCESSOR.UNSTARRED', translate-attr-aria-label='PROCESSOR.UNSTARRED')
+                        | Unstarred
+
+        //- SINGLE THREAD SPECIFIC ACTIONS (back to processors list page)
+        md-button.md-icon-button.close-processor(
+            ng-if='vm.currentProcessor'
+            ng-click='vm.surveyProcessors()'
+            aria-label='Back'
+            translate
+            translate-attr-aria-label='PROCESSOR.BACK'
+        )
+            md-icon(md-font-icon='icon-keyboard-backspace')
+
+        //- ACTION BUTTONS (for both single processor list and processors list)
+        .action-buttons(layout='row', layout-align='start center', ng-show='vm.selectedProcessors.length > 0 || vm.currentProcessor', hide, show-gt-xs)
+            .divider-vertical
+            md-button.md-icon-button(aria-label='Archive', translate, translate-attr-aria-label='PROCESSOR.ARCHIVE')
+                md-icon(md-font-icon='icon-archive')
+                md-tooltip
+                    span(translate='PROCESSOR.ARCHIVE') Archive
+            md-button.md-icon-button(aria-label='Spam', translate, translate-attr-aria-label='PROCESSOR.SPAM')
+                md-icon(md-font-icon='icon-alert-octagon')
+                md-tooltip
+                    span(translate='PROCESSOR.SPAM') Spam
+            md-button.md-icon-button(
+                ng-click='vm.deleteProcessors($event)'
+                aria-label='Delete'
+                translate, translate-attr-aria-label='PROCESSOR.DELETE'
+            )
+                md-icon(md-font-icon='icon-delete')
+                md-tooltip
+                    span(translate='PROCESSOR.DELETE') Delete
+            md-button.md-icon-button(
+                ng-click='vm.updateProcessor($event)'
+                ng-hide='vm.$state.current.name == "app.structure.processor"'
+                aria-label='Update'
+                translate, translate-attr-aria-label='PROCESSOR.UPDATE'
+            )
+                md-icon(md-font-icon='icon-pencil')
+                md-tooltip
+                    span(translate='PROCESSOR.UPDATE') Update
+            .divider-vertical
+            md-button.md-icon-button(aria-label='Move to', translate, translate-attr-aria-label='PROCESSOR.MOVE_TO')
+                md-icon(md-font-icon='icon-folder')
+                md-tooltip
+                    span(translate='PROCESSOR.MOVE_TO') Move to
+            md-menu
+                md-button.md-icon-button(aria-label='Labels', translate, translate-attr-aria-label='PROCESSOR.LABELS', ng-click='$mdOpenMenu($event)')
+                    md-icon(md-font-icon='icon-label')
+                    md-tooltip
+                        span(translate='PROCESSOR.LABELS') Labels
+                md-menu-content.processor-labels-toggle-list(width='3')
+                    md-list
+                        md-subheader.md-no-sticky
+                            span(translate='PROCESSOR.LABELS') Labels
+                        md-list-item(ng-repeat='label in vm.labels', ng-click='vm.toggleLabel(label)')
+                            div(layout='row', layout-align='start center')
+                                .w-10.h-10.mr-16(ng-class='label.color')
+                                div {{label.title}}
+                            md-icon.md-secondary(md-font-icon='icon-checkbox-blank-outline', ng-if='vm.currentProcessor && !vm.isLabelExist(label)')
+                            md-icon.md-accent.md-secondary(md-font-icon='icon-checkbox-marked', ng-if='vm.currentProcessor && vm.isLabelExist(label)')
+            .divider-vertical
+            md-menu
+                md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='PROCESSOR.MORE', translate, translate-attr-aria-label='PROCESSOR.MORE')
+                    md-icon(md-font-icon='icon-dots-vertical')
+                md-menu-content(width='3')
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('read', true)")
+                            span(translate='PROCESSOR.MARK_AS_READ') Mark as read
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('read', false)")
+                            span(translate='PROCESSOR.MARK_AS_UNREAD') Mark as unread
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('important', true)")
+                            span(translate='PROCESSOR.MARK_AS_IMPORTANT') Mark as important
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('important', false)")
+                            span(translate='PROCESSOR.MARK_AS_NOT_IMPORTANT') Mark as not important
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('starred', true)")
+                            span(translate='PROCESSOR.ADD_STAR') Add star
+                    md-menu-item
+                        md-button(ng-click="vm.setThreadStatus('starred', false)")
+                            span(translate='PROCESSOR.REMOVE_STAR') Remove star
+        //- ACTIONS MENU
+        md-menu.actions-menu(ng-show='vm.selectedProcessors.length > 0 || vm.currentProcessor', hide-gt-xs)
+            md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='Mail Actions', translate, translate-attr-aria-label='PROCESSOR.ACTIONS')
+                md-icon(md-font-icon='icon-dots-vertical')
+            md-menu-content(width='3')
+                md-menu-item
+                    md-button(aria-label='Archive', translate-attr-aria-label='PROCESSOR.ARCHIVE')
+                        md-icon(md-font-icon='icon-archive')
+                        span(translate='PROCESSOR.ARCHIVE') Archive
+                md-menu-item
+                    md-button(aria-label='Spam', translate-attr-aria-label='PROCESSOR.SPAM')
+                        md-icon(md-font-icon='icon-alert-octagon')
+                        span(translate='PROCESSOR.SPAM') Spam
+                md-menu-item
+                    md-button(aria-label='Delete', translate-aria-label='PROCESSOR.DELETE')
+                        md-icon(md-font-icon='icon-delete')
+                        span(translate='PROCESSOR.DELETE') Delete
+                md-menu-item
+                    md-button(aria-label='Move To', translate-attr-aria-label='PROCESSOR.MOVE_TO')
+                        md-icon(md-font-icon='icon-folder-move')
+                        span(translate='PROCESSOR.MOVE_TO') Move To
+                md-menu-item
+                    md-button(aria-label='Labels', translate-attr-aria-label='PROCESSOR.LABELS')
+                        md-icon(md-font-icon='icon-label')
+                        span(translate='PROCESSOR.LABELS') Labels
+
+//- CONTENT WRAPPER
+.content-wrapper(layout='column', flex)
+    //- THREAD DETAIL VIEW
+    .content.processor-detail(ng-if='vm.currentProcessor', ms-scroll, flex)
+        include ./detail/detail.pug
+
+    //- THREAD LIST VIEW
+    .content.processor-list(ng-if='!vm.currentProcessor', ms-scroll, flex)
+        include ./list/list.pug

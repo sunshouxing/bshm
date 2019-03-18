@@ -5,7 +5,7 @@ import path from 'path';
 import _ from 'lodash';
 
 /*function requiredProcessEnv(name) {
-  if(!process.env[name]) {
+  if (!process.env[name]) {
     throw new Error('You must set the ' + name + ' environment variable');
   }
   return process.env[name];
@@ -39,9 +39,7 @@ var all = {
   // MongoDB connection options
   mongo: {
     options: {
-      db: {
-        safe: true
-      }
+      useMongoClient: true,
     }
   }
 };

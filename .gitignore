@@ -1,10 +1,12 @@
-node_modules
+node_modules/
+logs/
 public
 .tmp
 .sass-cache
 .idea
 client/bower_components
 client/index.html
+client/assets/uploads
 dist
 /server/config/local.env.js
 npm-debug.log

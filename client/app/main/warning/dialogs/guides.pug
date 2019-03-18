@@ -1,0 +1,26 @@
+doctype html
+
+md-dialog.compose-dialog(aria-label='New Bridge')
+    form.md-inline-form(name='bridgeForm')
+        md-toolbar.md-accent.md-hue-2
+            .md-toolbar-tools(layout='row', layout-align='space-between center')
+                span.title 预警处理指导建议
+                md-button.md-icon-button(
+                    ng-click='vm.cancel()'
+                    aria-label='Close dialog'
+                    tranlate, translate-aria-label='BRIDGE.CLOSE_DIALOG'
+                )
+                    md-icon(md-font-icon='icon-close')
+        md-dialog-content(ms-scroll)
+            md-list
+                md-list-item
+                    p 1. 若在预警前后，该通道的监测数据均远低于预警阈值，且预警持续时间很短，则本次预警可能由数据野点触发可忽略；
+                md-list-item
+                    p 2. 若在预警前后，该通道的监测数据均接近预警阈值，则本次预警为一次有效预警，需进一步查明原因与判断严重性；
+                md-list-item
+                    p 3. 若在有效预警之后，该通道的监测数据恢复到原始水平，则本次预警可能由超限荷载触发且未造成结构损伤，应对本次预警进行存档；
+                md-list-item
+                    p 4. 若在有效预警之后，该通道的监测数据未恢复到原始水平，且临近通道亦有相同情况发生，则结构可能发生损伤，应组织离线评估；
+                md-list-item
+                    p 5. 若某一通道经常触发无效预警，应检查对应传感器是否损坏，如有损坏及时维修或更换。
+

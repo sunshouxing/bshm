@@ -1,0 +1,28 @@
+{
+    "SECTION": {
+        "SECTION_NAV": "截面",
+        "SECTIONS": "截面",
+        "CANCEL": "取消",
+        "CONFIRM": "确认",
+        "CREATE": "新 建",
+        "ASSOCIATED_BRIDGE": {
+          "LABEL": "关联桥梁",
+          "REQUIRED": "您必须为截面指定关联截面信息",
+          "REQUIRED_MATCH": "请选择已存在的截面"
+        },
+        "DESC_MIN_LEN": "请输入至少100字的截面描述信息",
+        "SEARCH_PLACEHOLDER": "搜索截面",
+        "UPLOAD_IMAGE": "上传图片",
+        "UPDATE": "更新",
+        "DELETE": "删除",
+        "DELETE_SECTIONS": "删除截面",
+        "DELETE_WARN_MSG": "请在以下列表中确认您要删除的截面",
+        "NEW_SECTION": "新建截面",
+        "UPDATE_SECTION": "更新截面",
+        "NAME": "名称",
+        "DESC": "描述",
+        "ABSCISSA": "横坐标",
+        "ORDINATE": "纵坐标",
+        "IMAGE": "截面图片"
+    }
+}

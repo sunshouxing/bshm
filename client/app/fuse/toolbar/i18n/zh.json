@@ -1,0 +1,12 @@
+{
+    "TOOLBAR": {
+        "TOGGLE_NAVIGATION": "Toggle navigation",
+        "TOGGLE_NAVIGATION_FOLD": "Toggle navigation fold",
+        "TOGGLE_NAVIGATION_MODE": "Toggle navigation mode",
+        "SEARCH": "搜索",
+        "USER_SETTINGS": "用户设置",
+        "TOGGLE_QUICK_PANEL": "Toggle quick panel",
+        "ENGLISH": "英文",
+        "CHINESE": "中文"
+    }
+}

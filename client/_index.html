@@ -4,9 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <base href="/">
-    <title>Angular Full-Stack Generator</title>
+    <title>Bridge Structure Health Monitor</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <!-- place cdn styles here -->
+    <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/jquery.perfect-scrollbar/0.6.11/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common-material.min.css" rel="stylesheet">
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.material.min.css" rel="stylesheet">
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.material.mobile.min.css" rel="stylesheet">
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 </head>
 <body>
@@ -25,8 +32,49 @@
       ga('send', 'pageview');
     </script>
 
-    <navbar></navbar>
-    <div ui-view=""></div>
-    <footer></footer>
+    <div md-theme="{{vm.themes.active.name}}" md-theme-watch ng-controller="IndexController as vm"
+          class="{{state.current.bodyClass || ''}}">
+
+        <!-- SPLASH SCREEN -->
+        <ms-splash-screen id="splash-screen">
+            <div class="center">
+                <div class="logo">
+                    <span>F</span>
+                </div>
+                <!-- Material Design Spinner -->
+                <div class="spinner-wrapper">
+                    <div class="spinner">
+                        <div class="inner">
+                            <div class="gap"></div>
+                            <div class="left">
+                                <div class="half-circle"></div>
+                            </div>
+                            <div class="right">
+                                <div class="half-circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- / Material Design Spinner -->
+            </div>
+        </ms-splash-screen>
+        <!-- / SPLASH SCREEN -->
+
+        <div id="main" class="animate-slide-up" ui-view="main" layout="column"></div>
+
+        <ms-theme-options></ms-theme-options>
+
+    </div>
+
+    <!-- place cdn scripts here -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdn.bootcss.com/mobile-detect/1.3.6/mobile-detect.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.perfect-scrollbar/0.6.11/js/perfect-scrollbar.min.js"></script>
+    <script src="https://cdn.bootcss.com/flow.js/2.13.0/flow.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/echarts.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.0.4/extension/bmap.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+    <script src='http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM'></script>
 </body>
 </html>

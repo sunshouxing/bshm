@@ -1,0 +1,13 @@
+{
+  "COMPONENTS": {
+    "PAGINATION": {
+      "PAGE": "Page:",
+      "ROWS_PER_PAGE": "Rows per page:",
+      "OF": "of",
+      "FIRST_PAGE": "First page",
+      "LAST_PAGE": "Last Page",
+      "PREVIOUS_PAGE": "Previous page",
+      "NEXT_PAGE": "Next page"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.md-inline-form
+
+    .channel(ng-repeat='channel in vm.sensor.channels')
+        md-card
+
+            md-card-actions(
+                layout='row', layout-align='end center'
+                ng-if='$index > 0'
+            )
+                md-button.md-icon-button.md-accent(ng-click='vm.deleteChannel($index)')
+                    md-icon(md-font-icon='icon-close-circle')
+
+            md-card-content
+                //- CHANNEL NAME
+                md-input-container.md-block
+                    label(translate='SENSOR.CHANNEL.NAME') Name
+                    md-icon(md-font-icon='icon-label')
+                    input(name='name', type='text', ng-model='channel.name', required)
+
+                //- CHANNEL DESC
+                md-input-container.md-block
+                    label(translate='SENSOR.CHANNEL.DESC') Description
+                    md-icon(md-font-icon='icon-document')
+                    textarea(
+                        name='desc'
+                        ng-model='channel.desc'
+                        ng-maxlength=50
+                        md-maxlength='50'
+                    )
+
+    div(layout='row', layout-align='end center')
+        md-button.md-fab.md-mini(
+            ng-click="vm.newChannel()"
+            aria-label='SENSOR.CHANNEL.NEW'
+            translate
+            translate-attr-aria-label='SENSOR.CHANNEL.NEW'
+        )
+            md-icon(md-font-icon='icon-plus-circle')
+            md-tooltip
+                span(translate='SENSOR.CHANNEL.NEW')

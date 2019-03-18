@@ -1,0 +1,87 @@
+doctype html
+
+// SECTION DETAIL
+.section-detail(ms-scroll, flex)
+    .section-header(layout='row', layout-align='space-between center')
+        div
+            .subject(flex) {{vm.currentSection.name}}
+            .labels
+                .label(ng-repeat='labelId in vm.currentSection.labels', ng-class='vm.getLabelColor(labelId)')
+                    | {{vm.getLabelTitle(labelId)}}
+        .actions(layout='row', layout-align='start center')
+            md-button.md-icon-button(
+                ng-click="vm.toggleThreadStatus('starred')"
+                aria-label='Toggle starred'
+                translate
+                translate-attr-toogle-starred='SECTION.TOGGLE_STARRED'
+            )
+                md-icon.amber-fg(ng-if='vm.currentSection.starred', md-font-icon='icon-star')
+                md-icon(ng-if='!vm.currentSection.starred', md-font-icon='icon-star-outline')
+            md-button.md-icon-button(
+                ng-click="vm.toggleThreadStatus('important')"
+                aria-label='Toggle important'
+                translate
+                translate-attr-toogle-starred='SECTION.TOGGLE_IMPORTANT'
+            )
+                md-icon.amber-300-fg(ng-if='vm.currentSection.important', md-font-icon='icon-label')
+                md-icon(ng-if='!vm.currentSection.important', md-font-icon='icon-label-outline')
+    .section-content
+        .info(layout='row', layout-align='space-between start')
+            div(layout='column', layout-align='start start')
+                div(layout='row', layout-align='start start')
+                    div
+                        img.avatar(ng-if='vm.currentSection.from.avatar', alt='{{vm.currentSection.from.name}}', ng-src='{{vm.currentSection.from.avatar}}')
+                        .avatar(ng-if='!vm.currentSection.from.avatar', ms-random-class='vm.colors')
+                            | {{vm.currentSection.from.name[0]}}
+                    div(layout='column', layout-align='start start')
+                        .name
+                            | {{vm.currentSection.from.name}}
+                        .to(layout='row', layout-align='start center')
+                            .to-text(translate='SECTION.INFO.TO') to
+                            div {{vm.currentSection.to[0].name}}
+                a.toggle-details.md-accent-color(
+                    ng-hide='vm.selectedMailShowDetails'
+                    ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails'
+                    translate='SECTION.SHOW_DETAILS'
+                )
+                    | Show Details
+                a.toggle-details.md-accent-color(ng-show='vm.selectedMailShowDetails', ng-click='vm.selectedMailShowDetails = !vm.selectedMailShowDetails', translate='SECTION.HIDE_DETAILS')
+                    | Hide Details
+                .details(ng-show='vm.selectedMailShowDetails', layout='row', layout-align='start start')
+                    div(layout='column')
+                        span.title(translate='SECTION.DETAILS.FROM') From:
+                        span.title(translate='SECTION.DETAILS.TO') To:
+                        span.title(translate='SECTION.DETAILS.DATE') Date:
+                    div(layout='column')
+                        span.detail {{vm.currentSection.from.email}}
+                        span.detail {{vm.currentSection.to[0].email}}
+                        span.detail {{vm.currentSection.time}}
+            md-menu
+                md-button.md-icon-button(aria-label='More', ng-click='$mdOpenMenu($event)', translate, translate-aria-label='SECTION.MORE')
+                    md-icon(md-font-icon='icon-dots-vertical')
+                md-menu-content(width='3')
+                    md-menu-item
+                        md-button(aria-label='Reply', translate-aria-label='SECTION.REPLY', ng-click='vm.replyDialog($event)')
+                            md-icon(md-font-icon='icon-reply')
+                            span(translate='SECTION.REPLY') Reply
+                    md-menu-item
+                        md-button(aria-label='Forward', translate-aria-label='SECTION.FORWARD')
+                            md-icon(md-font-icon='icon-forward')
+                            span(translate='SECTION.FORWARD') Forward
+                    md-menu-item
+                        md-button(aria-label='Print', translate-aria-label='SECTION.PRINT')
+                            md-icon(md-font-icon='icon-printer')
+                            span(translate='SECTION.PRINT') Print
+        div(ng-bind-html='vm.currentSection.desc')
+    .section-attachments(ng-if='vm.currentSection.attachments')
+        .title
+            span(translte='SECTION.ATTACHMENTS') Attachments
+            |  ({{vm.currentSection.attachments.length}})
+        .attachment-list(layout-wrap, layout='row')
+            .attachment(layout='column', ng-repeat='attachment in vm.currentSection.attachments')
+                img.preview(ng-src='{{attachment.preview}}')
+                div(layout='column')
+                    a.md-accent-color.link(href='#', translate='SECTION.VIEW') View
+                    a.md-accent-color.link(href='#', translate='SECTION.DOWNLOAD') Download
+                    .size ({{attachment.size}})
+    

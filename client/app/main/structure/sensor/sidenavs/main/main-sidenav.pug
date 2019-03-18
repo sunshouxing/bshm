@@ -1,0 +1,33 @@
+doctype html
+
+// SIDENAV HEADER
+.header(layout='column', layout-align='space-between start')
+    .logo(layout='row', layout-align='start center')
+        span.logo-icon
+            md-icon.icon(md-font-icon='icon-puzzle')
+        span.logo-text(translate='SENSOR.SENSORS') Sensors
+    .account
+        .title John Doe
+        md-select.account-selection.simplified(placeholder='Mail Selection', ng-model='vm.selectedAccount')
+            md-option(ng-repeat='(provider, address) in vm.accounts', value='{{provider}}')
+                | {{address}}
+
+// SIDENAV CONTENT
+md-content.content(ms-scroll='', flex='')
+    .compose-button
+        md-button.md-accent.md-raised(
+            ng-click='vm.createSensor($event)'
+            aria-label='create'
+            translate='SENSOR.CREATE'
+        )
+            | Create
+    .navigation-simple(layout='column')
+        md-button.item(aria-label='inbox', ng-repeat='folder in vm.folders', ng-click='vm.loadFolder(folder.name)', ng-class="{'selected':vm.isFolderActive(folder.name)}")
+            div(layout='row', layout-align='start center')
+                md-icon.s16(md-font-icon='{{folder.icon}}')
+                span.title {{folder.title}}
+        .item.subheader(translate='SENSOR.LABELS') Labels
+        md-button.item(ng-repeat='label in vm.labels', ng-click='vm.loadLabel(label.name)', ng-class="{'selected':vm.isLabelActive(label.name)}")
+            div(layout='row', layout-align='start center')
+                .h-10.w-10.mr-16(ng-class='label.color')
+                span.title {{label.title}}

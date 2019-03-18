@@ -9,7 +9,15 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
-  app.use('/api/things', require('./api/thing'));
+  app.use('/api/warnings', require('./api/warning'));
+  app.use('/api/realtime-data', require('./api/realtime-data'));
+  app.use('/api/processors', require('./api/processor'));
+  app.use('/api/channels', require('./api/channel'));
+  app.use('/api/sensors', require('./api/sensor'));
+  app.use('/api/sections', require('./api/section'));
+  app.use('/api/bridges', require('./api/bridge'));
+  app.use('/api/files', require('./api/file'));
+  app.use('/api/mail/folders', require('./api/folder'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth').default);

@@ -1,0 +1,109 @@
+doctype html
+
+md-dialog.compose-dialog(aria-label='New Bridge')
+    form.md-inline-form(name='bridgeForm')
+        md-toolbar.md-accent.md-hue-2
+            .md-toolbar-tools(layout='row', layout-align='space-between center')
+                span.title(
+                    ng-if='vm.mode == "create"'
+                    translate='BRIDGE.NEW_BRIDGE'
+                ) New Bridge
+                span.title(
+                    ng-if='vm.mode == "update"'
+                    translate='BRIDGE.UPDATE_BRIDGE'
+                ) Update Bridge
+                md-button.md-icon-button(
+                    ng-click='vm.cancel()'
+                    aria-label='Close dialog'
+                    tranlate, translate-aria-label='BRIDGE.CLOSE_DIALOG'
+                )
+                    md-icon(md-font-icon='icon-close')
+        md-dialog-content(ms-scroll)
+            md-input-container.md-block
+                label(translate='BRIDGE.NAME') Name
+                md-icon(md-font-icon='icon-label')
+                input(type='text', ng-model='vm.bridge.name', required)
+            md-input-container.md-block
+                label(translate='BRIDGE.DESC') Description
+                md-icon(md-font-icon='icon-document')
+                textarea(
+                    ng-model='vm.bridge.desc'
+                    ng-minlength=100
+                    ng-maxlength=500
+                    md-maxlength='500'
+                    placeholder='100 characters at least'
+                    translate-attr='{placeholder: "BRIDGE.DESC_MIN_LEN"}'
+                    required
+                )
+            div(layout-gt-sm='row')
+                md-input-container.md-block(flex-gt-sm)
+                    label(translate='BRIDGE.PROVINCE') Province
+                    md-icon(md-font-icon='icon-google-maps')
+                    input(type='text', ng-model='vm.bridge.state' required)
+                div(flex='5', hide-xs, hide-sm)
+                md-input-container.md-block(flex-gt-sm)
+                    label(translate='BRIDGE.CITY') City
+                    input(type='text', ng-model='vm.bridge.city' required)
+            div(layout-gt-sm='row')
+                md-input-container.md-block(flex-gt-sm)
+                    label(translate='BRIDGE.LONGITUDE') Longitude
+                    md-icon(md-font-icon='icon-web')
+                    input(type='number', ng-model='vm.bridge.longitude' required)
+                div(flex='5', hide-xs, hide-sm)
+                md-input-container.md-block(flex-gt-sm)
+                    label(translate='BRIDGE.LATITUDE') Latitude
+                    input(type='number', ng-model='vm.bridge.latitude' required)
+            div(
+                layout-gt-sm='row'
+                flow-init='vm.ngFlow.options'
+                flow-name='vm.ngFlow.flow'
+                flow-files-submitted='vm.upload()'
+                flow-file-success='vm.uploadSuccess($file, $message)'
+            )
+                md-input-container.md-block(flex-gt-sm)
+                    label(translate='BRIDGE.IMAGE') Image
+                    md-icon(md-font-icon='icon-picture')
+                    input(type='text', ng-model='vm.bridge.image.name', disabled, required)
+
+                md-button.md-fab.md-mini(
+                    flow-btn
+                    aria-label='Upload image'
+                    translate-attr-aria-label='BRIDGE.UPLOAD_IMAGE'
+                )
+                    md-icon(md-font-icon='icon-plus')
+                    md-tooltip
+                        span(translate='BRIDGE.UPLOAD_IMAGE')
+
+            input.ng-hide(type='text', ng-model='vm.bridge.image.path', required)
+
+        md-dialog-actions(layout='row', layout-align='space-between center')
+            div(layout='row', layout-align='start center')
+                md-button.send-button.md-primary.md-raised(
+                    ng-click='vm.cancel()'
+                    aria-label='Cancel'
+                    translate='BRIDGE.CANCEL'
+                    translate-attr-aria-label='BRIDGE.CANCEL'
+                )
+                    | Cancel
+            div(layout='row', layout-align='start center')
+
+                md-button.send-button.md-accent.md-raised(
+                    ng-if='vm.mode == "create"'
+                    ng-click='vm.confirm()'
+                    ng-disabled='!bridgeForm.$valid'
+                    aria-label='Create'
+                    translate='BRIDGE.CREATE'
+                    translate-attr-aria-label='BRIDGE.CREATE'
+                )
+                    | Create
+
+                md-button.send-button.md-accent.md-raised(
+                    ng-if='vm.mode == "update"'
+                    ng-click='vm.confirm()'
+                    ng-disabled='bridgeForm.$invalid || bridgeForm.$pristine'
+                    aria-label='Update'
+                    translate='BRIDGE.UPDATE'
+                    translate-attr-aria-label='BRIDGE.UPDATE'
+                )
+                    | Update
+

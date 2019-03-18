@@ -1,0 +1,24 @@
+// MONITOR SIDENAV
+
+.monitor-sidenav
+    //- BRIDGE STRUCTURE SELECTOR
+    .navigation-structure-selector
+        h4(translate='MONITOR.SIDENAV.ORGANIZED_DESC') Description
+
+        md-radio-group(ng-model='vm.organizedBy', ng-change='vm.organizeSensors()')
+            md-radio-button(value='type')
+                div(translate='MONITOR.SIDENAV.ORGANIZED_BY_TYPE') Type
+            md-radio-button(value='section')
+                div(translate='MONITOR.SIDENAV.ORGANIZED_BY_SECTION') Section
+
+    md-divider
+
+    //- BRIDGE STRUCTURE NAVIGATION
+    .navigation-structure.box-col
+        div(
+            kendo-tree-view='tree'
+            k-data-source='vm.navigation'
+            k-on-change='vm.selectNode(dataItem)'
+        )
+            span(k-template)
+                | {{dataItem.text}}
