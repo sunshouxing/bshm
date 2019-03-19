@@ -7,10 +7,16 @@ export default function($translatePartialLoaderProvider, msNavigationServiceProv
   $translatePartialLoaderProvider.addPart('app/main');
 
   // register apps navigation group
-  msNavigationServiceProvider.saveItem('apps', {
+  msNavigationServiceProvider.saveItem('baofu', {
     title: 'APPS',
     group: true,
-    translate: 'MAIN.APPS_NAV',
+    translate: 'MAIN.BAOFU_NAV',
+    weight: 1
+  });
+  msNavigationServiceProvider.saveItem('nanlihe', {
+    title: 'APPS',
+    group: true,
+    translate: 'MAIN.NANLIHE_NAV',
     weight: 1
   });
 }

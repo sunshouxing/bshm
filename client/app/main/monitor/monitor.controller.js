@@ -20,10 +20,11 @@ export default class MonitorController {
   /*********************
    *      Methods      *
    *********************/
-  constructor($state, $mdSidenav, msApi) {
+  constructor($state, $stateParams, $mdSidenav, msApi) {
     'ngInject';
 
     this.$state = $state;
+    this.$stateParams = $stateParams;
     this.$mdSidenav = $mdSidenav;
     this.msApi = msApi;
   }
@@ -50,12 +51,12 @@ export default class MonitorController {
       if (node != this.currentNode) {
         this.currentNode = node;
         this.nodePath = this._nodePath(node);
-        this.$state.go('app.monitor.sensor', {sensorName: node.text});
+        this.$state.go('app.monitor.sensor', {sensor: node.text});
       }
     } else if (this.organizedBy == 'section') {
       if (node.type == 'section') {
         this.nodePath = this._nodePath(node);
-        this.$state.go('app.monitor.section', {name: node.text});
+        this.$state.go('app.monitor.section', {section: node.text});
       }
     }
   }
@@ -64,7 +65,7 @@ export default class MonitorController {
    * Reorganize sensors in the way specified by field {organizedBy}.
    */
   organizeSensors() {
-    this.msApi.request(`monitor.navigation.${this.organizedBy}@get`, {},
+    this.msApi.request(`monitor.${this.$stateParams.bridge}.navigation.${this.organizedBy}@get`, {},
       // success callback
       response => {
         /* eslint-disable no-undef */
