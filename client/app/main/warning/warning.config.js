@@ -24,7 +24,14 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
   $translatePartialLoaderProvider.addPart('app/main/warning');
 
   // navigation
-  msNavigationServiceProvider.saveItem('apps.warning', {
+  msNavigationServiceProvider.saveItem('baofu.warning', {
+    title: 'Warning',
+    icon: 'icon-alert-circle',
+    state: 'app.warning',
+    translate: 'WARNING.WARNING_NAV',
+    weight: WARNING_WEIGHT
+  });
+  msNavigationServiceProvider.saveItem('nanlihe.warning', {
     title: 'Warning',
     icon: 'icon-alert-circle',
     state: 'app.warning',

@@ -28,10 +28,19 @@ export default function($stateProvider, $stateParamsProvider, $translatePartialL
   $translatePartialLoaderProvider.addPart('app/main/homepage');
 
   // navigation
-  msNavigationServiceProvider.saveItem('apps.homepage', {
+  msNavigationServiceProvider.saveItem('baofu.homepage', {
     title: 'Homepage',
     icon: 'icon-home',
     state: 'app.homepage',
+    stateParams: {bridge: 'baofu'},
+    translate: 'HOMEPAGE.HOMEPAGE_NAV',
+    weight: HOMEPAGE_WEIGHT
+  });
+  msNavigationServiceProvider.saveItem('nanlihe.homepage', {
+    title: 'Homepage',
+    icon: 'icon-home',
+    state: 'app.homepage',
+    stateParams: {bridge: 'nanlihe'},
     translate: 'HOMEPAGE.HOMEPAGE_NAV',
     weight: HOMEPAGE_WEIGHT
   });

@@ -1,5 +1,6 @@
 {
     "MAIN": {
-        "APPS_NAV": "APPS"
+        "BAOFU_NAV": "BRIDGE BAOFU",
+        "NANLIHE_NAV": "BRIDGE NANLIHE"
     }
 }
