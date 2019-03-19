@@ -229,7 +229,7 @@ export default function SensorMonitor($scope, $state, $interval, $http) {
   // }
 
   function getRealtimeData() {
-    $http.get(`/api/realtime-data/${$state.params.sensorName}`, {
+    $http.get(`/api/realtime-data/${$state.params.sensor}`, {
       params: {timestamp: queryTime}
     }).then(response => {
       angular.forEach(response.data, record => {

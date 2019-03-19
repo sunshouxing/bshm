@@ -37,10 +37,19 @@ export default function($stateProvider, $stateParamsProvider, $translatePartialL
   $translatePartialLoaderProvider.addPart('app/main/assessment');
 
   // navigation
-  msNavigationServiceProvider.saveItem('apps.assessment', {
+  msNavigationServiceProvider.saveItem('baofu.assessment', {
     title: 'assessment',
     icon: 'icon-stethoscope',
     state: 'app.assessment',
+    stateParams: {bridge: 'baofu'},
+    translate: 'assessment.ASSESSMENT_NAV',
+    weight: ASSESSMENT_WEIGHT
+  });
+  msNavigationServiceProvider.saveItem('nanlihe.assessment', {
+    title: 'assessment',
+    icon: 'icon-stethoscope',
+    state: 'app.assessment',
+    stateParams: {bridge: 'nanlihe'},
     translate: 'assessment.ASSESSMENT_NAV',
     weight: ASSESSMENT_WEIGHT
   });

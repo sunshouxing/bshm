@@ -24,7 +24,14 @@ export default function($stateProvider, $translatePartialLoaderProvider, msNavig
   $translatePartialLoaderProvider.addPart('app/main/file-manager');
 
   // navigation
-  msNavigationServiceProvider.saveItem('apps.file-manager', {
+  msNavigationServiceProvider.saveItem('baofu.file-manager', {
+    title: 'File Manager',
+    icon: 'icon-folder',
+    state: 'app.file-manager',
+    translate: 'FM.FILE_MANAGER_NAV',
+    weight: FILE_MANAGER_WEIGHT
+  });
+  msNavigationServiceProvider.saveItem('nanlihe.file-manager', {
     title: 'File Manager',
     icon: 'icon-folder',
     state: 'app.file-manager',
